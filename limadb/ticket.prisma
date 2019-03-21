@@ -1,0 +1,24 @@
+
+type TicketType {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  creatorID: ID!
+  attractions: [Attraction!]!
+  cost: Float!
+}
+
+type Ticket {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  type: TicketType!
+  owner: Person!
+  receive: PaymentEntry!
+  
+  expireAt: DateTime!
+  visited: [Attraction!]!
+
+}
