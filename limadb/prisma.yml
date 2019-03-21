@@ -1,0 +1,10 @@
+endpoint: https://us1.prisma.sh/bregy-malpartida-2d1dcf/limadb/dev
+datamodel:
+  - person.prisma
+  - traveler.prisma
+  - attraction.prisma
+  - partner.prisma
+
+generate:
+  - generator: go-client
+    output: ./lima-client

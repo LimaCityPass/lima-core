@@ -1,0 +1,25 @@
+enum AttractionType {
+  ADVENTURE
+  HISTORY
+}
+
+type Location {
+  longitude: Float!
+  latitude: Float!
+}
+
+type Attraction {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  owner: Partner!
+  name: String!
+  description: String!
+  address: String!
+  location: Location!
+  popularity: Int
+  likedBy: [Person!]!
+  types: [AttractionType!]!
+  tags: [String!]!
+}

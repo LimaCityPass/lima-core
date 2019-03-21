@@ -1,0 +1,8 @@
+type Partner {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  person: Person! @unique
+  attraction: Attraction!
+}

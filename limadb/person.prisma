@@ -1,0 +1,81 @@
+enum CredentialType {
+  EMAIL
+  PHONE
+  GMAIL
+  FACEBOOK
+  ANONYMOUS
+}
+
+enum IdentificationType {
+  DNI
+  PASSPORT
+}
+
+enum CommunicationType {
+  EMAIL
+  PHONE
+}
+
+interface CommunicationChannel {
+  id: ID!
+  displayName: String!
+  type: CommunicationType!
+  valid: Boolean! @default(value: false)
+}
+
+type Phone implements CommunicationChannel {
+  type: CommunicationType! @default(value: PHONE)
+  countryCode: String!
+  number: String
+}
+
+type Email implements CommunicationChannel {
+  type: CommunicationType! @default(value: EMAIL)
+  value: String!
+  extras: [String!]!
+}
+
+type Credential {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  displayName: String
+  owner: Person! @relation(name: "OwnerCredentials")
+  isMain: Boolean!
+  type: CredentialType! @default(value: EMAIL)
+  validated: Boolean @default(value: false)
+  validationID: ID
+
+  value: String! @unique
+  rawPassword: String
+  hashedPassword: String!
+}
+
+type IdentificationDocument {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  person: Person! @relation(name: "PersonIdentification") 
+    
+  type: IdentificationType!
+  value: String!
+}
+
+type Person {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  
+  mID: String 
+  name: String!
+  photo: String
+  birthday: DateTime!
+  from: String
+  channelsPhone: [Phone]
+  channelsEmail: [Email]
+  identification: IdentificationDocument! @relation(name: "PersonIdentification", onDelete: CASCADE)
+  tags: [String!]!
+  credentials: [Credential!]! @relation(name: "OwnerCredentials")
+}

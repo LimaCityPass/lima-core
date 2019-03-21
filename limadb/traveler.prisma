@@ -1,0 +1,47 @@
+
+enum CreditCardType {
+  VISA
+  MASTERCARD
+  AMERICAN
+}
+
+type PaymentEntry {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  externalID: String!
+  withCard: CreditCard! @relation(name:"Uses")
+  productID: ID!
+  product: String!
+  gatewayResponse: String
+  amount: Int!
+  discountID: ID
+  discount: Int
+}
+
+type CreditCard {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  owner: Traveler! @relation(name:"CreditCards")
+  cardNumber: String!
+  cardToken: String!
+  type: CreditCardType! @default(value: VISA)
+  lastUsed: DateTime
+
+  uses: [PaymentEntry!]! @relation(name:"Uses")
+}
+
+type Traveler {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  person: Person!
+  username: String! @unique
+
+  cards: [CreditCard!]! @relation(name:"CreditCards")
+  
+}
