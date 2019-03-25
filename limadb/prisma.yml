@@ -1,5 +1,6 @@
 # endpoint: https://us1.prisma.sh/bregy-malpartida-2d1dcf/limadb/dev
-endpoint: http://23.20.7.36:4466
+endpoint: http://db.limacitypass.com:4466/limadb/dev
+
 datamodel:
   - person.prisma
   - traveler.prisma
