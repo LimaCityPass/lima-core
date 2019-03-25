@@ -11,26 +11,24 @@ enum IdentificationType {
   PASSPORT
 }
 
-enum CommunicationType {
-  EMAIL
-  PHONE
-}
+type PhoneChannel {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
 
-interface CommunicationChannel {
-  id: ID!
   displayName: String!
-  type: CommunicationType!
   valid: Boolean! @default(value: false)
-}
-
-type Phone implements CommunicationChannel {
-  type: CommunicationType! @default(value: PHONE)
   countryCode: String!
   number: String
 }
 
-type Email implements CommunicationChannel {
-  type: CommunicationType! @default(value: EMAIL)
+type EmailChannel {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  displayName: String!
+  valid: Boolean! @default(value: false)
   value: String!
   extras: [String!]!
 }
@@ -61,6 +59,7 @@ type IdentificationDocument {
     
   type: IdentificationType!
   value: String!
+  validated: Boolean @default(value: false)
 }
 
 type Person {
@@ -73,8 +72,8 @@ type Person {
   photo: String
   birthday: DateTime!
   from: String
-  channelsPhone: [Phone]
-  channelsEmail: [Email]
+  phones: [PhoneChannel]
+  emails: [EmailChannel]
   identification: IdentificationDocument! @relation(name: "PersonIdentification", onDelete: CASCADE)
   tags: [String!]!
   credentials: [Credential!]! @relation(name: "OwnerCredentials")

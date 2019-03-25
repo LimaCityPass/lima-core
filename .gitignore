@@ -17,3 +17,4 @@ terralima/*.pem
 terralima/*.txt
 
 limadb/.env
+limadb/testclient

@@ -287,17 +287,28 @@ func (client *Client) DetailsesConnection(params *DetailsesConnectionParams) Det
 	panic("not implemented")
 }
 
-type EmailsParams struct {
-	Where   *EmailWhereInput   `json:"where,omitempty"`
-	OrderBy *EmailOrderByInput `json:"orderBy,omitempty"`
-	Skip    *int32             `json:"skip,omitempty"`
-	After   *string            `json:"after,omitempty"`
-	Before  *string            `json:"before,omitempty"`
-	First   *int32             `json:"first,omitempty"`
-	Last    *int32             `json:"last,omitempty"`
+func (client *Client) EmailChannel(params EmailChannelWhereUniqueInput) *EmailChannelExec {
+	ret := client.Client.GetOne(
+		nil,
+		params,
+		[2]string{"EmailChannelWhereUniqueInput!", "EmailChannel"},
+		"emailChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
+
+	return &EmailChannelExec{ret}
 }
 
-func (client *Client) Emails(params *EmailsParams) *EmailExecArray {
+type EmailChannelsParams struct {
+	Where   *EmailChannelWhereInput   `json:"where,omitempty"`
+	OrderBy *EmailChannelOrderByInput `json:"orderBy,omitempty"`
+	Skip    *int32                    `json:"skip,omitempty"`
+	After   *string                   `json:"after,omitempty"`
+	Before  *string                   `json:"before,omitempty"`
+	First   *int32                    `json:"first,omitempty"`
+	Last    *int32                    `json:"last,omitempty"`
+}
+
+func (client *Client) EmailChannels(params *EmailChannelsParams) *EmailChannelExecArray {
 	var wparams *prisma.WhereParams
 	if params != nil {
 		wparams = &prisma.WhereParams{
@@ -314,24 +325,24 @@ func (client *Client) Emails(params *EmailsParams) *EmailExecArray {
 	ret := client.Client.GetMany(
 		nil,
 		wparams,
-		[3]string{"EmailWhereInput", "EmailOrderByInput", "Email"},
-		"emails",
-		[]string{"type", "value", "extras"})
+		[3]string{"EmailChannelWhereInput", "EmailChannelOrderByInput", "EmailChannel"},
+		"emailChannels",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
 
-	return &EmailExecArray{ret}
+	return &EmailChannelExecArray{ret}
 }
 
-type EmailsConnectionParams struct {
-	Where   *EmailWhereInput   `json:"where,omitempty"`
-	OrderBy *EmailOrderByInput `json:"orderBy,omitempty"`
-	Skip    *int32             `json:"skip,omitempty"`
-	After   *string            `json:"after,omitempty"`
-	Before  *string            `json:"before,omitempty"`
-	First   *int32             `json:"first,omitempty"`
-	Last    *int32             `json:"last,omitempty"`
+type EmailChannelsConnectionParams struct {
+	Where   *EmailChannelWhereInput   `json:"where,omitempty"`
+	OrderBy *EmailChannelOrderByInput `json:"orderBy,omitempty"`
+	Skip    *int32                    `json:"skip,omitempty"`
+	After   *string                   `json:"after,omitempty"`
+	Before  *string                   `json:"before,omitempty"`
+	First   *int32                    `json:"first,omitempty"`
+	Last    *int32                    `json:"last,omitempty"`
 }
 
-func (client *Client) EmailsConnection(params *EmailsConnectionParams) EmailConnectionExec {
+func (client *Client) EmailChannelsConnection(params *EmailChannelsConnectionParams) EmailChannelConnectionExec {
 	panic("not implemented")
 }
 
@@ -389,7 +400,7 @@ func (client *Client) IDentificationDocument(params IDentificationDocumentWhereU
 		params,
 		[2]string{"IdentificationDocumentWhereUniqueInput!", "IdentificationDocument"},
 		"identificationDocument",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -423,7 +434,7 @@ func (client *Client) IDentificationDocuments(params *IDentificationDocumentsPar
 		wparams,
 		[3]string{"IdentificationDocumentWhereInput", "IdentificationDocumentOrderByInput", "IdentificationDocument"},
 		"identificationDocuments",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExecArray{ret}
 }
@@ -822,17 +833,28 @@ func (client *Client) PersonReviewsesConnection(params *PersonReviewsesConnectio
 	panic("not implemented")
 }
 
-type PhonesParams struct {
-	Where   *PhoneWhereInput   `json:"where,omitempty"`
-	OrderBy *PhoneOrderByInput `json:"orderBy,omitempty"`
-	Skip    *int32             `json:"skip,omitempty"`
-	After   *string            `json:"after,omitempty"`
-	Before  *string            `json:"before,omitempty"`
-	First   *int32             `json:"first,omitempty"`
-	Last    *int32             `json:"last,omitempty"`
+func (client *Client) PhoneChannel(params PhoneChannelWhereUniqueInput) *PhoneChannelExec {
+	ret := client.Client.GetOne(
+		nil,
+		params,
+		[2]string{"PhoneChannelWhereUniqueInput!", "PhoneChannel"},
+		"phoneChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
+
+	return &PhoneChannelExec{ret}
 }
 
-func (client *Client) Phones(params *PhonesParams) *PhoneExecArray {
+type PhoneChannelsParams struct {
+	Where   *PhoneChannelWhereInput   `json:"where,omitempty"`
+	OrderBy *PhoneChannelOrderByInput `json:"orderBy,omitempty"`
+	Skip    *int32                    `json:"skip,omitempty"`
+	After   *string                   `json:"after,omitempty"`
+	Before  *string                   `json:"before,omitempty"`
+	First   *int32                    `json:"first,omitempty"`
+	Last    *int32                    `json:"last,omitempty"`
+}
+
+func (client *Client) PhoneChannels(params *PhoneChannelsParams) *PhoneChannelExecArray {
 	var wparams *prisma.WhereParams
 	if params != nil {
 		wparams = &prisma.WhereParams{
@@ -849,24 +871,24 @@ func (client *Client) Phones(params *PhonesParams) *PhoneExecArray {
 	ret := client.Client.GetMany(
 		nil,
 		wparams,
-		[3]string{"PhoneWhereInput", "PhoneOrderByInput", "Phone"},
-		"phones",
-		[]string{"type", "countryCode", "number"})
+		[3]string{"PhoneChannelWhereInput", "PhoneChannelOrderByInput", "PhoneChannel"},
+		"phoneChannels",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
 
-	return &PhoneExecArray{ret}
+	return &PhoneChannelExecArray{ret}
 }
 
-type PhonesConnectionParams struct {
-	Where   *PhoneWhereInput   `json:"where,omitempty"`
-	OrderBy *PhoneOrderByInput `json:"orderBy,omitempty"`
-	Skip    *int32             `json:"skip,omitempty"`
-	After   *string            `json:"after,omitempty"`
-	Before  *string            `json:"before,omitempty"`
-	First   *int32             `json:"first,omitempty"`
-	Last    *int32             `json:"last,omitempty"`
+type PhoneChannelsConnectionParams struct {
+	Where   *PhoneChannelWhereInput   `json:"where,omitempty"`
+	OrderBy *PhoneChannelOrderByInput `json:"orderBy,omitempty"`
+	Skip    *int32                    `json:"skip,omitempty"`
+	After   *string                   `json:"after,omitempty"`
+	Before  *string                   `json:"before,omitempty"`
+	First   *int32                    `json:"first,omitempty"`
+	Last    *int32                    `json:"last,omitempty"`
 }
 
-func (client *Client) PhonesConnection(params *PhonesConnectionParams) PhoneConnectionExec {
+func (client *Client) PhoneChannelsConnection(params *PhoneChannelsConnectionParams) PhoneChannelConnectionExec {
 	panic("not implemented")
 }
 
@@ -1318,34 +1340,83 @@ func (client *Client) DeleteManyDetailses(params *DetailsWhereInput) *BatchPaylo
 	return &BatchPayloadExec{exec}
 }
 
-func (client *Client) CreateEmail(params EmailCreateInput) *EmailExec {
+func (client *Client) CreateEmailChannel(params EmailChannelCreateInput) *EmailChannelExec {
 	ret := client.Client.Create(
 		params,
-		[2]string{"EmailCreateInput!", "Email"},
-		"createEmail",
-		[]string{"type", "value", "extras"})
+		[2]string{"EmailChannelCreateInput!", "EmailChannel"},
+		"createEmailChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
 
-	return &EmailExec{ret}
+	return &EmailChannelExec{ret}
 }
 
-type EmailUpdateManyParams struct {
-	Data  EmailUpdateManyMutationInput `json:"data"`
-	Where *EmailWhereInput             `json:"where,omitempty"`
+type EmailChannelUpdateParams struct {
+	Data  EmailChannelUpdateInput      `json:"data"`
+	Where EmailChannelWhereUniqueInput `json:"where"`
 }
 
-func (client *Client) UpdateManyEmails(params EmailUpdateManyParams) *BatchPayloadExec {
+func (client *Client) UpdateEmailChannel(params EmailChannelUpdateParams) *EmailChannelExec {
+	ret := client.Client.Update(
+		prisma.UpdateParams{
+			Data:  params.Data,
+			Where: params.Where,
+		},
+		[3]string{"EmailChannelUpdateInput!", "EmailChannelWhereUniqueInput!", "EmailChannel"},
+		"updateEmailChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
+
+	return &EmailChannelExec{ret}
+}
+
+type EmailChannelUpdateManyParams struct {
+	Data  EmailChannelUpdateManyMutationInput `json:"data"`
+	Where *EmailChannelWhereInput             `json:"where,omitempty"`
+}
+
+func (client *Client) UpdateManyEmailChannels(params EmailChannelUpdateManyParams) *BatchPayloadExec {
 	exec := client.Client.UpdateMany(
 		prisma.UpdateParams{
 			Data:  params.Data,
 			Where: params.Where,
 		},
-		[2]string{"EmailUpdateManyMutationInput!", "EmailWhereInput"},
-		"updateManyEmails")
+		[2]string{"EmailChannelUpdateManyMutationInput!", "EmailChannelWhereInput"},
+		"updateManyEmailChannels")
 	return &BatchPayloadExec{exec}
 }
 
-func (client *Client) DeleteManyEmails(params *EmailWhereInput) *BatchPayloadExec {
-	exec := client.Client.DeleteMany(params, "EmailWhereInput", "deleteManyEmails")
+type EmailChannelUpsertParams struct {
+	Where  EmailChannelWhereUniqueInput `json:"where"`
+	Create EmailChannelCreateInput      `json:"create"`
+	Update EmailChannelUpdateInput      `json:"update"`
+}
+
+func (client *Client) UpsertEmailChannel(params EmailChannelUpsertParams) *EmailChannelExec {
+	uparams := &prisma.UpsertParams{
+		Where:  params.Where,
+		Create: params.Create,
+		Update: params.Update,
+	}
+	ret := client.Client.Upsert(
+		uparams,
+		[4]string{"EmailChannelWhereUniqueInput!", "EmailChannelCreateInput!", "EmailChannelUpdateInput!", "EmailChannel"},
+		"upsertEmailChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
+
+	return &EmailChannelExec{ret}
+}
+
+func (client *Client) DeleteEmailChannel(params EmailChannelWhereUniqueInput) *EmailChannelExec {
+	ret := client.Client.Delete(
+		params,
+		[2]string{"EmailChannelWhereUniqueInput!", "EmailChannel"},
+		"deleteEmailChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
+
+	return &EmailChannelExec{ret}
+}
+
+func (client *Client) DeleteManyEmailChannels(params *EmailChannelWhereInput) *BatchPayloadExec {
+	exec := client.Client.DeleteMany(params, "EmailChannelWhereInput", "deleteManyEmailChannels")
 	return &BatchPayloadExec{exec}
 }
 
@@ -1385,7 +1456,7 @@ func (client *Client) CreateIdentificationDocument(params IDentificationDocument
 		params,
 		[2]string{"IdentificationDocumentCreateInput!", "IdentificationDocument"},
 		"createIdentificationDocument",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -1403,7 +1474,7 @@ func (client *Client) UpdateIdentificationDocument(params IDentificationDocument
 		},
 		[3]string{"IdentificationDocumentUpdateInput!", "IdentificationDocumentWhereUniqueInput!", "IdentificationDocument"},
 		"updateIdentificationDocument",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -1440,7 +1511,7 @@ func (client *Client) UpsertIdentificationDocument(params IDentificationDocument
 		uparams,
 		[4]string{"IdentificationDocumentWhereUniqueInput!", "IdentificationDocumentCreateInput!", "IdentificationDocumentUpdateInput!", "IdentificationDocument"},
 		"upsertIdentificationDocument",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -1450,7 +1521,7 @@ func (client *Client) DeleteIdentificationDocument(params IDentificationDocument
 		params,
 		[2]string{"IdentificationDocumentWhereUniqueInput!", "IdentificationDocument"},
 		"deleteIdentificationDocument",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -1873,34 +1944,83 @@ func (client *Client) DeleteManyPersonReviewses(params *PersonReviewsWhereInput)
 	return &BatchPayloadExec{exec}
 }
 
-func (client *Client) CreatePhone(params PhoneCreateInput) *PhoneExec {
+func (client *Client) CreatePhoneChannel(params PhoneChannelCreateInput) *PhoneChannelExec {
 	ret := client.Client.Create(
 		params,
-		[2]string{"PhoneCreateInput!", "Phone"},
-		"createPhone",
-		[]string{"type", "countryCode", "number"})
+		[2]string{"PhoneChannelCreateInput!", "PhoneChannel"},
+		"createPhoneChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
 
-	return &PhoneExec{ret}
+	return &PhoneChannelExec{ret}
 }
 
-type PhoneUpdateManyParams struct {
-	Data  PhoneUpdateManyMutationInput `json:"data"`
-	Where *PhoneWhereInput             `json:"where,omitempty"`
+type PhoneChannelUpdateParams struct {
+	Data  PhoneChannelUpdateInput      `json:"data"`
+	Where PhoneChannelWhereUniqueInput `json:"where"`
 }
 
-func (client *Client) UpdateManyPhones(params PhoneUpdateManyParams) *BatchPayloadExec {
+func (client *Client) UpdatePhoneChannel(params PhoneChannelUpdateParams) *PhoneChannelExec {
+	ret := client.Client.Update(
+		prisma.UpdateParams{
+			Data:  params.Data,
+			Where: params.Where,
+		},
+		[3]string{"PhoneChannelUpdateInput!", "PhoneChannelWhereUniqueInput!", "PhoneChannel"},
+		"updatePhoneChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
+
+	return &PhoneChannelExec{ret}
+}
+
+type PhoneChannelUpdateManyParams struct {
+	Data  PhoneChannelUpdateManyMutationInput `json:"data"`
+	Where *PhoneChannelWhereInput             `json:"where,omitempty"`
+}
+
+func (client *Client) UpdateManyPhoneChannels(params PhoneChannelUpdateManyParams) *BatchPayloadExec {
 	exec := client.Client.UpdateMany(
 		prisma.UpdateParams{
 			Data:  params.Data,
 			Where: params.Where,
 		},
-		[2]string{"PhoneUpdateManyMutationInput!", "PhoneWhereInput"},
-		"updateManyPhones")
+		[2]string{"PhoneChannelUpdateManyMutationInput!", "PhoneChannelWhereInput"},
+		"updateManyPhoneChannels")
 	return &BatchPayloadExec{exec}
 }
 
-func (client *Client) DeleteManyPhones(params *PhoneWhereInput) *BatchPayloadExec {
-	exec := client.Client.DeleteMany(params, "PhoneWhereInput", "deleteManyPhones")
+type PhoneChannelUpsertParams struct {
+	Where  PhoneChannelWhereUniqueInput `json:"where"`
+	Create PhoneChannelCreateInput      `json:"create"`
+	Update PhoneChannelUpdateInput      `json:"update"`
+}
+
+func (client *Client) UpsertPhoneChannel(params PhoneChannelUpsertParams) *PhoneChannelExec {
+	uparams := &prisma.UpsertParams{
+		Where:  params.Where,
+		Create: params.Create,
+		Update: params.Update,
+	}
+	ret := client.Client.Upsert(
+		uparams,
+		[4]string{"PhoneChannelWhereUniqueInput!", "PhoneChannelCreateInput!", "PhoneChannelUpdateInput!", "PhoneChannel"},
+		"upsertPhoneChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
+
+	return &PhoneChannelExec{ret}
+}
+
+func (client *Client) DeletePhoneChannel(params PhoneChannelWhereUniqueInput) *PhoneChannelExec {
+	ret := client.Client.Delete(
+		params,
+		[2]string{"PhoneChannelWhereUniqueInput!", "PhoneChannel"},
+		"deletePhoneChannel",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
+
+	return &PhoneChannelExec{ret}
+}
+
+func (client *Client) DeleteManyPhoneChannels(params *PhoneChannelWhereInput) *BatchPayloadExec {
+	exec := client.Client.DeleteMany(params, "PhoneChannelWhereInput", "deleteManyPhoneChannels")
 	return &BatchPayloadExec{exec}
 }
 
@@ -2144,19 +2264,21 @@ func (client *Client) DeleteManyTravelers(params *TravelerWhereInput) *BatchPayl
 	return &BatchPayloadExec{exec}
 }
 
-type EmailOrderByInput string
+type EmailChannelOrderByInput string
 
 const (
-	EmailOrderByInputTypeAsc       EmailOrderByInput = "type_ASC"
-	EmailOrderByInputTypeDesc      EmailOrderByInput = "type_DESC"
-	EmailOrderByInputValueAsc      EmailOrderByInput = "value_ASC"
-	EmailOrderByInputValueDesc     EmailOrderByInput = "value_DESC"
-	EmailOrderByInputIDAsc         EmailOrderByInput = "id_ASC"
-	EmailOrderByInputIDDesc        EmailOrderByInput = "id_DESC"
-	EmailOrderByInputCreatedAtAsc  EmailOrderByInput = "createdAt_ASC"
-	EmailOrderByInputCreatedAtDesc EmailOrderByInput = "createdAt_DESC"
-	EmailOrderByInputUpdatedAtAsc  EmailOrderByInput = "updatedAt_ASC"
-	EmailOrderByInputUpdatedAtDesc EmailOrderByInput = "updatedAt_DESC"
+	EmailChannelOrderByInputIDAsc           EmailChannelOrderByInput = "id_ASC"
+	EmailChannelOrderByInputIDDesc          EmailChannelOrderByInput = "id_DESC"
+	EmailChannelOrderByInputCreatedAtAsc    EmailChannelOrderByInput = "createdAt_ASC"
+	EmailChannelOrderByInputCreatedAtDesc   EmailChannelOrderByInput = "createdAt_DESC"
+	EmailChannelOrderByInputUpdatedAtAsc    EmailChannelOrderByInput = "updatedAt_ASC"
+	EmailChannelOrderByInputUpdatedAtDesc   EmailChannelOrderByInput = "updatedAt_DESC"
+	EmailChannelOrderByInputDisplayNameAsc  EmailChannelOrderByInput = "displayName_ASC"
+	EmailChannelOrderByInputDisplayNameDesc EmailChannelOrderByInput = "displayName_DESC"
+	EmailChannelOrderByInputValidAsc        EmailChannelOrderByInput = "valid_ASC"
+	EmailChannelOrderByInputValidDesc       EmailChannelOrderByInput = "valid_DESC"
+	EmailChannelOrderByInputValueAsc        EmailChannelOrderByInput = "value_ASC"
+	EmailChannelOrderByInputValueDesc       EmailChannelOrderByInput = "value_DESC"
 )
 
 type AttractionOrderByInput string
@@ -2176,29 +2298,17 @@ const (
 	AttractionOrderByInputPopularityDesc AttractionOrderByInput = "popularity_DESC"
 )
 
-type PaymentEntryOrderByInput string
+type TicketOrderByInput string
 
 const (
-	PaymentEntryOrderByInputIDAsc               PaymentEntryOrderByInput = "id_ASC"
-	PaymentEntryOrderByInputIDDesc              PaymentEntryOrderByInput = "id_DESC"
-	PaymentEntryOrderByInputCreatedAtAsc        PaymentEntryOrderByInput = "createdAt_ASC"
-	PaymentEntryOrderByInputCreatedAtDesc       PaymentEntryOrderByInput = "createdAt_DESC"
-	PaymentEntryOrderByInputUpdatedAtAsc        PaymentEntryOrderByInput = "updatedAt_ASC"
-	PaymentEntryOrderByInputUpdatedAtDesc       PaymentEntryOrderByInput = "updatedAt_DESC"
-	PaymentEntryOrderByInputExternalIdAsc       PaymentEntryOrderByInput = "externalID_ASC"
-	PaymentEntryOrderByInputExternalIdDesc      PaymentEntryOrderByInput = "externalID_DESC"
-	PaymentEntryOrderByInputProductIdAsc        PaymentEntryOrderByInput = "productID_ASC"
-	PaymentEntryOrderByInputProductIdDesc       PaymentEntryOrderByInput = "productID_DESC"
-	PaymentEntryOrderByInputProductAsc          PaymentEntryOrderByInput = "product_ASC"
-	PaymentEntryOrderByInputProductDesc         PaymentEntryOrderByInput = "product_DESC"
-	PaymentEntryOrderByInputGatewayResponseAsc  PaymentEntryOrderByInput = "gatewayResponse_ASC"
-	PaymentEntryOrderByInputGatewayResponseDesc PaymentEntryOrderByInput = "gatewayResponse_DESC"
-	PaymentEntryOrderByInputAmountAsc           PaymentEntryOrderByInput = "amount_ASC"
-	PaymentEntryOrderByInputAmountDesc          PaymentEntryOrderByInput = "amount_DESC"
-	PaymentEntryOrderByInputDiscountIdAsc       PaymentEntryOrderByInput = "discountID_ASC"
-	PaymentEntryOrderByInputDiscountIdDesc      PaymentEntryOrderByInput = "discountID_DESC"
-	PaymentEntryOrderByInputDiscountAsc         PaymentEntryOrderByInput = "discount_ASC"
-	PaymentEntryOrderByInputDiscountDesc        PaymentEntryOrderByInput = "discount_DESC"
+	TicketOrderByInputIDAsc         TicketOrderByInput = "id_ASC"
+	TicketOrderByInputIDDesc        TicketOrderByInput = "id_DESC"
+	TicketOrderByInputCreatedAtAsc  TicketOrderByInput = "createdAt_ASC"
+	TicketOrderByInputCreatedAtDesc TicketOrderByInput = "createdAt_DESC"
+	TicketOrderByInputUpdatedAtAsc  TicketOrderByInput = "updatedAt_ASC"
+	TicketOrderByInputUpdatedAtDesc TicketOrderByInput = "updatedAt_DESC"
+	TicketOrderByInputExpireAtAsc   TicketOrderByInput = "expireAt_ASC"
+	TicketOrderByInputExpireAtDesc  TicketOrderByInput = "expireAt_DESC"
 )
 
 type TravelerOrderByInput string
@@ -2214,17 +2324,23 @@ const (
 	TravelerOrderByInputUsernameDesc  TravelerOrderByInput = "username_DESC"
 )
 
-type TicketOrderByInput string
+type CreditCardOrderByInput string
 
 const (
-	TicketOrderByInputIDAsc         TicketOrderByInput = "id_ASC"
-	TicketOrderByInputIDDesc        TicketOrderByInput = "id_DESC"
-	TicketOrderByInputCreatedAtAsc  TicketOrderByInput = "createdAt_ASC"
-	TicketOrderByInputCreatedAtDesc TicketOrderByInput = "createdAt_DESC"
-	TicketOrderByInputUpdatedAtAsc  TicketOrderByInput = "updatedAt_ASC"
-	TicketOrderByInputUpdatedAtDesc TicketOrderByInput = "updatedAt_DESC"
-	TicketOrderByInputExpireAtAsc   TicketOrderByInput = "expireAt_ASC"
-	TicketOrderByInputExpireAtDesc  TicketOrderByInput = "expireAt_DESC"
+	CreditCardOrderByInputIDAsc          CreditCardOrderByInput = "id_ASC"
+	CreditCardOrderByInputIDDesc         CreditCardOrderByInput = "id_DESC"
+	CreditCardOrderByInputCreatedAtAsc   CreditCardOrderByInput = "createdAt_ASC"
+	CreditCardOrderByInputCreatedAtDesc  CreditCardOrderByInput = "createdAt_DESC"
+	CreditCardOrderByInputUpdatedAtAsc   CreditCardOrderByInput = "updatedAt_ASC"
+	CreditCardOrderByInputUpdatedAtDesc  CreditCardOrderByInput = "updatedAt_DESC"
+	CreditCardOrderByInputCardNumberAsc  CreditCardOrderByInput = "cardNumber_ASC"
+	CreditCardOrderByInputCardNumberDesc CreditCardOrderByInput = "cardNumber_DESC"
+	CreditCardOrderByInputCardTokenAsc   CreditCardOrderByInput = "cardToken_ASC"
+	CreditCardOrderByInputCardTokenDesc  CreditCardOrderByInput = "cardToken_DESC"
+	CreditCardOrderByInputTypeAsc        CreditCardOrderByInput = "type_ASC"
+	CreditCardOrderByInputTypeDesc       CreditCardOrderByInput = "type_DESC"
+	CreditCardOrderByInputLastUsedAsc    CreditCardOrderByInput = "lastUsed_ASC"
+	CreditCardOrderByInputLastUsedDesc   CreditCardOrderByInput = "lastUsed_DESC"
 )
 
 type PartnerOrderByInput string
@@ -2268,42 +2384,6 @@ const (
 	OpeningHoursOrderByInputUpdatedAtDesc OpeningHoursOrderByInput = "updatedAt_DESC"
 )
 
-type CreditCardOrderByInput string
-
-const (
-	CreditCardOrderByInputIDAsc          CreditCardOrderByInput = "id_ASC"
-	CreditCardOrderByInputIDDesc         CreditCardOrderByInput = "id_DESC"
-	CreditCardOrderByInputCreatedAtAsc   CreditCardOrderByInput = "createdAt_ASC"
-	CreditCardOrderByInputCreatedAtDesc  CreditCardOrderByInput = "createdAt_DESC"
-	CreditCardOrderByInputUpdatedAtAsc   CreditCardOrderByInput = "updatedAt_ASC"
-	CreditCardOrderByInputUpdatedAtDesc  CreditCardOrderByInput = "updatedAt_DESC"
-	CreditCardOrderByInputCardNumberAsc  CreditCardOrderByInput = "cardNumber_ASC"
-	CreditCardOrderByInputCardNumberDesc CreditCardOrderByInput = "cardNumber_DESC"
-	CreditCardOrderByInputCardTokenAsc   CreditCardOrderByInput = "cardToken_ASC"
-	CreditCardOrderByInputCardTokenDesc  CreditCardOrderByInput = "cardToken_DESC"
-	CreditCardOrderByInputTypeAsc        CreditCardOrderByInput = "type_ASC"
-	CreditCardOrderByInputTypeDesc       CreditCardOrderByInput = "type_DESC"
-	CreditCardOrderByInputLastUsedAsc    CreditCardOrderByInput = "lastUsed_ASC"
-	CreditCardOrderByInputLastUsedDesc   CreditCardOrderByInput = "lastUsed_DESC"
-)
-
-type PhoneOrderByInput string
-
-const (
-	PhoneOrderByInputTypeAsc         PhoneOrderByInput = "type_ASC"
-	PhoneOrderByInputTypeDesc        PhoneOrderByInput = "type_DESC"
-	PhoneOrderByInputCountryCodeAsc  PhoneOrderByInput = "countryCode_ASC"
-	PhoneOrderByInputCountryCodeDesc PhoneOrderByInput = "countryCode_DESC"
-	PhoneOrderByInputNumberAsc       PhoneOrderByInput = "number_ASC"
-	PhoneOrderByInputNumberDesc      PhoneOrderByInput = "number_DESC"
-	PhoneOrderByInputIDAsc           PhoneOrderByInput = "id_ASC"
-	PhoneOrderByInputIDDesc          PhoneOrderByInput = "id_DESC"
-	PhoneOrderByInputCreatedAtAsc    PhoneOrderByInput = "createdAt_ASC"
-	PhoneOrderByInputCreatedAtDesc   PhoneOrderByInput = "createdAt_DESC"
-	PhoneOrderByInputUpdatedAtAsc    PhoneOrderByInput = "updatedAt_ASC"
-	PhoneOrderByInputUpdatedAtDesc   PhoneOrderByInput = "updatedAt_DESC"
-)
-
 type CreditCardType string
 
 const (
@@ -2312,19 +2392,23 @@ const (
 	CreditCardTypeAmerican   CreditCardType = "AMERICAN"
 )
 
-type IDentificationDocumentOrderByInput string
+type PhoneChannelOrderByInput string
 
 const (
-	IDentificationDocumentOrderByInputIDAsc         IDentificationDocumentOrderByInput = "id_ASC"
-	IDentificationDocumentOrderByInputIDDesc        IDentificationDocumentOrderByInput = "id_DESC"
-	IDentificationDocumentOrderByInputCreatedAtAsc  IDentificationDocumentOrderByInput = "createdAt_ASC"
-	IDentificationDocumentOrderByInputCreatedAtDesc IDentificationDocumentOrderByInput = "createdAt_DESC"
-	IDentificationDocumentOrderByInputUpdatedAtAsc  IDentificationDocumentOrderByInput = "updatedAt_ASC"
-	IDentificationDocumentOrderByInputUpdatedAtDesc IDentificationDocumentOrderByInput = "updatedAt_DESC"
-	IDentificationDocumentOrderByInputTypeAsc       IDentificationDocumentOrderByInput = "type_ASC"
-	IDentificationDocumentOrderByInputTypeDesc      IDentificationDocumentOrderByInput = "type_DESC"
-	IDentificationDocumentOrderByInputValueAsc      IDentificationDocumentOrderByInput = "value_ASC"
-	IDentificationDocumentOrderByInputValueDesc     IDentificationDocumentOrderByInput = "value_DESC"
+	PhoneChannelOrderByInputIDAsc           PhoneChannelOrderByInput = "id_ASC"
+	PhoneChannelOrderByInputIDDesc          PhoneChannelOrderByInput = "id_DESC"
+	PhoneChannelOrderByInputCreatedAtAsc    PhoneChannelOrderByInput = "createdAt_ASC"
+	PhoneChannelOrderByInputCreatedAtDesc   PhoneChannelOrderByInput = "createdAt_DESC"
+	PhoneChannelOrderByInputUpdatedAtAsc    PhoneChannelOrderByInput = "updatedAt_ASC"
+	PhoneChannelOrderByInputUpdatedAtDesc   PhoneChannelOrderByInput = "updatedAt_DESC"
+	PhoneChannelOrderByInputDisplayNameAsc  PhoneChannelOrderByInput = "displayName_ASC"
+	PhoneChannelOrderByInputDisplayNameDesc PhoneChannelOrderByInput = "displayName_DESC"
+	PhoneChannelOrderByInputValidAsc        PhoneChannelOrderByInput = "valid_ASC"
+	PhoneChannelOrderByInputValidDesc       PhoneChannelOrderByInput = "valid_DESC"
+	PhoneChannelOrderByInputCountryCodeAsc  PhoneChannelOrderByInput = "countryCode_ASC"
+	PhoneChannelOrderByInputCountryCodeDesc PhoneChannelOrderByInput = "countryCode_DESC"
+	PhoneChannelOrderByInputNumberAsc       PhoneChannelOrderByInput = "number_ASC"
+	PhoneChannelOrderByInputNumberDesc      PhoneChannelOrderByInput = "number_DESC"
 )
 
 type PersonReviewsOrderByInput string
@@ -2346,12 +2430,25 @@ const (
 	PersonReviewsOrderByInputDeclineNumberDesc PersonReviewsOrderByInput = "declineNumber_DESC"
 )
 
-type MutationType string
+type DetailsOrderByInput string
 
 const (
-	MutationTypeCreated MutationType = "CREATED"
-	MutationTypeUpdated MutationType = "UPDATED"
-	MutationTypeDeleted MutationType = "DELETED"
+	DetailsOrderByInputProviderNameAsc      DetailsOrderByInput = "providerName_ASC"
+	DetailsOrderByInputProviderNameDesc     DetailsOrderByInput = "providerName_DESC"
+	DetailsOrderByInputProviderWebAsc       DetailsOrderByInput = "providerWeb_ASC"
+	DetailsOrderByInputProviderWebDesc      DetailsOrderByInput = "providerWeb_DESC"
+	DetailsOrderByInputContactPhoneAsc      DetailsOrderByInput = "contactPhone_ASC"
+	DetailsOrderByInputContactPhoneDesc     DetailsOrderByInput = "contactPhone_DESC"
+	DetailsOrderByInputContactEmailAsc      DetailsOrderByInput = "contactEmail_ASC"
+	DetailsOrderByInputContactEmailDesc     DetailsOrderByInput = "contactEmail_DESC"
+	DetailsOrderByInputAddressReferenceAsc  DetailsOrderByInput = "addressReference_ASC"
+	DetailsOrderByInputAddressReferenceDesc DetailsOrderByInput = "addressReference_DESC"
+	DetailsOrderByInputIDAsc                DetailsOrderByInput = "id_ASC"
+	DetailsOrderByInputIDDesc               DetailsOrderByInput = "id_DESC"
+	DetailsOrderByInputCreatedAtAsc         DetailsOrderByInput = "createdAt_ASC"
+	DetailsOrderByInputCreatedAtDesc        DetailsOrderByInput = "createdAt_DESC"
+	DetailsOrderByInputUpdatedAtAsc         DetailsOrderByInput = "updatedAt_ASC"
+	DetailsOrderByInputUpdatedAtDesc        DetailsOrderByInput = "updatedAt_DESC"
 )
 
 type AttractionType string
@@ -2365,19 +2462,12 @@ const (
 	AttractionTypeDiscount   AttractionType = "DISCOUNT"
 )
 
-type OverviewOrderByInput string
+type MutationType string
 
 const (
-	OverviewOrderByInputNameAsc         OverviewOrderByInput = "name_ASC"
-	OverviewOrderByInputNameDesc        OverviewOrderByInput = "name_DESC"
-	OverviewOrderByInputDescriptionAsc  OverviewOrderByInput = "description_ASC"
-	OverviewOrderByInputDescriptionDesc OverviewOrderByInput = "description_DESC"
-	OverviewOrderByInputIDAsc           OverviewOrderByInput = "id_ASC"
-	OverviewOrderByInputIDDesc          OverviewOrderByInput = "id_DESC"
-	OverviewOrderByInputCreatedAtAsc    OverviewOrderByInput = "createdAt_ASC"
-	OverviewOrderByInputCreatedAtDesc   OverviewOrderByInput = "createdAt_DESC"
-	OverviewOrderByInputUpdatedAtAsc    OverviewOrderByInput = "updatedAt_ASC"
-	OverviewOrderByInputUpdatedAtDesc   OverviewOrderByInput = "updatedAt_DESC"
+	MutationTypeCreated MutationType = "CREATED"
+	MutationTypeUpdated MutationType = "UPDATED"
+	MutationTypeDeleted MutationType = "DELETED"
 )
 
 type FeatureOrderByInput string
@@ -2453,13 +2543,6 @@ const (
 	CredentialTypeAnonymous CredentialType = "ANONYMOUS"
 )
 
-type CommunicationType string
-
-const (
-	CommunicationTypeEmail CommunicationType = "EMAIL"
-	CommunicationTypePhone CommunicationType = "PHONE"
-)
-
 type TicketTypeOrderByInput string
 
 const (
@@ -2475,25 +2558,46 @@ const (
 	TicketTypeOrderByInputCostDesc      TicketTypeOrderByInput = "cost_DESC"
 )
 
-type DetailsOrderByInput string
+type PaymentEntryOrderByInput string
 
 const (
-	DetailsOrderByInputProviderNameAsc      DetailsOrderByInput = "providerName_ASC"
-	DetailsOrderByInputProviderNameDesc     DetailsOrderByInput = "providerName_DESC"
-	DetailsOrderByInputProviderWebAsc       DetailsOrderByInput = "providerWeb_ASC"
-	DetailsOrderByInputProviderWebDesc      DetailsOrderByInput = "providerWeb_DESC"
-	DetailsOrderByInputContactPhoneAsc      DetailsOrderByInput = "contactPhone_ASC"
-	DetailsOrderByInputContactPhoneDesc     DetailsOrderByInput = "contactPhone_DESC"
-	DetailsOrderByInputContactEmailAsc      DetailsOrderByInput = "contactEmail_ASC"
-	DetailsOrderByInputContactEmailDesc     DetailsOrderByInput = "contactEmail_DESC"
-	DetailsOrderByInputAddressReferenceAsc  DetailsOrderByInput = "addressReference_ASC"
-	DetailsOrderByInputAddressReferenceDesc DetailsOrderByInput = "addressReference_DESC"
-	DetailsOrderByInputIDAsc                DetailsOrderByInput = "id_ASC"
-	DetailsOrderByInputIDDesc               DetailsOrderByInput = "id_DESC"
-	DetailsOrderByInputCreatedAtAsc         DetailsOrderByInput = "createdAt_ASC"
-	DetailsOrderByInputCreatedAtDesc        DetailsOrderByInput = "createdAt_DESC"
-	DetailsOrderByInputUpdatedAtAsc         DetailsOrderByInput = "updatedAt_ASC"
-	DetailsOrderByInputUpdatedAtDesc        DetailsOrderByInput = "updatedAt_DESC"
+	PaymentEntryOrderByInputIDAsc               PaymentEntryOrderByInput = "id_ASC"
+	PaymentEntryOrderByInputIDDesc              PaymentEntryOrderByInput = "id_DESC"
+	PaymentEntryOrderByInputCreatedAtAsc        PaymentEntryOrderByInput = "createdAt_ASC"
+	PaymentEntryOrderByInputCreatedAtDesc       PaymentEntryOrderByInput = "createdAt_DESC"
+	PaymentEntryOrderByInputUpdatedAtAsc        PaymentEntryOrderByInput = "updatedAt_ASC"
+	PaymentEntryOrderByInputUpdatedAtDesc       PaymentEntryOrderByInput = "updatedAt_DESC"
+	PaymentEntryOrderByInputExternalIdAsc       PaymentEntryOrderByInput = "externalID_ASC"
+	PaymentEntryOrderByInputExternalIdDesc      PaymentEntryOrderByInput = "externalID_DESC"
+	PaymentEntryOrderByInputProductIdAsc        PaymentEntryOrderByInput = "productID_ASC"
+	PaymentEntryOrderByInputProductIdDesc       PaymentEntryOrderByInput = "productID_DESC"
+	PaymentEntryOrderByInputProductAsc          PaymentEntryOrderByInput = "product_ASC"
+	PaymentEntryOrderByInputProductDesc         PaymentEntryOrderByInput = "product_DESC"
+	PaymentEntryOrderByInputGatewayResponseAsc  PaymentEntryOrderByInput = "gatewayResponse_ASC"
+	PaymentEntryOrderByInputGatewayResponseDesc PaymentEntryOrderByInput = "gatewayResponse_DESC"
+	PaymentEntryOrderByInputAmountAsc           PaymentEntryOrderByInput = "amount_ASC"
+	PaymentEntryOrderByInputAmountDesc          PaymentEntryOrderByInput = "amount_DESC"
+	PaymentEntryOrderByInputDiscountIdAsc       PaymentEntryOrderByInput = "discountID_ASC"
+	PaymentEntryOrderByInputDiscountIdDesc      PaymentEntryOrderByInput = "discountID_DESC"
+	PaymentEntryOrderByInputDiscountAsc         PaymentEntryOrderByInput = "discount_ASC"
+	PaymentEntryOrderByInputDiscountDesc        PaymentEntryOrderByInput = "discount_DESC"
+)
+
+type IDentificationDocumentOrderByInput string
+
+const (
+	IDentificationDocumentOrderByInputIDAsc         IDentificationDocumentOrderByInput = "id_ASC"
+	IDentificationDocumentOrderByInputIDDesc        IDentificationDocumentOrderByInput = "id_DESC"
+	IDentificationDocumentOrderByInputCreatedAtAsc  IDentificationDocumentOrderByInput = "createdAt_ASC"
+	IDentificationDocumentOrderByInputCreatedAtDesc IDentificationDocumentOrderByInput = "createdAt_DESC"
+	IDentificationDocumentOrderByInputUpdatedAtAsc  IDentificationDocumentOrderByInput = "updatedAt_ASC"
+	IDentificationDocumentOrderByInputUpdatedAtDesc IDentificationDocumentOrderByInput = "updatedAt_DESC"
+	IDentificationDocumentOrderByInputTypeAsc       IDentificationDocumentOrderByInput = "type_ASC"
+	IDentificationDocumentOrderByInputTypeDesc      IDentificationDocumentOrderByInput = "type_DESC"
+	IDentificationDocumentOrderByInputValueAsc      IDentificationDocumentOrderByInput = "value_ASC"
+	IDentificationDocumentOrderByInputValueDesc     IDentificationDocumentOrderByInput = "value_DESC"
+	IDentificationDocumentOrderByInputValidatedAsc  IDentificationDocumentOrderByInput = "validated_ASC"
+	IDentificationDocumentOrderByInputValidatedDesc IDentificationDocumentOrderByInput = "validated_DESC"
 )
 
 type LocationOrderByInput string
@@ -2513,18 +2617,34 @@ const (
 	LocationOrderByInputUpdatedAtDesc   LocationOrderByInput = "updatedAt_DESC"
 )
 
-type LocationUpsertNestedInput struct {
-	Update LocationUpdateDataInput `json:"update"`
-	Create LocationCreateInput     `json:"create"`
+type OverviewOrderByInput string
+
+const (
+	OverviewOrderByInputNameAsc         OverviewOrderByInput = "name_ASC"
+	OverviewOrderByInputNameDesc        OverviewOrderByInput = "name_DESC"
+	OverviewOrderByInputDescriptionAsc  OverviewOrderByInput = "description_ASC"
+	OverviewOrderByInputDescriptionDesc OverviewOrderByInput = "description_DESC"
+	OverviewOrderByInputIDAsc           OverviewOrderByInput = "id_ASC"
+	OverviewOrderByInputIDDesc          OverviewOrderByInput = "id_DESC"
+	OverviewOrderByInputCreatedAtAsc    OverviewOrderByInput = "createdAt_ASC"
+	OverviewOrderByInputCreatedAtDesc   OverviewOrderByInput = "createdAt_DESC"
+	OverviewOrderByInputUpdatedAtAsc    OverviewOrderByInput = "updatedAt_ASC"
+	OverviewOrderByInputUpdatedAtDesc   OverviewOrderByInput = "updatedAt_DESC"
+)
+
+type LocationUpdateOneRequiredInput struct {
+	Create *LocationCreateInput       `json:"create,omitempty"`
+	Update *LocationUpdateDataInput   `json:"update,omitempty"`
+	Upsert *LocationUpsertNestedInput `json:"upsert,omitempty"`
 }
 
 type AttractionWhereUniqueInput struct {
 	ID *string `json:"id,omitempty"`
 }
 
-type PersonUpdateWithWhereUniqueNestedInput struct {
-	Where PersonWhereUniqueInput `json:"where"`
-	Data  PersonUpdateDataInput  `json:"data"`
+type OverviewUpdateDataInput struct {
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 type LocationWhereInput struct {
@@ -2563,10 +2683,9 @@ type LocationWhereInput struct {
 	Not                      []LocationWhereInput `json:"NOT,omitempty"`
 }
 
-type PersonUpsertWithWhereUniqueNestedInput struct {
-	Where  PersonWhereUniqueInput `json:"where"`
-	Update PersonUpdateDataInput  `json:"update"`
-	Create PersonCreateInput      `json:"create"`
+type OverviewUpsertNestedInput struct {
+	Update OverviewUpdateDataInput `json:"update"`
+	Create OverviewCreateInput     `json:"create"`
 }
 
 type FeatureWhereInput struct {
@@ -2603,104 +2722,16 @@ type FeatureWhereInput struct {
 	Not                []FeatureWhereInput `json:"NOT,omitempty"`
 }
 
-type PersonScalarWhereInput struct {
-	ID                 *string                  `json:"id,omitempty"`
-	IDNot              *string                  `json:"id_not,omitempty"`
-	IDIn               []string                 `json:"id_in,omitempty"`
-	IDNotIn            []string                 `json:"id_not_in,omitempty"`
-	IDLt               *string                  `json:"id_lt,omitempty"`
-	IDLte              *string                  `json:"id_lte,omitempty"`
-	IDGt               *string                  `json:"id_gt,omitempty"`
-	IDGte              *string                  `json:"id_gte,omitempty"`
-	IDContains         *string                  `json:"id_contains,omitempty"`
-	IDNotContains      *string                  `json:"id_not_contains,omitempty"`
-	IDStartsWith       *string                  `json:"id_starts_with,omitempty"`
-	IDNotStartsWith    *string                  `json:"id_not_starts_with,omitempty"`
-	IDEndsWith         *string                  `json:"id_ends_with,omitempty"`
-	IDNotEndsWith      *string                  `json:"id_not_ends_with,omitempty"`
-	CreatedAt          *string                  `json:"createdAt,omitempty"`
-	CreatedAtNot       *string                  `json:"createdAt_not,omitempty"`
-	CreatedAtIn        []string                 `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn     []string                 `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt        *string                  `json:"createdAt_lt,omitempty"`
-	CreatedAtLte       *string                  `json:"createdAt_lte,omitempty"`
-	CreatedAtGt        *string                  `json:"createdAt_gt,omitempty"`
-	CreatedAtGte       *string                  `json:"createdAt_gte,omitempty"`
-	UpdatedAt          *string                  `json:"updatedAt,omitempty"`
-	UpdatedAtNot       *string                  `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn        []string                 `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn     []string                 `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt        *string                  `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte       *string                  `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt        *string                  `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte       *string                  `json:"updatedAt_gte,omitempty"`
-	MId                *string                  `json:"mID,omitempty"`
-	MIdNot             *string                  `json:"mID_not,omitempty"`
-	MIdIn              []string                 `json:"mID_in,omitempty"`
-	MIdNotIn           []string                 `json:"mID_not_in,omitempty"`
-	MIdLt              *string                  `json:"mID_lt,omitempty"`
-	MIdLte             *string                  `json:"mID_lte,omitempty"`
-	MIdGt              *string                  `json:"mID_gt,omitempty"`
-	MIdGte             *string                  `json:"mID_gte,omitempty"`
-	MIdContains        *string                  `json:"mID_contains,omitempty"`
-	MIdNotContains     *string                  `json:"mID_not_contains,omitempty"`
-	MIdStartsWith      *string                  `json:"mID_starts_with,omitempty"`
-	MIdNotStartsWith   *string                  `json:"mID_not_starts_with,omitempty"`
-	MIdEndsWith        *string                  `json:"mID_ends_with,omitempty"`
-	MIdNotEndsWith     *string                  `json:"mID_not_ends_with,omitempty"`
-	Name               *string                  `json:"name,omitempty"`
-	NameNot            *string                  `json:"name_not,omitempty"`
-	NameIn             []string                 `json:"name_in,omitempty"`
-	NameNotIn          []string                 `json:"name_not_in,omitempty"`
-	NameLt             *string                  `json:"name_lt,omitempty"`
-	NameLte            *string                  `json:"name_lte,omitempty"`
-	NameGt             *string                  `json:"name_gt,omitempty"`
-	NameGte            *string                  `json:"name_gte,omitempty"`
-	NameContains       *string                  `json:"name_contains,omitempty"`
-	NameNotContains    *string                  `json:"name_not_contains,omitempty"`
-	NameStartsWith     *string                  `json:"name_starts_with,omitempty"`
-	NameNotStartsWith  *string                  `json:"name_not_starts_with,omitempty"`
-	NameEndsWith       *string                  `json:"name_ends_with,omitempty"`
-	NameNotEndsWith    *string                  `json:"name_not_ends_with,omitempty"`
-	Photo              *string                  `json:"photo,omitempty"`
-	PhotoNot           *string                  `json:"photo_not,omitempty"`
-	PhotoIn            []string                 `json:"photo_in,omitempty"`
-	PhotoNotIn         []string                 `json:"photo_not_in,omitempty"`
-	PhotoLt            *string                  `json:"photo_lt,omitempty"`
-	PhotoLte           *string                  `json:"photo_lte,omitempty"`
-	PhotoGt            *string                  `json:"photo_gt,omitempty"`
-	PhotoGte           *string                  `json:"photo_gte,omitempty"`
-	PhotoContains      *string                  `json:"photo_contains,omitempty"`
-	PhotoNotContains   *string                  `json:"photo_not_contains,omitempty"`
-	PhotoStartsWith    *string                  `json:"photo_starts_with,omitempty"`
-	PhotoNotStartsWith *string                  `json:"photo_not_starts_with,omitempty"`
-	PhotoEndsWith      *string                  `json:"photo_ends_with,omitempty"`
-	PhotoNotEndsWith   *string                  `json:"photo_not_ends_with,omitempty"`
-	Birthday           *string                  `json:"birthday,omitempty"`
-	BirthdayNot        *string                  `json:"birthday_not,omitempty"`
-	BirthdayIn         []string                 `json:"birthday_in,omitempty"`
-	BirthdayNotIn      []string                 `json:"birthday_not_in,omitempty"`
-	BirthdayLt         *string                  `json:"birthday_lt,omitempty"`
-	BirthdayLte        *string                  `json:"birthday_lte,omitempty"`
-	BirthdayGt         *string                  `json:"birthday_gt,omitempty"`
-	BirthdayGte        *string                  `json:"birthday_gte,omitempty"`
-	From               *string                  `json:"from,omitempty"`
-	FromNot            *string                  `json:"from_not,omitempty"`
-	FromIn             []string                 `json:"from_in,omitempty"`
-	FromNotIn          []string                 `json:"from_not_in,omitempty"`
-	FromLt             *string                  `json:"from_lt,omitempty"`
-	FromLte            *string                  `json:"from_lte,omitempty"`
-	FromGt             *string                  `json:"from_gt,omitempty"`
-	FromGte            *string                  `json:"from_gte,omitempty"`
-	FromContains       *string                  `json:"from_contains,omitempty"`
-	FromNotContains    *string                  `json:"from_not_contains,omitempty"`
-	FromStartsWith     *string                  `json:"from_starts_with,omitempty"`
-	FromNotStartsWith  *string                  `json:"from_not_starts_with,omitempty"`
-	FromEndsWith       *string                  `json:"from_ends_with,omitempty"`
-	FromNotEndsWith    *string                  `json:"from_not_ends_with,omitempty"`
-	And                []PersonScalarWhereInput `json:"AND,omitempty"`
-	Or                 []PersonScalarWhereInput `json:"OR,omitempty"`
-	Not                []PersonScalarWhereInput `json:"NOT,omitempty"`
+type PersonUpdateManyInput struct {
+	Create     []PersonCreateInput                      `json:"create,omitempty"`
+	Update     []PersonUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []PersonUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []PersonWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []PersonWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []PersonWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []PersonWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []PersonScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []PersonUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
 }
 
 type OverviewWhereInput struct {
@@ -2737,9 +2768,9 @@ type OverviewWhereInput struct {
 	Not                      []OverviewWhereInput `json:"NOT,omitempty"`
 }
 
-type PersonUpdateManyWithWhereNestedInput struct {
-	Where PersonScalarWhereInput    `json:"where"`
-	Data  PersonUpdateManyDataInput `json:"data"`
+type PersonUpdateWithWhereUniqueNestedInput struct {
+	Where PersonWhereUniqueInput `json:"where"`
+	Data  PersonUpdateDataInput  `json:"data"`
 }
 
 type DetailsWhereInput struct {
@@ -2818,35 +2849,29 @@ type DetailsWhereInput struct {
 	Not                           []DetailsWhereInput `json:"NOT,omitempty"`
 }
 
-type FeatureCreateInput struct {
-	Name  *string `json:"name,omitempty"`
-	Image *string `json:"image,omitempty"`
+type OverviewCreateOneInput struct {
+	Create *OverviewCreateInput `json:"create,omitempty"`
 }
 
-type CreditCardUpdateWithoutUsesDataInput struct {
-	Owner      *TravelerUpdateOneRequiredWithoutCardsInput `json:"owner,omitempty"`
-	CardNumber *string                                     `json:"cardNumber,omitempty"`
-	CardToken  *string                                     `json:"cardToken,omitempty"`
-	Type       *CreditCardType                             `json:"type,omitempty"`
-	LastUsed   *string                                     `json:"lastUsed,omitempty"`
+type PaymentEntryUpsertNestedInput struct {
+	Update PaymentEntryUpdateDataInput `json:"update"`
+	Create PaymentEntryCreateInput     `json:"create"`
 }
 
-type OpeningHoursCreateOneInput struct {
-	Create *OpeningHoursCreateInput `json:"create,omitempty"`
+type OverviewCreateInput struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
-type PersonUpdateManyDataInput struct {
-	MId      *string                `json:"mID,omitempty"`
-	Name     *string                `json:"name,omitempty"`
-	Photo    *string                `json:"photo,omitempty"`
-	Birthday *string                `json:"birthday,omitempty"`
-	From     *string                `json:"from,omitempty"`
-	Tags     *PersonUpdatetagsInput `json:"tags,omitempty"`
+type PersonUpsertWithWhereUniqueNestedInput struct {
+	Where  PersonWhereUniqueInput `json:"where"`
+	Update PersonUpdateDataInput  `json:"update"`
+	Create PersonCreateInput      `json:"create"`
 }
 
-type OpeningHoursCreateInput struct {
-	From string `json:"from"`
-	To   string `json:"to"`
+type PersonCreateManyInput struct {
+	Create  []PersonCreateInput      `json:"create,omitempty"`
+	Connect []PersonWhereUniqueInput `json:"connect,omitempty"`
 }
 
 type TicketTypeSubscriptionWhereInput struct {
@@ -2860,114 +2885,192 @@ type TicketTypeSubscriptionWhereInput struct {
 	Not                        []TicketTypeSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type OverviewCreateOneInput struct {
-	Create *OverviewCreateInput `json:"create,omitempty"`
-}
-
-type PhoneSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                       `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                      `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                      `json:"updatedFields_contains_some,omitempty"`
-	Node                       *PhoneWhereInput              `json:"node,omitempty"`
-	And                        []PhoneSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []PhoneSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []PhoneSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type OverviewCreateInput struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
-
-type IDentificationDocumentWhereInput struct {
-	ID                 *string                            `json:"id,omitempty"`
-	IDNot              *string                            `json:"id_not,omitempty"`
-	IDIn               []string                           `json:"id_in,omitempty"`
-	IDNotIn            []string                           `json:"id_not_in,omitempty"`
-	IDLt               *string                            `json:"id_lt,omitempty"`
-	IDLte              *string                            `json:"id_lte,omitempty"`
-	IDGt               *string                            `json:"id_gt,omitempty"`
-	IDGte              *string                            `json:"id_gte,omitempty"`
-	IDContains         *string                            `json:"id_contains,omitempty"`
-	IDNotContains      *string                            `json:"id_not_contains,omitempty"`
-	IDStartsWith       *string                            `json:"id_starts_with,omitempty"`
-	IDNotStartsWith    *string                            `json:"id_not_starts_with,omitempty"`
-	IDEndsWith         *string                            `json:"id_ends_with,omitempty"`
-	IDNotEndsWith      *string                            `json:"id_not_ends_with,omitempty"`
-	CreatedAt          *string                            `json:"createdAt,omitempty"`
-	CreatedAtNot       *string                            `json:"createdAt_not,omitempty"`
-	CreatedAtIn        []string                           `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn     []string                           `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt        *string                            `json:"createdAt_lt,omitempty"`
-	CreatedAtLte       *string                            `json:"createdAt_lte,omitempty"`
-	CreatedAtGt        *string                            `json:"createdAt_gt,omitempty"`
-	CreatedAtGte       *string                            `json:"createdAt_gte,omitempty"`
-	UpdatedAt          *string                            `json:"updatedAt,omitempty"`
-	UpdatedAtNot       *string                            `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn        []string                           `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn     []string                           `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt        *string                            `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte       *string                            `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt        *string                            `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte       *string                            `json:"updatedAt_gte,omitempty"`
-	Person             *PersonWhereInput                  `json:"person,omitempty"`
-	Type               *IDentificationType                `json:"type,omitempty"`
-	TypeNot            *IDentificationType                `json:"type_not,omitempty"`
-	TypeIn             []IDentificationType               `json:"type_in,omitempty"`
-	TypeNotIn          []IDentificationType               `json:"type_not_in,omitempty"`
-	Value              *string                            `json:"value,omitempty"`
-	ValueNot           *string                            `json:"value_not,omitempty"`
-	ValueIn            []string                           `json:"value_in,omitempty"`
-	ValueNotIn         []string                           `json:"value_not_in,omitempty"`
-	ValueLt            *string                            `json:"value_lt,omitempty"`
-	ValueLte           *string                            `json:"value_lte,omitempty"`
-	ValueGt            *string                            `json:"value_gt,omitempty"`
-	ValueGte           *string                            `json:"value_gte,omitempty"`
-	ValueContains      *string                            `json:"value_contains,omitempty"`
-	ValueNotContains   *string                            `json:"value_not_contains,omitempty"`
-	ValueStartsWith    *string                            `json:"value_starts_with,omitempty"`
-	ValueNotStartsWith *string                            `json:"value_not_starts_with,omitempty"`
-	ValueEndsWith      *string                            `json:"value_ends_with,omitempty"`
-	ValueNotEndsWith   *string                            `json:"value_not_ends_with,omitempty"`
-	And                []IDentificationDocumentWhereInput `json:"AND,omitempty"`
-	Or                 []IDentificationDocumentWhereInput `json:"OR,omitempty"`
-	Not                []IDentificationDocumentWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonCreateManyInput struct {
-	Create  []PersonCreateInput      `json:"create,omitempty"`
-	Connect []PersonWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type PaymentEntrySubscriptionWhereInput struct {
-	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
-	Node                       *PaymentEntryWhereInput              `json:"node,omitempty"`
-	And                        []PaymentEntrySubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []PaymentEntrySubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []PaymentEntrySubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
 type AttractionCreatetypesInput struct {
 	Set []AttractionType `json:"set,omitempty"`
 }
 
-type OverviewSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                   `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                          `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                         `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                         `json:"updatedFields_contains_some,omitempty"`
-	Node                       *OverviewWhereInput              `json:"node,omitempty"`
-	And                        []OverviewSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []OverviewSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []OverviewSubscriptionWhereInput `json:"NOT,omitempty"`
+type PhoneChannelSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
+	Node                       *PhoneChannelWhereInput              `json:"node,omitempty"`
+	And                        []PhoneChannelSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []PhoneChannelSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []PhoneChannelSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
 type AttractionCreatetagsInput struct {
 	Set []string `json:"set,omitempty"`
+}
+
+type PersonWhereInput struct {
+	ID                 *string                           `json:"id,omitempty"`
+	IDNot              *string                           `json:"id_not,omitempty"`
+	IDIn               []string                          `json:"id_in,omitempty"`
+	IDNotIn            []string                          `json:"id_not_in,omitempty"`
+	IDLt               *string                           `json:"id_lt,omitempty"`
+	IDLte              *string                           `json:"id_lte,omitempty"`
+	IDGt               *string                           `json:"id_gt,omitempty"`
+	IDGte              *string                           `json:"id_gte,omitempty"`
+	IDContains         *string                           `json:"id_contains,omitempty"`
+	IDNotContains      *string                           `json:"id_not_contains,omitempty"`
+	IDStartsWith       *string                           `json:"id_starts_with,omitempty"`
+	IDNotStartsWith    *string                           `json:"id_not_starts_with,omitempty"`
+	IDEndsWith         *string                           `json:"id_ends_with,omitempty"`
+	IDNotEndsWith      *string                           `json:"id_not_ends_with,omitempty"`
+	CreatedAt          *string                           `json:"createdAt,omitempty"`
+	CreatedAtNot       *string                           `json:"createdAt_not,omitempty"`
+	CreatedAtIn        []string                          `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn     []string                          `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt        *string                           `json:"createdAt_lt,omitempty"`
+	CreatedAtLte       *string                           `json:"createdAt_lte,omitempty"`
+	CreatedAtGt        *string                           `json:"createdAt_gt,omitempty"`
+	CreatedAtGte       *string                           `json:"createdAt_gte,omitempty"`
+	UpdatedAt          *string                           `json:"updatedAt,omitempty"`
+	UpdatedAtNot       *string                           `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn        []string                          `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn     []string                          `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt        *string                           `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte       *string                           `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt        *string                           `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte       *string                           `json:"updatedAt_gte,omitempty"`
+	MId                *string                           `json:"mID,omitempty"`
+	MIdNot             *string                           `json:"mID_not,omitempty"`
+	MIdIn              []string                          `json:"mID_in,omitempty"`
+	MIdNotIn           []string                          `json:"mID_not_in,omitempty"`
+	MIdLt              *string                           `json:"mID_lt,omitempty"`
+	MIdLte             *string                           `json:"mID_lte,omitempty"`
+	MIdGt              *string                           `json:"mID_gt,omitempty"`
+	MIdGte             *string                           `json:"mID_gte,omitempty"`
+	MIdContains        *string                           `json:"mID_contains,omitempty"`
+	MIdNotContains     *string                           `json:"mID_not_contains,omitempty"`
+	MIdStartsWith      *string                           `json:"mID_starts_with,omitempty"`
+	MIdNotStartsWith   *string                           `json:"mID_not_starts_with,omitempty"`
+	MIdEndsWith        *string                           `json:"mID_ends_with,omitempty"`
+	MIdNotEndsWith     *string                           `json:"mID_not_ends_with,omitempty"`
+	Name               *string                           `json:"name,omitempty"`
+	NameNot            *string                           `json:"name_not,omitempty"`
+	NameIn             []string                          `json:"name_in,omitempty"`
+	NameNotIn          []string                          `json:"name_not_in,omitempty"`
+	NameLt             *string                           `json:"name_lt,omitempty"`
+	NameLte            *string                           `json:"name_lte,omitempty"`
+	NameGt             *string                           `json:"name_gt,omitempty"`
+	NameGte            *string                           `json:"name_gte,omitempty"`
+	NameContains       *string                           `json:"name_contains,omitempty"`
+	NameNotContains    *string                           `json:"name_not_contains,omitempty"`
+	NameStartsWith     *string                           `json:"name_starts_with,omitempty"`
+	NameNotStartsWith  *string                           `json:"name_not_starts_with,omitempty"`
+	NameEndsWith       *string                           `json:"name_ends_with,omitempty"`
+	NameNotEndsWith    *string                           `json:"name_not_ends_with,omitempty"`
+	Photo              *string                           `json:"photo,omitempty"`
+	PhotoNot           *string                           `json:"photo_not,omitempty"`
+	PhotoIn            []string                          `json:"photo_in,omitempty"`
+	PhotoNotIn         []string                          `json:"photo_not_in,omitempty"`
+	PhotoLt            *string                           `json:"photo_lt,omitempty"`
+	PhotoLte           *string                           `json:"photo_lte,omitempty"`
+	PhotoGt            *string                           `json:"photo_gt,omitempty"`
+	PhotoGte           *string                           `json:"photo_gte,omitempty"`
+	PhotoContains      *string                           `json:"photo_contains,omitempty"`
+	PhotoNotContains   *string                           `json:"photo_not_contains,omitempty"`
+	PhotoStartsWith    *string                           `json:"photo_starts_with,omitempty"`
+	PhotoNotStartsWith *string                           `json:"photo_not_starts_with,omitempty"`
+	PhotoEndsWith      *string                           `json:"photo_ends_with,omitempty"`
+	PhotoNotEndsWith   *string                           `json:"photo_not_ends_with,omitempty"`
+	Birthday           *string                           `json:"birthday,omitempty"`
+	BirthdayNot        *string                           `json:"birthday_not,omitempty"`
+	BirthdayIn         []string                          `json:"birthday_in,omitempty"`
+	BirthdayNotIn      []string                          `json:"birthday_not_in,omitempty"`
+	BirthdayLt         *string                           `json:"birthday_lt,omitempty"`
+	BirthdayLte        *string                           `json:"birthday_lte,omitempty"`
+	BirthdayGt         *string                           `json:"birthday_gt,omitempty"`
+	BirthdayGte        *string                           `json:"birthday_gte,omitempty"`
+	From               *string                           `json:"from,omitempty"`
+	FromNot            *string                           `json:"from_not,omitempty"`
+	FromIn             []string                          `json:"from_in,omitempty"`
+	FromNotIn          []string                          `json:"from_not_in,omitempty"`
+	FromLt             *string                           `json:"from_lt,omitempty"`
+	FromLte            *string                           `json:"from_lte,omitempty"`
+	FromGt             *string                           `json:"from_gt,omitempty"`
+	FromGte            *string                           `json:"from_gte,omitempty"`
+	FromContains       *string                           `json:"from_contains,omitempty"`
+	FromNotContains    *string                           `json:"from_not_contains,omitempty"`
+	FromStartsWith     *string                           `json:"from_starts_with,omitempty"`
+	FromNotStartsWith  *string                           `json:"from_not_starts_with,omitempty"`
+	FromEndsWith       *string                           `json:"from_ends_with,omitempty"`
+	FromNotEndsWith    *string                           `json:"from_not_ends_with,omitempty"`
+	ChannelsPhoneEvery *PhoneChannelWhereInput           `json:"channelsPhone_every,omitempty"`
+	ChannelsPhoneSome  *PhoneChannelWhereInput           `json:"channelsPhone_some,omitempty"`
+	ChannelsPhoneNone  *PhoneChannelWhereInput           `json:"channelsPhone_none,omitempty"`
+	ChannelsEmailEvery *EmailChannelWhereInput           `json:"channelsEmail_every,omitempty"`
+	ChannelsEmailSome  *EmailChannelWhereInput           `json:"channelsEmail_some,omitempty"`
+	ChannelsEmailNone  *EmailChannelWhereInput           `json:"channelsEmail_none,omitempty"`
+	IDentification     *IDentificationDocumentWhereInput `json:"identification,omitempty"`
+	CredentialsEvery   *CredentialWhereInput             `json:"credentials_every,omitempty"`
+	CredentialsSome    *CredentialWhereInput             `json:"credentials_some,omitempty"`
+	CredentialsNone    *CredentialWhereInput             `json:"credentials_none,omitempty"`
+	And                []PersonWhereInput                `json:"AND,omitempty"`
+	Or                 []PersonWhereInput                `json:"OR,omitempty"`
+	Not                []PersonWhereInput                `json:"NOT,omitempty"`
+}
+
+type PersonReviewsCreateManyInput struct {
+	Create  []PersonReviewsCreateInput      `json:"create,omitempty"`
+	Connect []PersonReviewsWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type PersonSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                 `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                        `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                       `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                       `json:"updatedFields_contains_some,omitempty"`
+	Node                       *PersonWhereInput              `json:"node,omitempty"`
+	And                        []PersonSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []PersonSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []PersonSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PersonReviewsCreateInput struct {
+	Person        PersonCreateOneInput          `json:"person"`
+	Title         string                        `json:"title"`
+	Description   *string                       `json:"description,omitempty"`
+	AproveNumber  *int32                        `json:"aproveNumber,omitempty"`
+	DeclineNumber *int32                        `json:"declineNumber,omitempty"`
+	Comments      *PersonReviewsCreateManyInput `json:"comments,omitempty"`
+}
+
+type PartnerSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                  `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                         `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                        `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                        `json:"updatedFields_contains_some,omitempty"`
+	Node                       *PartnerWhereInput              `json:"node,omitempty"`
+	And                        []PartnerSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []PartnerSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []PartnerSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type DetailsCreateOneInput struct {
+	Create *DetailsCreateInput `json:"create,omitempty"`
+}
+
+type OpeningHoursSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
+	Node                       *OpeningHoursWhereInput              `json:"node,omitempty"`
+	And                        []OpeningHoursSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []OpeningHoursSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []OpeningHoursSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type DetailsCreateInput struct {
+	ProviderName     string  `json:"providerName"`
+	ProviderWeb      *string `json:"providerWeb,omitempty"`
+	ContactPhone     *string `json:"contactPhone,omitempty"`
+	ContactEmail     *string `json:"contactEmail,omitempty"`
+	AddressReference *string `json:"addressReference,omitempty"`
 }
 
 type LocationSubscriptionWhereInput struct {
@@ -2981,63 +3084,58 @@ type LocationSubscriptionWhereInput struct {
 	Not                        []LocationSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type PersonReviewsCreateManyInput struct {
-	Create  []PersonReviewsCreateInput      `json:"create,omitempty"`
-	Connect []PersonReviewsWhereUniqueInput `json:"connect,omitempty"`
+type AttractionUpdateInput struct {
+	Owner      *PartnerUpdateOneRequiredWithoutAttractionsInput `json:"owner,omitempty"`
+	Overview   *OverviewUpdateOneRequiredInput                  `json:"overview,omitempty"`
+	MaxUses    *int32                                           `json:"maxUses,omitempty"`
+	Address    *string                                          `json:"address,omitempty"`
+	Location   *LocationUpdateOneRequiredInput                  `json:"location,omitempty"`
+	Popularity *float64                                         `json:"popularity,omitempty"`
+	LikedBy    *PersonUpdateManyInput                           `json:"likedBy,omitempty"`
+	Types      *AttractionUpdatetypesInput                      `json:"types,omitempty"`
+	Tags       *AttractionUpdatetagsInput                       `json:"tags,omitempty"`
+	Reviews    *PersonReviewsUpdateManyInput                    `json:"reviews,omitempty"`
+	Details    *DetailsUpdateOneInput                           `json:"details,omitempty"`
 }
 
-type IDentificationDocumentSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                                 `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                                        `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                                       `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                                       `json:"updatedFields_contains_some,omitempty"`
-	Node                       *IDentificationDocumentWhereInput              `json:"node,omitempty"`
-	And                        []IDentificationDocumentSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []IDentificationDocumentSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []IDentificationDocumentSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonReviewsCreateInput struct {
-	Person        PersonCreateOneInput          `json:"person"`
-	Title         string                        `json:"title"`
-	Description   *string                       `json:"description,omitempty"`
-	AproveNumber  *int32                        `json:"aproveNumber,omitempty"`
-	DeclineNumber *int32                        `json:"declineNumber,omitempty"`
-	Comments      *PersonReviewsCreateManyInput `json:"comments,omitempty"`
-}
-
-type EmailSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                       `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                      `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                      `json:"updatedFields_contains_some,omitempty"`
-	Node                       *EmailWhereInput              `json:"node,omitempty"`
-	And                        []EmailSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []EmailSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []EmailSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type DetailsCreateOneInput struct {
-	Create *DetailsCreateInput `json:"create,omitempty"`
-}
-
-type DetailsSubscriptionWhereInput struct {
+type FeatureSubscriptionWhereInput struct {
 	MutationIn                 []MutationType                  `json:"mutation_in,omitempty"`
 	UpdatedFieldsContains      *string                         `json:"updatedFields_contains,omitempty"`
 	UpdatedFieldsContainsEvery []string                        `json:"updatedFields_contains_every,omitempty"`
 	UpdatedFieldsContainsSome  []string                        `json:"updatedFields_contains_some,omitempty"`
-	Node                       *DetailsWhereInput              `json:"node,omitempty"`
-	And                        []DetailsSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []DetailsSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []DetailsSubscriptionWhereInput `json:"NOT,omitempty"`
+	Node                       *FeatureWhereInput              `json:"node,omitempty"`
+	And                        []FeatureSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []FeatureSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []FeatureSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type DetailsCreateInput struct {
-	ProviderName     string  `json:"providerName"`
-	ProviderWeb      *string `json:"providerWeb,omitempty"`
-	ContactPhone     *string `json:"contactPhone,omitempty"`
-	ContactEmail     *string `json:"contactEmail,omitempty"`
-	AddressReference *string `json:"addressReference,omitempty"`
+type PartnerUpdateOneRequiredWithoutAttractionsInput struct {
+	Create  *PartnerCreateWithoutAttractionsInput     `json:"create,omitempty"`
+	Update  *PartnerUpdateWithoutAttractionsDataInput `json:"update,omitempty"`
+	Upsert  *PartnerUpsertWithoutAttractionsInput     `json:"upsert,omitempty"`
+	Connect *PartnerWhereUniqueInput                  `json:"connect,omitempty"`
+}
+
+type EmailChannelSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
+	Node                       *EmailChannelWhereInput              `json:"node,omitempty"`
+	And                        []EmailChannelSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []EmailChannelSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []EmailChannelSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PartnerUpdateWithoutAttractionsDataInput struct {
+	Person       *PersonUpdateOneRequiredInput       `json:"person,omitempty"`
+	BrandName    *string                             `json:"brandName,omitempty"`
+	SocialReason *string                             `json:"socialReason,omitempty"`
+	Ruc          *string                             `json:"ruc,omitempty"`
+	Address      *string                             `json:"address,omitempty"`
+	Location     *LocationUpdateOneRequiredInput     `json:"location,omitempty"`
+	Features     *FeatureUpdateManyInput             `json:"features,omitempty"`
+	OpeningHours *OpeningHoursUpdateOneRequiredInput `json:"openingHours,omitempty"`
 }
 
 type CreditCardWhereInput struct {
@@ -3120,18 +3218,11 @@ type CreditCardWhereInput struct {
 	Not                     []CreditCardWhereInput  `json:"NOT,omitempty"`
 }
 
-type AttractionUpdateInput struct {
-	Owner      *PartnerUpdateOneRequiredWithoutAttractionsInput `json:"owner,omitempty"`
-	Overview   *OverviewUpdateOneRequiredInput                  `json:"overview,omitempty"`
-	MaxUses    *int32                                           `json:"maxUses,omitempty"`
-	Address    *string                                          `json:"address,omitempty"`
-	Location   *LocationUpdateOneRequiredInput                  `json:"location,omitempty"`
-	Popularity *float64                                         `json:"popularity,omitempty"`
-	LikedBy    *PersonUpdateManyInput                           `json:"likedBy,omitempty"`
-	Types      *AttractionUpdatetypesInput                      `json:"types,omitempty"`
-	Tags       *AttractionUpdatetagsInput                       `json:"tags,omitempty"`
-	Reviews    *PersonReviewsUpdateManyInput                    `json:"reviews,omitempty"`
-	Details    *DetailsUpdateOneInput                           `json:"details,omitempty"`
+type PersonUpdateOneRequiredInput struct {
+	Create  *PersonCreateInput       `json:"create,omitempty"`
+	Update  *PersonUpdateDataInput   `json:"update,omitempty"`
+	Upsert  *PersonUpsertNestedInput `json:"upsert,omitempty"`
+	Connect *PersonWhereUniqueInput  `json:"connect,omitempty"`
 }
 
 type TicketWhereInput struct {
@@ -3184,11 +3275,17 @@ type TicketWhereInput struct {
 	Not             []TicketWhereInput      `json:"NOT,omitempty"`
 }
 
-type PartnerUpdateOneRequiredWithoutAttractionsInput struct {
-	Create  *PartnerCreateWithoutAttractionsInput     `json:"create,omitempty"`
-	Update  *PartnerUpdateWithoutAttractionsDataInput `json:"update,omitempty"`
-	Upsert  *PartnerUpsertWithoutAttractionsInput     `json:"upsert,omitempty"`
-	Connect *PartnerWhereUniqueInput                  `json:"connect,omitempty"`
+type PersonUpdateDataInput struct {
+	MId            *string                                                    `json:"mID,omitempty"`
+	Name           *string                                                    `json:"name,omitempty"`
+	Photo          *string                                                    `json:"photo,omitempty"`
+	Birthday       *string                                                    `json:"birthday,omitempty"`
+	From           *string                                                    `json:"from,omitempty"`
+	ChannelsPhone  *PhoneChannelUpdateManyInput                               `json:"channelsPhone,omitempty"`
+	ChannelsEmail  *EmailChannelUpdateManyInput                               `json:"channelsEmail,omitempty"`
+	IDentification *IDentificationDocumentUpdateOneRequiredWithoutPersonInput `json:"identification,omitempty"`
+	Tags           *PersonUpdatetagsInput                                     `json:"tags,omitempty"`
+	Credentials    *CredentialUpdateManyWithoutOwnerInput                     `json:"credentials,omitempty"`
 }
 
 type PaymentEntryWhereInput struct {
@@ -3314,15 +3411,1424 @@ type PaymentEntryWhereInput struct {
 	Not                          []PaymentEntryWhereInput `json:"NOT,omitempty"`
 }
 
-type PartnerUpdateWithoutAttractionsDataInput struct {
-	Person       *PersonUpdateOneRequiredInput       `json:"person,omitempty"`
-	BrandName    *string                             `json:"brandName,omitempty"`
-	SocialReason *string                             `json:"socialReason,omitempty"`
-	Ruc          *string                             `json:"ruc,omitempty"`
-	Address      *string                             `json:"address,omitempty"`
-	Location     *LocationUpdateOneRequiredInput     `json:"location,omitempty"`
-	Features     *FeatureUpdateManyInput             `json:"features,omitempty"`
-	OpeningHours *OpeningHoursUpdateOneRequiredInput `json:"openingHours,omitempty"`
+type PhoneChannelUpdateManyInput struct {
+	Create     []PhoneChannelCreateInput                      `json:"create,omitempty"`
+	Update     []PhoneChannelUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []PhoneChannelUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []PhoneChannelWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []PhoneChannelWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []PhoneChannelWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []PhoneChannelWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []PhoneChannelScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []PhoneChannelUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
+}
+
+type CreditCardSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
+	Node                       *CreditCardWhereInput              `json:"node,omitempty"`
+	And                        []CreditCardSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []CreditCardSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []CreditCardSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PhoneChannelUpdateWithWhereUniqueNestedInput struct {
+	Where PhoneChannelWhereUniqueInput `json:"where"`
+	Data  PhoneChannelUpdateDataInput  `json:"data"`
+}
+
+type AttractionSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
+	Node                       *AttractionWhereInput              `json:"node,omitempty"`
+	And                        []AttractionSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []AttractionSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []AttractionSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PhoneChannelUpdateDataInput struct {
+	DisplayName *string `json:"displayName,omitempty"`
+	Valid       *bool   `json:"valid,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
+}
+
+type CreditCardUpdateManyDataInput struct {
+	CardNumber *string         `json:"cardNumber,omitempty"`
+	CardToken  *string         `json:"cardToken,omitempty"`
+	Type       *CreditCardType `json:"type,omitempty"`
+	LastUsed   *string         `json:"lastUsed,omitempty"`
+}
+
+type PhoneChannelUpsertWithWhereUniqueNestedInput struct {
+	Where  PhoneChannelWhereUniqueInput `json:"where"`
+	Update PhoneChannelUpdateDataInput  `json:"update"`
+	Create PhoneChannelCreateInput      `json:"create"`
+}
+
+type CreditCardUpdateManyWithWhereNestedInput struct {
+	Where CreditCardScalarWhereInput    `json:"where"`
+	Data  CreditCardUpdateManyDataInput `json:"data"`
+}
+
+type PhoneChannelScalarWhereInput struct {
+	ID                       *string                        `json:"id,omitempty"`
+	IDNot                    *string                        `json:"id_not,omitempty"`
+	IDIn                     []string                       `json:"id_in,omitempty"`
+	IDNotIn                  []string                       `json:"id_not_in,omitempty"`
+	IDLt                     *string                        `json:"id_lt,omitempty"`
+	IDLte                    *string                        `json:"id_lte,omitempty"`
+	IDGt                     *string                        `json:"id_gt,omitempty"`
+	IDGte                    *string                        `json:"id_gte,omitempty"`
+	IDContains               *string                        `json:"id_contains,omitempty"`
+	IDNotContains            *string                        `json:"id_not_contains,omitempty"`
+	IDStartsWith             *string                        `json:"id_starts_with,omitempty"`
+	IDNotStartsWith          *string                        `json:"id_not_starts_with,omitempty"`
+	IDEndsWith               *string                        `json:"id_ends_with,omitempty"`
+	IDNotEndsWith            *string                        `json:"id_not_ends_with,omitempty"`
+	CreatedAt                *string                        `json:"createdAt,omitempty"`
+	CreatedAtNot             *string                        `json:"createdAt_not,omitempty"`
+	CreatedAtIn              []string                       `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn           []string                       `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt              *string                        `json:"createdAt_lt,omitempty"`
+	CreatedAtLte             *string                        `json:"createdAt_lte,omitempty"`
+	CreatedAtGt              *string                        `json:"createdAt_gt,omitempty"`
+	CreatedAtGte             *string                        `json:"createdAt_gte,omitempty"`
+	UpdatedAt                *string                        `json:"updatedAt,omitempty"`
+	UpdatedAtNot             *string                        `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn              []string                       `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn           []string                       `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt              *string                        `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte             *string                        `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt              *string                        `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte             *string                        `json:"updatedAt_gte,omitempty"`
+	DisplayName              *string                        `json:"displayName,omitempty"`
+	DisplayNameNot           *string                        `json:"displayName_not,omitempty"`
+	DisplayNameIn            []string                       `json:"displayName_in,omitempty"`
+	DisplayNameNotIn         []string                       `json:"displayName_not_in,omitempty"`
+	DisplayNameLt            *string                        `json:"displayName_lt,omitempty"`
+	DisplayNameLte           *string                        `json:"displayName_lte,omitempty"`
+	DisplayNameGt            *string                        `json:"displayName_gt,omitempty"`
+	DisplayNameGte           *string                        `json:"displayName_gte,omitempty"`
+	DisplayNameContains      *string                        `json:"displayName_contains,omitempty"`
+	DisplayNameNotContains   *string                        `json:"displayName_not_contains,omitempty"`
+	DisplayNameStartsWith    *string                        `json:"displayName_starts_with,omitempty"`
+	DisplayNameNotStartsWith *string                        `json:"displayName_not_starts_with,omitempty"`
+	DisplayNameEndsWith      *string                        `json:"displayName_ends_with,omitempty"`
+	DisplayNameNotEndsWith   *string                        `json:"displayName_not_ends_with,omitempty"`
+	Valid                    *bool                          `json:"valid,omitempty"`
+	ValidNot                 *bool                          `json:"valid_not,omitempty"`
+	CountryCode              *string                        `json:"countryCode,omitempty"`
+	CountryCodeNot           *string                        `json:"countryCode_not,omitempty"`
+	CountryCodeIn            []string                       `json:"countryCode_in,omitempty"`
+	CountryCodeNotIn         []string                       `json:"countryCode_not_in,omitempty"`
+	CountryCodeLt            *string                        `json:"countryCode_lt,omitempty"`
+	CountryCodeLte           *string                        `json:"countryCode_lte,omitempty"`
+	CountryCodeGt            *string                        `json:"countryCode_gt,omitempty"`
+	CountryCodeGte           *string                        `json:"countryCode_gte,omitempty"`
+	CountryCodeContains      *string                        `json:"countryCode_contains,omitempty"`
+	CountryCodeNotContains   *string                        `json:"countryCode_not_contains,omitempty"`
+	CountryCodeStartsWith    *string                        `json:"countryCode_starts_with,omitempty"`
+	CountryCodeNotStartsWith *string                        `json:"countryCode_not_starts_with,omitempty"`
+	CountryCodeEndsWith      *string                        `json:"countryCode_ends_with,omitempty"`
+	CountryCodeNotEndsWith   *string                        `json:"countryCode_not_ends_with,omitempty"`
+	Number                   *string                        `json:"number,omitempty"`
+	NumberNot                *string                        `json:"number_not,omitempty"`
+	NumberIn                 []string                       `json:"number_in,omitempty"`
+	NumberNotIn              []string                       `json:"number_not_in,omitempty"`
+	NumberLt                 *string                        `json:"number_lt,omitempty"`
+	NumberLte                *string                        `json:"number_lte,omitempty"`
+	NumberGt                 *string                        `json:"number_gt,omitempty"`
+	NumberGte                *string                        `json:"number_gte,omitempty"`
+	NumberContains           *string                        `json:"number_contains,omitempty"`
+	NumberNotContains        *string                        `json:"number_not_contains,omitempty"`
+	NumberStartsWith         *string                        `json:"number_starts_with,omitempty"`
+	NumberNotStartsWith      *string                        `json:"number_not_starts_with,omitempty"`
+	NumberEndsWith           *string                        `json:"number_ends_with,omitempty"`
+	NumberNotEndsWith        *string                        `json:"number_not_ends_with,omitempty"`
+	And                      []PhoneChannelScalarWhereInput `json:"AND,omitempty"`
+	Or                       []PhoneChannelScalarWhereInput `json:"OR,omitempty"`
+	Not                      []PhoneChannelScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type CreditCardUpsertWithWhereUniqueWithoutOwnerInput struct {
+	Where  CreditCardWhereUniqueInput            `json:"where"`
+	Update CreditCardUpdateWithoutOwnerDataInput `json:"update"`
+	Create CreditCardCreateWithoutOwnerInput     `json:"create"`
+}
+
+type PhoneChannelUpdateManyWithWhereNestedInput struct {
+	Where PhoneChannelScalarWhereInput    `json:"where"`
+	Data  PhoneChannelUpdateManyDataInput `json:"data"`
+}
+
+type CreditCardUpdateWithWhereUniqueWithoutOwnerInput struct {
+	Where CreditCardWhereUniqueInput            `json:"where"`
+	Data  CreditCardUpdateWithoutOwnerDataInput `json:"data"`
+}
+
+type PhoneChannelUpdateManyDataInput struct {
+	DisplayName *string `json:"displayName,omitempty"`
+	Valid       *bool   `json:"valid,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
+}
+
+type TravelerUpdateInput struct {
+	Person   *PersonUpdateOneRequiredInput          `json:"person,omitempty"`
+	Username *string                                `json:"username,omitempty"`
+	Cards    *CreditCardUpdateManyWithoutOwnerInput `json:"cards,omitempty"`
+	Tickets  *TicketUpdateManyInput                 `json:"tickets,omitempty"`
+}
+
+type EmailChannelUpdateManyInput struct {
+	Create     []EmailChannelCreateInput                      `json:"create,omitempty"`
+	Update     []EmailChannelUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []EmailChannelUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []EmailChannelWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []EmailChannelWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []EmailChannelWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []EmailChannelWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []EmailChannelScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []EmailChannelUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
+}
+
+type CreditCardCreateWithoutOwnerInput struct {
+	CardNumber string                                      `json:"cardNumber"`
+	CardToken  string                                      `json:"cardToken"`
+	Type       *CreditCardType                             `json:"type,omitempty"`
+	LastUsed   *string                                     `json:"lastUsed,omitempty"`
+	Uses       *PaymentEntryCreateManyWithoutWithCardInput `json:"uses,omitempty"`
+}
+
+type EmailChannelUpdateWithWhereUniqueNestedInput struct {
+	Where EmailChannelWhereUniqueInput `json:"where"`
+	Data  EmailChannelUpdateDataInput  `json:"data"`
+}
+
+type TravelerCreateInput struct {
+	Person   PersonCreateOneInput                   `json:"person"`
+	Username string                                 `json:"username"`
+	Cards    *CreditCardCreateManyWithoutOwnerInput `json:"cards,omitempty"`
+	Tickets  *TicketCreateManyInput                 `json:"tickets,omitempty"`
+}
+
+type EmailChannelUpdateDataInput struct {
+	DisplayName *string                        `json:"displayName,omitempty"`
+	Valid       *bool                          `json:"valid,omitempty"`
+	Value       *string                        `json:"value,omitempty"`
+	Extras      *EmailChannelUpdateextrasInput `json:"extras,omitempty"`
+}
+
+type TicketTypeUpdateInput struct {
+	CreatorId   *string                    `json:"creatorID,omitempty"`
+	Attractions *AttractionUpdateManyInput `json:"attractions,omitempty"`
+	Cost        *float64                   `json:"cost,omitempty"`
+}
+
+type EmailChannelUpdateextrasInput struct {
+	Set []string `json:"set,omitempty"`
+}
+
+type IDentificationDocumentWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type EmailChannelUpsertWithWhereUniqueNestedInput struct {
+	Where  EmailChannelWhereUniqueInput `json:"where"`
+	Update EmailChannelUpdateDataInput  `json:"update"`
+	Create EmailChannelCreateInput      `json:"create"`
+}
+
+type PhoneChannelUpdateManyMutationInput struct {
+	DisplayName *string `json:"displayName,omitempty"`
+	Valid       *bool   `json:"valid,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
+}
+
+type EmailChannelScalarWhereInput struct {
+	ID                       *string                        `json:"id,omitempty"`
+	IDNot                    *string                        `json:"id_not,omitempty"`
+	IDIn                     []string                       `json:"id_in,omitempty"`
+	IDNotIn                  []string                       `json:"id_not_in,omitempty"`
+	IDLt                     *string                        `json:"id_lt,omitempty"`
+	IDLte                    *string                        `json:"id_lte,omitempty"`
+	IDGt                     *string                        `json:"id_gt,omitempty"`
+	IDGte                    *string                        `json:"id_gte,omitempty"`
+	IDContains               *string                        `json:"id_contains,omitempty"`
+	IDNotContains            *string                        `json:"id_not_contains,omitempty"`
+	IDStartsWith             *string                        `json:"id_starts_with,omitempty"`
+	IDNotStartsWith          *string                        `json:"id_not_starts_with,omitempty"`
+	IDEndsWith               *string                        `json:"id_ends_with,omitempty"`
+	IDNotEndsWith            *string                        `json:"id_not_ends_with,omitempty"`
+	CreatedAt                *string                        `json:"createdAt,omitempty"`
+	CreatedAtNot             *string                        `json:"createdAt_not,omitempty"`
+	CreatedAtIn              []string                       `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn           []string                       `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt              *string                        `json:"createdAt_lt,omitempty"`
+	CreatedAtLte             *string                        `json:"createdAt_lte,omitempty"`
+	CreatedAtGt              *string                        `json:"createdAt_gt,omitempty"`
+	CreatedAtGte             *string                        `json:"createdAt_gte,omitempty"`
+	UpdatedAt                *string                        `json:"updatedAt,omitempty"`
+	UpdatedAtNot             *string                        `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn              []string                       `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn           []string                       `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt              *string                        `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte             *string                        `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt              *string                        `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte             *string                        `json:"updatedAt_gte,omitempty"`
+	DisplayName              *string                        `json:"displayName,omitempty"`
+	DisplayNameNot           *string                        `json:"displayName_not,omitempty"`
+	DisplayNameIn            []string                       `json:"displayName_in,omitempty"`
+	DisplayNameNotIn         []string                       `json:"displayName_not_in,omitempty"`
+	DisplayNameLt            *string                        `json:"displayName_lt,omitempty"`
+	DisplayNameLte           *string                        `json:"displayName_lte,omitempty"`
+	DisplayNameGt            *string                        `json:"displayName_gt,omitempty"`
+	DisplayNameGte           *string                        `json:"displayName_gte,omitempty"`
+	DisplayNameContains      *string                        `json:"displayName_contains,omitempty"`
+	DisplayNameNotContains   *string                        `json:"displayName_not_contains,omitempty"`
+	DisplayNameStartsWith    *string                        `json:"displayName_starts_with,omitempty"`
+	DisplayNameNotStartsWith *string                        `json:"displayName_not_starts_with,omitempty"`
+	DisplayNameEndsWith      *string                        `json:"displayName_ends_with,omitempty"`
+	DisplayNameNotEndsWith   *string                        `json:"displayName_not_ends_with,omitempty"`
+	Valid                    *bool                          `json:"valid,omitempty"`
+	ValidNot                 *bool                          `json:"valid_not,omitempty"`
+	Value                    *string                        `json:"value,omitempty"`
+	ValueNot                 *string                        `json:"value_not,omitempty"`
+	ValueIn                  []string                       `json:"value_in,omitempty"`
+	ValueNotIn               []string                       `json:"value_not_in,omitempty"`
+	ValueLt                  *string                        `json:"value_lt,omitempty"`
+	ValueLte                 *string                        `json:"value_lte,omitempty"`
+	ValueGt                  *string                        `json:"value_gt,omitempty"`
+	ValueGte                 *string                        `json:"value_gte,omitempty"`
+	ValueContains            *string                        `json:"value_contains,omitempty"`
+	ValueNotContains         *string                        `json:"value_not_contains,omitempty"`
+	ValueStartsWith          *string                        `json:"value_starts_with,omitempty"`
+	ValueNotStartsWith       *string                        `json:"value_not_starts_with,omitempty"`
+	ValueEndsWith            *string                        `json:"value_ends_with,omitempty"`
+	ValueNotEndsWith         *string                        `json:"value_not_ends_with,omitempty"`
+	And                      []EmailChannelScalarWhereInput `json:"AND,omitempty"`
+	Or                       []EmailChannelScalarWhereInput `json:"OR,omitempty"`
+	Not                      []EmailChannelScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type PersonReviewsUpdateManyMutationInput struct {
+	Title         *string `json:"title,omitempty"`
+	Description   *string `json:"description,omitempty"`
+	AproveNumber  *int32  `json:"aproveNumber,omitempty"`
+	DeclineNumber *int32  `json:"declineNumber,omitempty"`
+}
+
+type EmailChannelUpdateManyWithWhereNestedInput struct {
+	Where EmailChannelScalarWhereInput    `json:"where"`
+	Data  EmailChannelUpdateManyDataInput `json:"data"`
+}
+
+type PersonUpdateManyMutationInput struct {
+	MId      *string                `json:"mID,omitempty"`
+	Name     *string                `json:"name,omitempty"`
+	Photo    *string                `json:"photo,omitempty"`
+	Birthday *string                `json:"birthday,omitempty"`
+	From     *string                `json:"from,omitempty"`
+	Tags     *PersonUpdatetagsInput `json:"tags,omitempty"`
+}
+
+type EmailChannelUpdateManyDataInput struct {
+	DisplayName *string                        `json:"displayName,omitempty"`
+	Valid       *bool                          `json:"valid,omitempty"`
+	Value       *string                        `json:"value,omitempty"`
+	Extras      *EmailChannelUpdateextrasInput `json:"extras,omitempty"`
+}
+
+type PaymentEntryUpdateManyMutationInput struct {
+	ExternalId      *string `json:"externalID,omitempty"`
+	ProductId       *string `json:"productID,omitempty"`
+	Product         *string `json:"product,omitempty"`
+	GatewayResponse *string `json:"gatewayResponse,omitempty"`
+	Amount          *int32  `json:"amount,omitempty"`
+	DiscountId      *string `json:"discountID,omitempty"`
+	Discount        *int32  `json:"discount,omitempty"`
+}
+
+type IDentificationDocumentUpdateOneRequiredWithoutPersonInput struct {
+	Create  *IDentificationDocumentCreateWithoutPersonInput     `json:"create,omitempty"`
+	Update  *IDentificationDocumentUpdateWithoutPersonDataInput `json:"update,omitempty"`
+	Upsert  *IDentificationDocumentUpsertWithoutPersonInput     `json:"upsert,omitempty"`
+	Connect *IDentificationDocumentWhereUniqueInput             `json:"connect,omitempty"`
+}
+
+type PaymentEntryUpdateInput struct {
+	ExternalId      *string                                      `json:"externalID,omitempty"`
+	WithCard        *CreditCardUpdateOneRequiredWithoutUsesInput `json:"withCard,omitempty"`
+	ProductId       *string                                      `json:"productID,omitempty"`
+	Product         *string                                      `json:"product,omitempty"`
+	GatewayResponse *string                                      `json:"gatewayResponse,omitempty"`
+	Amount          *int32                                       `json:"amount,omitempty"`
+	DiscountId      *string                                      `json:"discountID,omitempty"`
+	Discount        *int32                                       `json:"discount,omitempty"`
+}
+
+type IDentificationDocumentUpdateWithoutPersonDataInput struct {
+	Type      *IDentificationType `json:"type,omitempty"`
+	Value     *string             `json:"value,omitempty"`
+	Validated *bool               `json:"validated,omitempty"`
+}
+
+type AttractionUpsertWithWhereUniqueWithoutOwnerInput struct {
+	Where  AttractionWhereUniqueInput            `json:"where"`
+	Update AttractionUpdateWithoutOwnerDataInput `json:"update"`
+	Create AttractionCreateWithoutOwnerInput     `json:"create"`
+}
+
+type IDentificationDocumentUpsertWithoutPersonInput struct {
+	Update IDentificationDocumentUpdateWithoutPersonDataInput `json:"update"`
+	Create IDentificationDocumentCreateWithoutPersonInput     `json:"create"`
+}
+
+type AttractionUpdateWithWhereUniqueWithoutOwnerInput struct {
+	Where AttractionWhereUniqueInput            `json:"where"`
+	Data  AttractionUpdateWithoutOwnerDataInput `json:"data"`
+}
+
+type PersonUpdatetagsInput struct {
+	Set []string `json:"set,omitempty"`
+}
+
+type PartnerUpdateInput struct {
+	Person       *PersonUpdateOneRequiredInput          `json:"person,omitempty"`
+	Attractions  *AttractionUpdateManyWithoutOwnerInput `json:"attractions,omitempty"`
+	BrandName    *string                                `json:"brandName,omitempty"`
+	SocialReason *string                                `json:"socialReason,omitempty"`
+	Ruc          *string                                `json:"ruc,omitempty"`
+	Address      *string                                `json:"address,omitempty"`
+	Location     *LocationUpdateOneRequiredInput        `json:"location,omitempty"`
+	Features     *FeatureUpdateManyInput                `json:"features,omitempty"`
+	OpeningHours *OpeningHoursUpdateOneRequiredInput    `json:"openingHours,omitempty"`
+}
+
+type CredentialUpdateManyWithoutOwnerInput struct {
+	Create     []CredentialCreateWithoutOwnerInput                `json:"create,omitempty"`
+	Delete     []CredentialWhereUniqueInput                       `json:"delete,omitempty"`
+	Connect    []CredentialWhereUniqueInput                       `json:"connect,omitempty"`
+	Set        []CredentialWhereUniqueInput                       `json:"set,omitempty"`
+	Disconnect []CredentialWhereUniqueInput                       `json:"disconnect,omitempty"`
+	Update     []CredentialUpdateWithWhereUniqueWithoutOwnerInput `json:"update,omitempty"`
+	Upsert     []CredentialUpsertWithWhereUniqueWithoutOwnerInput `json:"upsert,omitempty"`
+	DeleteMany []CredentialScalarWhereInput                       `json:"deleteMany,omitempty"`
+	UpdateMany []CredentialUpdateManyWithWhereNestedInput         `json:"updateMany,omitempty"`
+}
+
+type AttractionCreateWithoutOwnerInput struct {
+	Overview   OverviewCreateOneInput        `json:"overview"`
+	MaxUses    *int32                        `json:"maxUses,omitempty"`
+	Address    string                        `json:"address"`
+	Location   LocationCreateOneInput        `json:"location"`
+	Popularity *float64                      `json:"popularity,omitempty"`
+	LikedBy    *PersonCreateManyInput        `json:"likedBy,omitempty"`
+	Types      *AttractionCreatetypesInput   `json:"types,omitempty"`
+	Tags       *AttractionCreatetagsInput    `json:"tags,omitempty"`
+	Reviews    *PersonReviewsCreateManyInput `json:"reviews,omitempty"`
+	Details    *DetailsCreateOneInput        `json:"details,omitempty"`
+}
+
+type CredentialUpdateWithWhereUniqueWithoutOwnerInput struct {
+	Where CredentialWhereUniqueInput            `json:"where"`
+	Data  CredentialUpdateWithoutOwnerDataInput `json:"data"`
+}
+
+type PartnerCreateInput struct {
+	Person       PersonCreateOneInput                   `json:"person"`
+	Attractions  *AttractionCreateManyWithoutOwnerInput `json:"attractions,omitempty"`
+	BrandName    string                                 `json:"brandName"`
+	SocialReason string                                 `json:"socialReason"`
+	Ruc          string                                 `json:"ruc"`
+	Address      string                                 `json:"address"`
+	Location     LocationCreateOneInput                 `json:"location"`
+	Features     *FeatureCreateManyInput                `json:"features,omitempty"`
+	OpeningHours OpeningHoursCreateOneInput             `json:"openingHours"`
+}
+
+type CredentialUpdateWithoutOwnerDataInput struct {
+	DisplayName    *string         `json:"displayName,omitempty"`
+	IsMain         *bool           `json:"isMain,omitempty"`
+	Type           *CredentialType `json:"type,omitempty"`
+	Validated      *bool           `json:"validated,omitempty"`
+	ValidationId   *string         `json:"validationID,omitempty"`
+	Value          *string         `json:"value,omitempty"`
+	RawPassword    *string         `json:"rawPassword,omitempty"`
+	HashedPassword *string         `json:"hashedPassword,omitempty"`
+}
+
+type PaymentEntryWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type CredentialUpsertWithWhereUniqueWithoutOwnerInput struct {
+	Where  CredentialWhereUniqueInput            `json:"where"`
+	Update CredentialUpdateWithoutOwnerDataInput `json:"update"`
+	Create CredentialCreateWithoutOwnerInput     `json:"create"`
+}
+
+type LocationUpdateManyMutationInput struct {
+	Longitude   *float64 `json:"longitude,omitempty"`
+	Latitude    *float64 `json:"latitude,omitempty"`
+	Description *string  `json:"description,omitempty"`
+}
+
+type CredentialScalarWhereInput struct {
+	ID                          *string                      `json:"id,omitempty"`
+	IDNot                       *string                      `json:"id_not,omitempty"`
+	IDIn                        []string                     `json:"id_in,omitempty"`
+	IDNotIn                     []string                     `json:"id_not_in,omitempty"`
+	IDLt                        *string                      `json:"id_lt,omitempty"`
+	IDLte                       *string                      `json:"id_lte,omitempty"`
+	IDGt                        *string                      `json:"id_gt,omitempty"`
+	IDGte                       *string                      `json:"id_gte,omitempty"`
+	IDContains                  *string                      `json:"id_contains,omitempty"`
+	IDNotContains               *string                      `json:"id_not_contains,omitempty"`
+	IDStartsWith                *string                      `json:"id_starts_with,omitempty"`
+	IDNotStartsWith             *string                      `json:"id_not_starts_with,omitempty"`
+	IDEndsWith                  *string                      `json:"id_ends_with,omitempty"`
+	IDNotEndsWith               *string                      `json:"id_not_ends_with,omitempty"`
+	CreatedAt                   *string                      `json:"createdAt,omitempty"`
+	CreatedAtNot                *string                      `json:"createdAt_not,omitempty"`
+	CreatedAtIn                 []string                     `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn              []string                     `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt                 *string                      `json:"createdAt_lt,omitempty"`
+	CreatedAtLte                *string                      `json:"createdAt_lte,omitempty"`
+	CreatedAtGt                 *string                      `json:"createdAt_gt,omitempty"`
+	CreatedAtGte                *string                      `json:"createdAt_gte,omitempty"`
+	UpdatedAt                   *string                      `json:"updatedAt,omitempty"`
+	UpdatedAtNot                *string                      `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn                 []string                     `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn              []string                     `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt                 *string                      `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte                *string                      `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt                 *string                      `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte                *string                      `json:"updatedAt_gte,omitempty"`
+	DisplayName                 *string                      `json:"displayName,omitempty"`
+	DisplayNameNot              *string                      `json:"displayName_not,omitempty"`
+	DisplayNameIn               []string                     `json:"displayName_in,omitempty"`
+	DisplayNameNotIn            []string                     `json:"displayName_not_in,omitempty"`
+	DisplayNameLt               *string                      `json:"displayName_lt,omitempty"`
+	DisplayNameLte              *string                      `json:"displayName_lte,omitempty"`
+	DisplayNameGt               *string                      `json:"displayName_gt,omitempty"`
+	DisplayNameGte              *string                      `json:"displayName_gte,omitempty"`
+	DisplayNameContains         *string                      `json:"displayName_contains,omitempty"`
+	DisplayNameNotContains      *string                      `json:"displayName_not_contains,omitempty"`
+	DisplayNameStartsWith       *string                      `json:"displayName_starts_with,omitempty"`
+	DisplayNameNotStartsWith    *string                      `json:"displayName_not_starts_with,omitempty"`
+	DisplayNameEndsWith         *string                      `json:"displayName_ends_with,omitempty"`
+	DisplayNameNotEndsWith      *string                      `json:"displayName_not_ends_with,omitempty"`
+	IsMain                      *bool                        `json:"isMain,omitempty"`
+	IsMainNot                   *bool                        `json:"isMain_not,omitempty"`
+	Type                        *CredentialType              `json:"type,omitempty"`
+	TypeNot                     *CredentialType              `json:"type_not,omitempty"`
+	TypeIn                      []CredentialType             `json:"type_in,omitempty"`
+	TypeNotIn                   []CredentialType             `json:"type_not_in,omitempty"`
+	Validated                   *bool                        `json:"validated,omitempty"`
+	ValidatedNot                *bool                        `json:"validated_not,omitempty"`
+	ValidationId                *string                      `json:"validationID,omitempty"`
+	ValidationIdNot             *string                      `json:"validationID_not,omitempty"`
+	ValidationIdIn              []string                     `json:"validationID_in,omitempty"`
+	ValidationIdNotIn           []string                     `json:"validationID_not_in,omitempty"`
+	ValidationIdLt              *string                      `json:"validationID_lt,omitempty"`
+	ValidationIdLte             *string                      `json:"validationID_lte,omitempty"`
+	ValidationIdGt              *string                      `json:"validationID_gt,omitempty"`
+	ValidationIdGte             *string                      `json:"validationID_gte,omitempty"`
+	ValidationIdContains        *string                      `json:"validationID_contains,omitempty"`
+	ValidationIdNotContains     *string                      `json:"validationID_not_contains,omitempty"`
+	ValidationIdStartsWith      *string                      `json:"validationID_starts_with,omitempty"`
+	ValidationIdNotStartsWith   *string                      `json:"validationID_not_starts_with,omitempty"`
+	ValidationIdEndsWith        *string                      `json:"validationID_ends_with,omitempty"`
+	ValidationIdNotEndsWith     *string                      `json:"validationID_not_ends_with,omitempty"`
+	Value                       *string                      `json:"value,omitempty"`
+	ValueNot                    *string                      `json:"value_not,omitempty"`
+	ValueIn                     []string                     `json:"value_in,omitempty"`
+	ValueNotIn                  []string                     `json:"value_not_in,omitempty"`
+	ValueLt                     *string                      `json:"value_lt,omitempty"`
+	ValueLte                    *string                      `json:"value_lte,omitempty"`
+	ValueGt                     *string                      `json:"value_gt,omitempty"`
+	ValueGte                    *string                      `json:"value_gte,omitempty"`
+	ValueContains               *string                      `json:"value_contains,omitempty"`
+	ValueNotContains            *string                      `json:"value_not_contains,omitempty"`
+	ValueStartsWith             *string                      `json:"value_starts_with,omitempty"`
+	ValueNotStartsWith          *string                      `json:"value_not_starts_with,omitempty"`
+	ValueEndsWith               *string                      `json:"value_ends_with,omitempty"`
+	ValueNotEndsWith            *string                      `json:"value_not_ends_with,omitempty"`
+	RawPassword                 *string                      `json:"rawPassword,omitempty"`
+	RawPasswordNot              *string                      `json:"rawPassword_not,omitempty"`
+	RawPasswordIn               []string                     `json:"rawPassword_in,omitempty"`
+	RawPasswordNotIn            []string                     `json:"rawPassword_not_in,omitempty"`
+	RawPasswordLt               *string                      `json:"rawPassword_lt,omitempty"`
+	RawPasswordLte              *string                      `json:"rawPassword_lte,omitempty"`
+	RawPasswordGt               *string                      `json:"rawPassword_gt,omitempty"`
+	RawPasswordGte              *string                      `json:"rawPassword_gte,omitempty"`
+	RawPasswordContains         *string                      `json:"rawPassword_contains,omitempty"`
+	RawPasswordNotContains      *string                      `json:"rawPassword_not_contains,omitempty"`
+	RawPasswordStartsWith       *string                      `json:"rawPassword_starts_with,omitempty"`
+	RawPasswordNotStartsWith    *string                      `json:"rawPassword_not_starts_with,omitempty"`
+	RawPasswordEndsWith         *string                      `json:"rawPassword_ends_with,omitempty"`
+	RawPasswordNotEndsWith      *string                      `json:"rawPassword_not_ends_with,omitempty"`
+	HashedPassword              *string                      `json:"hashedPassword,omitempty"`
+	HashedPasswordNot           *string                      `json:"hashedPassword_not,omitempty"`
+	HashedPasswordIn            []string                     `json:"hashedPassword_in,omitempty"`
+	HashedPasswordNotIn         []string                     `json:"hashedPassword_not_in,omitempty"`
+	HashedPasswordLt            *string                      `json:"hashedPassword_lt,omitempty"`
+	HashedPasswordLte           *string                      `json:"hashedPassword_lte,omitempty"`
+	HashedPasswordGt            *string                      `json:"hashedPassword_gt,omitempty"`
+	HashedPasswordGte           *string                      `json:"hashedPassword_gte,omitempty"`
+	HashedPasswordContains      *string                      `json:"hashedPassword_contains,omitempty"`
+	HashedPasswordNotContains   *string                      `json:"hashedPassword_not_contains,omitempty"`
+	HashedPasswordStartsWith    *string                      `json:"hashedPassword_starts_with,omitempty"`
+	HashedPasswordNotStartsWith *string                      `json:"hashedPassword_not_starts_with,omitempty"`
+	HashedPasswordEndsWith      *string                      `json:"hashedPassword_ends_with,omitempty"`
+	HashedPasswordNotEndsWith   *string                      `json:"hashedPassword_not_ends_with,omitempty"`
+	And                         []CredentialScalarWhereInput `json:"AND,omitempty"`
+	Or                          []CredentialScalarWhereInput `json:"OR,omitempty"`
+	Not                         []CredentialScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type PersonWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type CredentialUpdateManyWithWhereNestedInput struct {
+	Where CredentialScalarWhereInput    `json:"where"`
+	Data  CredentialUpdateManyDataInput `json:"data"`
+}
+
+type PersonUpdateWithoutIdentificationDataInput struct {
+	MId           *string                                `json:"mID,omitempty"`
+	Name          *string                                `json:"name,omitempty"`
+	Photo         *string                                `json:"photo,omitempty"`
+	Birthday      *string                                `json:"birthday,omitempty"`
+	From          *string                                `json:"from,omitempty"`
+	ChannelsPhone *PhoneChannelUpdateManyInput           `json:"channelsPhone,omitempty"`
+	ChannelsEmail *EmailChannelUpdateManyInput           `json:"channelsEmail,omitempty"`
+	Tags          *PersonUpdatetagsInput                 `json:"tags,omitempty"`
+	Credentials   *CredentialUpdateManyWithoutOwnerInput `json:"credentials,omitempty"`
+}
+
+type CredentialUpdateManyDataInput struct {
+	DisplayName    *string         `json:"displayName,omitempty"`
+	IsMain         *bool           `json:"isMain,omitempty"`
+	Type           *CredentialType `json:"type,omitempty"`
+	Validated      *bool           `json:"validated,omitempty"`
+	ValidationId   *string         `json:"validationID,omitempty"`
+	Value          *string         `json:"value,omitempty"`
+	RawPassword    *string         `json:"rawPassword,omitempty"`
+	HashedPassword *string         `json:"hashedPassword,omitempty"`
+}
+
+type PersonReviewsWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type PersonUpsertNestedInput struct {
+	Update PersonUpdateDataInput `json:"update"`
+	Create PersonCreateInput     `json:"create"`
+}
+
+type PersonCreateWithoutIdentificationInput struct {
+	MId           *string                                `json:"mID,omitempty"`
+	Name          string                                 `json:"name"`
+	Photo         *string                                `json:"photo,omitempty"`
+	Birthday      string                                 `json:"birthday"`
+	From          *string                                `json:"from,omitempty"`
+	ChannelsPhone *PhoneChannelCreateManyInput           `json:"channelsPhone,omitempty"`
+	ChannelsEmail *EmailChannelCreateManyInput           `json:"channelsEmail,omitempty"`
+	Tags          *PersonCreatetagsInput                 `json:"tags,omitempty"`
+	Credentials   *CredentialCreateManyWithoutOwnerInput `json:"credentials,omitempty"`
+}
+
+type TicketUpdateManyDataInput struct {
+	ExpireAt *string `json:"expireAt,omitempty"`
+}
+
+type PhoneChannelWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type LocationUpdateDataInput struct {
+	Longitude   *float64 `json:"longitude,omitempty"`
+	Latitude    *float64 `json:"latitude,omitempty"`
+	Description *string  `json:"description,omitempty"`
+}
+
+type FeatureUpdateManyMutationInput struct {
+	Name  *string `json:"name,omitempty"`
+	Image *string `json:"image,omitempty"`
+}
+
+type LocationUpsertNestedInput struct {
+	Update LocationUpdateDataInput `json:"update"`
+	Create LocationCreateInput     `json:"create"`
+}
+
+type TicketWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type FeatureUpdateManyInput struct {
+	Create     []FeatureCreateInput                    `json:"create,omitempty"`
+	DeleteMany []FeatureScalarWhereInput               `json:"deleteMany,omitempty"`
+	UpdateMany []FeatureUpdateManyWithWhereNestedInput `json:"updateMany,omitempty"`
+}
+
+type DetailsUpdateManyMutationInput struct {
+	ProviderName     *string `json:"providerName,omitempty"`
+	ProviderWeb      *string `json:"providerWeb,omitempty"`
+	ContactPhone     *string `json:"contactPhone,omitempty"`
+	ContactEmail     *string `json:"contactEmail,omitempty"`
+	AddressReference *string `json:"addressReference,omitempty"`
+}
+
+type FeatureScalarWhereInput struct {
+	Name               *string                   `json:"name,omitempty"`
+	NameNot            *string                   `json:"name_not,omitempty"`
+	NameIn             []string                  `json:"name_in,omitempty"`
+	NameNotIn          []string                  `json:"name_not_in,omitempty"`
+	NameLt             *string                   `json:"name_lt,omitempty"`
+	NameLte            *string                   `json:"name_lte,omitempty"`
+	NameGt             *string                   `json:"name_gt,omitempty"`
+	NameGte            *string                   `json:"name_gte,omitempty"`
+	NameContains       *string                   `json:"name_contains,omitempty"`
+	NameNotContains    *string                   `json:"name_not_contains,omitempty"`
+	NameStartsWith     *string                   `json:"name_starts_with,omitempty"`
+	NameNotStartsWith  *string                   `json:"name_not_starts_with,omitempty"`
+	NameEndsWith       *string                   `json:"name_ends_with,omitempty"`
+	NameNotEndsWith    *string                   `json:"name_not_ends_with,omitempty"`
+	Image              *string                   `json:"image,omitempty"`
+	ImageNot           *string                   `json:"image_not,omitempty"`
+	ImageIn            []string                  `json:"image_in,omitempty"`
+	ImageNotIn         []string                  `json:"image_not_in,omitempty"`
+	ImageLt            *string                   `json:"image_lt,omitempty"`
+	ImageLte           *string                   `json:"image_lte,omitempty"`
+	ImageGt            *string                   `json:"image_gt,omitempty"`
+	ImageGte           *string                   `json:"image_gte,omitempty"`
+	ImageContains      *string                   `json:"image_contains,omitempty"`
+	ImageNotContains   *string                   `json:"image_not_contains,omitempty"`
+	ImageStartsWith    *string                   `json:"image_starts_with,omitempty"`
+	ImageNotStartsWith *string                   `json:"image_not_starts_with,omitempty"`
+	ImageEndsWith      *string                   `json:"image_ends_with,omitempty"`
+	ImageNotEndsWith   *string                   `json:"image_not_ends_with,omitempty"`
+	And                []FeatureScalarWhereInput `json:"AND,omitempty"`
+	Or                 []FeatureScalarWhereInput `json:"OR,omitempty"`
+	Not                []FeatureScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type TicketTypeWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type FeatureUpdateManyWithWhereNestedInput struct {
+	Where FeatureScalarWhereInput    `json:"where"`
+	Data  FeatureUpdateManyDataInput `json:"data"`
+}
+
+type PaymentEntryUpdateManyWithWhereNestedInput struct {
+	Where PaymentEntryScalarWhereInput    `json:"where"`
+	Data  PaymentEntryUpdateManyDataInput `json:"data"`
+}
+
+type FeatureUpdateManyDataInput struct {
+	Name  *string `json:"name,omitempty"`
+	Image *string `json:"image,omitempty"`
+}
+
+type PaymentEntryUpsertWithWhereUniqueWithoutWithCardInput struct {
+	Where  PaymentEntryWhereUniqueInput               `json:"where"`
+	Update PaymentEntryUpdateWithoutWithCardDataInput `json:"update"`
+	Create PaymentEntryCreateWithoutWithCardInput     `json:"create"`
+}
+
+type OpeningHoursUpdateOneRequiredInput struct {
+	Create *OpeningHoursCreateInput       `json:"create,omitempty"`
+	Update *OpeningHoursUpdateDataInput   `json:"update,omitempty"`
+	Upsert *OpeningHoursUpsertNestedInput `json:"upsert,omitempty"`
+}
+
+type PaymentEntryUpdateWithoutWithCardDataInput struct {
+	ExternalId      *string `json:"externalID,omitempty"`
+	ProductId       *string `json:"productID,omitempty"`
+	Product         *string `json:"product,omitempty"`
+	GatewayResponse *string `json:"gatewayResponse,omitempty"`
+	Amount          *int32  `json:"amount,omitempty"`
+	DiscountId      *string `json:"discountID,omitempty"`
+	Discount        *int32  `json:"discount,omitempty"`
+}
+
+type OpeningHoursUpdateDataInput struct {
+	From *string `json:"from,omitempty"`
+	To   *string `json:"to,omitempty"`
+}
+
+type PaymentEntryUpdateManyWithoutWithCardInput struct {
+	Create     []PaymentEntryCreateWithoutWithCardInput                `json:"create,omitempty"`
+	Delete     []PaymentEntryWhereUniqueInput                          `json:"delete,omitempty"`
+	Connect    []PaymentEntryWhereUniqueInput                          `json:"connect,omitempty"`
+	Set        []PaymentEntryWhereUniqueInput                          `json:"set,omitempty"`
+	Disconnect []PaymentEntryWhereUniqueInput                          `json:"disconnect,omitempty"`
+	Update     []PaymentEntryUpdateWithWhereUniqueWithoutWithCardInput `json:"update,omitempty"`
+	Upsert     []PaymentEntryUpsertWithWhereUniqueWithoutWithCardInput `json:"upsert,omitempty"`
+	DeleteMany []PaymentEntryScalarWhereInput                          `json:"deleteMany,omitempty"`
+	UpdateMany []PaymentEntryUpdateManyWithWhereNestedInput            `json:"updateMany,omitempty"`
+}
+
+type OpeningHoursUpsertNestedInput struct {
+	Update OpeningHoursUpdateDataInput `json:"update"`
+	Create OpeningHoursCreateInput     `json:"create"`
+}
+
+type PartnerCreateOneWithoutAttractionsInput struct {
+	Create  *PartnerCreateWithoutAttractionsInput `json:"create,omitempty"`
+	Connect *PartnerWhereUniqueInput              `json:"connect,omitempty"`
+}
+
+type PartnerUpsertWithoutAttractionsInput struct {
+	Update PartnerUpdateWithoutAttractionsDataInput `json:"update"`
+	Create PartnerCreateWithoutAttractionsInput     `json:"create"`
+}
+
+type PersonCreateOneInput struct {
+	Create  *PersonCreateInput      `json:"create,omitempty"`
+	Connect *PersonWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type OverviewUpdateOneRequiredInput struct {
+	Create *OverviewCreateInput       `json:"create,omitempty"`
+	Update *OverviewUpdateDataInput   `json:"update,omitempty"`
+	Upsert *OverviewUpsertNestedInput `json:"upsert,omitempty"`
+}
+
+type PhoneChannelCreateManyInput struct {
+	Create  []PhoneChannelCreateInput      `json:"create,omitempty"`
+	Connect []PhoneChannelWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type TicketUpdateManyWithWhereNestedInput struct {
+	Where TicketScalarWhereInput    `json:"where"`
+	Data  TicketUpdateManyDataInput `json:"data"`
+}
+
+type EmailChannelCreateManyInput struct {
+	Create  []EmailChannelCreateInput      `json:"create,omitempty"`
+	Connect []EmailChannelWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type OpeningHoursWhereInput struct {
+	From      *string                  `json:"from,omitempty"`
+	FromNot   *string                  `json:"from_not,omitempty"`
+	FromIn    []string                 `json:"from_in,omitempty"`
+	FromNotIn []string                 `json:"from_not_in,omitempty"`
+	FromLt    *string                  `json:"from_lt,omitempty"`
+	FromLte   *string                  `json:"from_lte,omitempty"`
+	FromGt    *string                  `json:"from_gt,omitempty"`
+	FromGte   *string                  `json:"from_gte,omitempty"`
+	To        *string                  `json:"to,omitempty"`
+	ToNot     *string                  `json:"to_not,omitempty"`
+	ToIn      []string                 `json:"to_in,omitempty"`
+	ToNotIn   []string                 `json:"to_not_in,omitempty"`
+	ToLt      *string                  `json:"to_lt,omitempty"`
+	ToLte     *string                  `json:"to_lte,omitempty"`
+	ToGt      *string                  `json:"to_gt,omitempty"`
+	ToGte     *string                  `json:"to_gte,omitempty"`
+	And       []OpeningHoursWhereInput `json:"AND,omitempty"`
+	Or        []OpeningHoursWhereInput `json:"OR,omitempty"`
+	Not       []OpeningHoursWhereInput `json:"NOT,omitempty"`
+}
+
+type EmailChannelCreateextrasInput struct {
+	Set []string `json:"set,omitempty"`
+}
+
+type PersonReviewsWhereInput struct {
+	ID                       *string                   `json:"id,omitempty"`
+	IDNot                    *string                   `json:"id_not,omitempty"`
+	IDIn                     []string                  `json:"id_in,omitempty"`
+	IDNotIn                  []string                  `json:"id_not_in,omitempty"`
+	IDLt                     *string                   `json:"id_lt,omitempty"`
+	IDLte                    *string                   `json:"id_lte,omitempty"`
+	IDGt                     *string                   `json:"id_gt,omitempty"`
+	IDGte                    *string                   `json:"id_gte,omitempty"`
+	IDContains               *string                   `json:"id_contains,omitempty"`
+	IDNotContains            *string                   `json:"id_not_contains,omitempty"`
+	IDStartsWith             *string                   `json:"id_starts_with,omitempty"`
+	IDNotStartsWith          *string                   `json:"id_not_starts_with,omitempty"`
+	IDEndsWith               *string                   `json:"id_ends_with,omitempty"`
+	IDNotEndsWith            *string                   `json:"id_not_ends_with,omitempty"`
+	CreatedAt                *string                   `json:"createdAt,omitempty"`
+	CreatedAtNot             *string                   `json:"createdAt_not,omitempty"`
+	CreatedAtIn              []string                  `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn           []string                  `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt              *string                   `json:"createdAt_lt,omitempty"`
+	CreatedAtLte             *string                   `json:"createdAt_lte,omitempty"`
+	CreatedAtGt              *string                   `json:"createdAt_gt,omitempty"`
+	CreatedAtGte             *string                   `json:"createdAt_gte,omitempty"`
+	UpdatedAt                *string                   `json:"updatedAt,omitempty"`
+	UpdatedAtNot             *string                   `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn              []string                  `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn           []string                  `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt              *string                   `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte             *string                   `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt              *string                   `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte             *string                   `json:"updatedAt_gte,omitempty"`
+	Person                   *PersonWhereInput         `json:"person,omitempty"`
+	Title                    *string                   `json:"title,omitempty"`
+	TitleNot                 *string                   `json:"title_not,omitempty"`
+	TitleIn                  []string                  `json:"title_in,omitempty"`
+	TitleNotIn               []string                  `json:"title_not_in,omitempty"`
+	TitleLt                  *string                   `json:"title_lt,omitempty"`
+	TitleLte                 *string                   `json:"title_lte,omitempty"`
+	TitleGt                  *string                   `json:"title_gt,omitempty"`
+	TitleGte                 *string                   `json:"title_gte,omitempty"`
+	TitleContains            *string                   `json:"title_contains,omitempty"`
+	TitleNotContains         *string                   `json:"title_not_contains,omitempty"`
+	TitleStartsWith          *string                   `json:"title_starts_with,omitempty"`
+	TitleNotStartsWith       *string                   `json:"title_not_starts_with,omitempty"`
+	TitleEndsWith            *string                   `json:"title_ends_with,omitempty"`
+	TitleNotEndsWith         *string                   `json:"title_not_ends_with,omitempty"`
+	Description              *string                   `json:"description,omitempty"`
+	DescriptionNot           *string                   `json:"description_not,omitempty"`
+	DescriptionIn            []string                  `json:"description_in,omitempty"`
+	DescriptionNotIn         []string                  `json:"description_not_in,omitempty"`
+	DescriptionLt            *string                   `json:"description_lt,omitempty"`
+	DescriptionLte           *string                   `json:"description_lte,omitempty"`
+	DescriptionGt            *string                   `json:"description_gt,omitempty"`
+	DescriptionGte           *string                   `json:"description_gte,omitempty"`
+	DescriptionContains      *string                   `json:"description_contains,omitempty"`
+	DescriptionNotContains   *string                   `json:"description_not_contains,omitempty"`
+	DescriptionStartsWith    *string                   `json:"description_starts_with,omitempty"`
+	DescriptionNotStartsWith *string                   `json:"description_not_starts_with,omitempty"`
+	DescriptionEndsWith      *string                   `json:"description_ends_with,omitempty"`
+	DescriptionNotEndsWith   *string                   `json:"description_not_ends_with,omitempty"`
+	AproveNumber             *int32                    `json:"aproveNumber,omitempty"`
+	AproveNumberNot          *int32                    `json:"aproveNumber_not,omitempty"`
+	AproveNumberIn           []int32                   `json:"aproveNumber_in,omitempty"`
+	AproveNumberNotIn        []int32                   `json:"aproveNumber_not_in,omitempty"`
+	AproveNumberLt           *int32                    `json:"aproveNumber_lt,omitempty"`
+	AproveNumberLte          *int32                    `json:"aproveNumber_lte,omitempty"`
+	AproveNumberGt           *int32                    `json:"aproveNumber_gt,omitempty"`
+	AproveNumberGte          *int32                    `json:"aproveNumber_gte,omitempty"`
+	DeclineNumber            *int32                    `json:"declineNumber,omitempty"`
+	DeclineNumberNot         *int32                    `json:"declineNumber_not,omitempty"`
+	DeclineNumberIn          []int32                   `json:"declineNumber_in,omitempty"`
+	DeclineNumberNotIn       []int32                   `json:"declineNumber_not_in,omitempty"`
+	DeclineNumberLt          *int32                    `json:"declineNumber_lt,omitempty"`
+	DeclineNumberLte         *int32                    `json:"declineNumber_lte,omitempty"`
+	DeclineNumberGt          *int32                    `json:"declineNumber_gt,omitempty"`
+	DeclineNumberGte         *int32                    `json:"declineNumber_gte,omitempty"`
+	CommentsEvery            *PersonReviewsWhereInput  `json:"comments_every,omitempty"`
+	CommentsSome             *PersonReviewsWhereInput  `json:"comments_some,omitempty"`
+	CommentsNone             *PersonReviewsWhereInput  `json:"comments_none,omitempty"`
+	And                      []PersonReviewsWhereInput `json:"AND,omitempty"`
+	Or                       []PersonReviewsWhereInput `json:"OR,omitempty"`
+	Not                      []PersonReviewsWhereInput `json:"NOT,omitempty"`
+}
+
+type IDentificationDocumentCreateWithoutPersonInput struct {
+	Type      IDentificationType `json:"type"`
+	Value     string             `json:"value"`
+	Validated *bool              `json:"validated,omitempty"`
+}
+
+type PartnerWhereInput struct {
+	ID                        *string                 `json:"id,omitempty"`
+	IDNot                     *string                 `json:"id_not,omitempty"`
+	IDIn                      []string                `json:"id_in,omitempty"`
+	IDNotIn                   []string                `json:"id_not_in,omitempty"`
+	IDLt                      *string                 `json:"id_lt,omitempty"`
+	IDLte                     *string                 `json:"id_lte,omitempty"`
+	IDGt                      *string                 `json:"id_gt,omitempty"`
+	IDGte                     *string                 `json:"id_gte,omitempty"`
+	IDContains                *string                 `json:"id_contains,omitempty"`
+	IDNotContains             *string                 `json:"id_not_contains,omitempty"`
+	IDStartsWith              *string                 `json:"id_starts_with,omitempty"`
+	IDNotStartsWith           *string                 `json:"id_not_starts_with,omitempty"`
+	IDEndsWith                *string                 `json:"id_ends_with,omitempty"`
+	IDNotEndsWith             *string                 `json:"id_not_ends_with,omitempty"`
+	CreatedAt                 *string                 `json:"createdAt,omitempty"`
+	CreatedAtNot              *string                 `json:"createdAt_not,omitempty"`
+	CreatedAtIn               []string                `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn            []string                `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt               *string                 `json:"createdAt_lt,omitempty"`
+	CreatedAtLte              *string                 `json:"createdAt_lte,omitempty"`
+	CreatedAtGt               *string                 `json:"createdAt_gt,omitempty"`
+	CreatedAtGte              *string                 `json:"createdAt_gte,omitempty"`
+	UpdatedAt                 *string                 `json:"updatedAt,omitempty"`
+	UpdatedAtNot              *string                 `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn               []string                `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn            []string                `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt               *string                 `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte              *string                 `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt               *string                 `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte              *string                 `json:"updatedAt_gte,omitempty"`
+	Person                    *PersonWhereInput       `json:"person,omitempty"`
+	AttractionsEvery          *AttractionWhereInput   `json:"attractions_every,omitempty"`
+	AttractionsSome           *AttractionWhereInput   `json:"attractions_some,omitempty"`
+	AttractionsNone           *AttractionWhereInput   `json:"attractions_none,omitempty"`
+	BrandName                 *string                 `json:"brandName,omitempty"`
+	BrandNameNot              *string                 `json:"brandName_not,omitempty"`
+	BrandNameIn               []string                `json:"brandName_in,omitempty"`
+	BrandNameNotIn            []string                `json:"brandName_not_in,omitempty"`
+	BrandNameLt               *string                 `json:"brandName_lt,omitempty"`
+	BrandNameLte              *string                 `json:"brandName_lte,omitempty"`
+	BrandNameGt               *string                 `json:"brandName_gt,omitempty"`
+	BrandNameGte              *string                 `json:"brandName_gte,omitempty"`
+	BrandNameContains         *string                 `json:"brandName_contains,omitempty"`
+	BrandNameNotContains      *string                 `json:"brandName_not_contains,omitempty"`
+	BrandNameStartsWith       *string                 `json:"brandName_starts_with,omitempty"`
+	BrandNameNotStartsWith    *string                 `json:"brandName_not_starts_with,omitempty"`
+	BrandNameEndsWith         *string                 `json:"brandName_ends_with,omitempty"`
+	BrandNameNotEndsWith      *string                 `json:"brandName_not_ends_with,omitempty"`
+	SocialReason              *string                 `json:"socialReason,omitempty"`
+	SocialReasonNot           *string                 `json:"socialReason_not,omitempty"`
+	SocialReasonIn            []string                `json:"socialReason_in,omitempty"`
+	SocialReasonNotIn         []string                `json:"socialReason_not_in,omitempty"`
+	SocialReasonLt            *string                 `json:"socialReason_lt,omitempty"`
+	SocialReasonLte           *string                 `json:"socialReason_lte,omitempty"`
+	SocialReasonGt            *string                 `json:"socialReason_gt,omitempty"`
+	SocialReasonGte           *string                 `json:"socialReason_gte,omitempty"`
+	SocialReasonContains      *string                 `json:"socialReason_contains,omitempty"`
+	SocialReasonNotContains   *string                 `json:"socialReason_not_contains,omitempty"`
+	SocialReasonStartsWith    *string                 `json:"socialReason_starts_with,omitempty"`
+	SocialReasonNotStartsWith *string                 `json:"socialReason_not_starts_with,omitempty"`
+	SocialReasonEndsWith      *string                 `json:"socialReason_ends_with,omitempty"`
+	SocialReasonNotEndsWith   *string                 `json:"socialReason_not_ends_with,omitempty"`
+	Ruc                       *string                 `json:"ruc,omitempty"`
+	RucNot                    *string                 `json:"ruc_not,omitempty"`
+	RucIn                     []string                `json:"ruc_in,omitempty"`
+	RucNotIn                  []string                `json:"ruc_not_in,omitempty"`
+	RucLt                     *string                 `json:"ruc_lt,omitempty"`
+	RucLte                    *string                 `json:"ruc_lte,omitempty"`
+	RucGt                     *string                 `json:"ruc_gt,omitempty"`
+	RucGte                    *string                 `json:"ruc_gte,omitempty"`
+	RucContains               *string                 `json:"ruc_contains,omitempty"`
+	RucNotContains            *string                 `json:"ruc_not_contains,omitempty"`
+	RucStartsWith             *string                 `json:"ruc_starts_with,omitempty"`
+	RucNotStartsWith          *string                 `json:"ruc_not_starts_with,omitempty"`
+	RucEndsWith               *string                 `json:"ruc_ends_with,omitempty"`
+	RucNotEndsWith            *string                 `json:"ruc_not_ends_with,omitempty"`
+	Address                   *string                 `json:"address,omitempty"`
+	AddressNot                *string                 `json:"address_not,omitempty"`
+	AddressIn                 []string                `json:"address_in,omitempty"`
+	AddressNotIn              []string                `json:"address_not_in,omitempty"`
+	AddressLt                 *string                 `json:"address_lt,omitempty"`
+	AddressLte                *string                 `json:"address_lte,omitempty"`
+	AddressGt                 *string                 `json:"address_gt,omitempty"`
+	AddressGte                *string                 `json:"address_gte,omitempty"`
+	AddressContains           *string                 `json:"address_contains,omitempty"`
+	AddressNotContains        *string                 `json:"address_not_contains,omitempty"`
+	AddressStartsWith         *string                 `json:"address_starts_with,omitempty"`
+	AddressNotStartsWith      *string                 `json:"address_not_starts_with,omitempty"`
+	AddressEndsWith           *string                 `json:"address_ends_with,omitempty"`
+	AddressNotEndsWith        *string                 `json:"address_not_ends_with,omitempty"`
+	Location                  *LocationWhereInput     `json:"location,omitempty"`
+	FeaturesEvery             *FeatureWhereInput      `json:"features_every,omitempty"`
+	FeaturesSome              *FeatureWhereInput      `json:"features_some,omitempty"`
+	FeaturesNone              *FeatureWhereInput      `json:"features_none,omitempty"`
+	OpeningHours              *OpeningHoursWhereInput `json:"openingHours,omitempty"`
+	And                       []PartnerWhereInput     `json:"AND,omitempty"`
+	Or                        []PartnerWhereInput     `json:"OR,omitempty"`
+	Not                       []PartnerWhereInput     `json:"NOT,omitempty"`
+}
+
+type CredentialCreateManyWithoutOwnerInput struct {
+	Create  []CredentialCreateWithoutOwnerInput `json:"create,omitempty"`
+	Connect []CredentialWhereUniqueInput        `json:"connect,omitempty"`
+}
+
+type AttractionWhereInput struct {
+	ID                   *string                  `json:"id,omitempty"`
+	IDNot                *string                  `json:"id_not,omitempty"`
+	IDIn                 []string                 `json:"id_in,omitempty"`
+	IDNotIn              []string                 `json:"id_not_in,omitempty"`
+	IDLt                 *string                  `json:"id_lt,omitempty"`
+	IDLte                *string                  `json:"id_lte,omitempty"`
+	IDGt                 *string                  `json:"id_gt,omitempty"`
+	IDGte                *string                  `json:"id_gte,omitempty"`
+	IDContains           *string                  `json:"id_contains,omitempty"`
+	IDNotContains        *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith         *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith      *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith           *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith        *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt            *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot         *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn          []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn       []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt          *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte         *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt          *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte         *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt            *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot         *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn          []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn       []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt          *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte         *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt          *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte         *string                  `json:"updatedAt_gte,omitempty"`
+	Owner                *PartnerWhereInput       `json:"owner,omitempty"`
+	Overview             *OverviewWhereInput      `json:"overview,omitempty"`
+	MaxUses              *int32                   `json:"maxUses,omitempty"`
+	MaxUsesNot           *int32                   `json:"maxUses_not,omitempty"`
+	MaxUsesIn            []int32                  `json:"maxUses_in,omitempty"`
+	MaxUsesNotIn         []int32                  `json:"maxUses_not_in,omitempty"`
+	MaxUsesLt            *int32                   `json:"maxUses_lt,omitempty"`
+	MaxUsesLte           *int32                   `json:"maxUses_lte,omitempty"`
+	MaxUsesGt            *int32                   `json:"maxUses_gt,omitempty"`
+	MaxUsesGte           *int32                   `json:"maxUses_gte,omitempty"`
+	Address              *string                  `json:"address,omitempty"`
+	AddressNot           *string                  `json:"address_not,omitempty"`
+	AddressIn            []string                 `json:"address_in,omitempty"`
+	AddressNotIn         []string                 `json:"address_not_in,omitempty"`
+	AddressLt            *string                  `json:"address_lt,omitempty"`
+	AddressLte           *string                  `json:"address_lte,omitempty"`
+	AddressGt            *string                  `json:"address_gt,omitempty"`
+	AddressGte           *string                  `json:"address_gte,omitempty"`
+	AddressContains      *string                  `json:"address_contains,omitempty"`
+	AddressNotContains   *string                  `json:"address_not_contains,omitempty"`
+	AddressStartsWith    *string                  `json:"address_starts_with,omitempty"`
+	AddressNotStartsWith *string                  `json:"address_not_starts_with,omitempty"`
+	AddressEndsWith      *string                  `json:"address_ends_with,omitempty"`
+	AddressNotEndsWith   *string                  `json:"address_not_ends_with,omitempty"`
+	Location             *LocationWhereInput      `json:"location,omitempty"`
+	Popularity           *float64                 `json:"popularity,omitempty"`
+	PopularityNot        *float64                 `json:"popularity_not,omitempty"`
+	PopularityIn         []float64                `json:"popularity_in,omitempty"`
+	PopularityNotIn      []float64                `json:"popularity_not_in,omitempty"`
+	PopularityLt         *float64                 `json:"popularity_lt,omitempty"`
+	PopularityLte        *float64                 `json:"popularity_lte,omitempty"`
+	PopularityGt         *float64                 `json:"popularity_gt,omitempty"`
+	PopularityGte        *float64                 `json:"popularity_gte,omitempty"`
+	LikedByEvery         *PersonWhereInput        `json:"likedBy_every,omitempty"`
+	LikedBySome          *PersonWhereInput        `json:"likedBy_some,omitempty"`
+	LikedByNone          *PersonWhereInput        `json:"likedBy_none,omitempty"`
+	ReviewsEvery         *PersonReviewsWhereInput `json:"reviews_every,omitempty"`
+	ReviewsSome          *PersonReviewsWhereInput `json:"reviews_some,omitempty"`
+	ReviewsNone          *PersonReviewsWhereInput `json:"reviews_none,omitempty"`
+	Details              *DetailsWhereInput       `json:"details,omitempty"`
+	And                  []AttractionWhereInput   `json:"AND,omitempty"`
+	Or                   []AttractionWhereInput   `json:"OR,omitempty"`
+	Not                  []AttractionWhereInput   `json:"NOT,omitempty"`
+}
+
+type LocationCreateOneInput struct {
+	Create *LocationCreateInput `json:"create,omitempty"`
+}
+
+type PersonScalarWhereInput struct {
+	ID                 *string                  `json:"id,omitempty"`
+	IDNot              *string                  `json:"id_not,omitempty"`
+	IDIn               []string                 `json:"id_in,omitempty"`
+	IDNotIn            []string                 `json:"id_not_in,omitempty"`
+	IDLt               *string                  `json:"id_lt,omitempty"`
+	IDLte              *string                  `json:"id_lte,omitempty"`
+	IDGt               *string                  `json:"id_gt,omitempty"`
+	IDGte              *string                  `json:"id_gte,omitempty"`
+	IDContains         *string                  `json:"id_contains,omitempty"`
+	IDNotContains      *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith       *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith    *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith         *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith      *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt          *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot       *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn        []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn     []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt        *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte       *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt        *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte       *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt          *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot       *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn        []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn     []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt        *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte       *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt        *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte       *string                  `json:"updatedAt_gte,omitempty"`
+	MId                *string                  `json:"mID,omitempty"`
+	MIdNot             *string                  `json:"mID_not,omitempty"`
+	MIdIn              []string                 `json:"mID_in,omitempty"`
+	MIdNotIn           []string                 `json:"mID_not_in,omitempty"`
+	MIdLt              *string                  `json:"mID_lt,omitempty"`
+	MIdLte             *string                  `json:"mID_lte,omitempty"`
+	MIdGt              *string                  `json:"mID_gt,omitempty"`
+	MIdGte             *string                  `json:"mID_gte,omitempty"`
+	MIdContains        *string                  `json:"mID_contains,omitempty"`
+	MIdNotContains     *string                  `json:"mID_not_contains,omitempty"`
+	MIdStartsWith      *string                  `json:"mID_starts_with,omitempty"`
+	MIdNotStartsWith   *string                  `json:"mID_not_starts_with,omitempty"`
+	MIdEndsWith        *string                  `json:"mID_ends_with,omitempty"`
+	MIdNotEndsWith     *string                  `json:"mID_not_ends_with,omitempty"`
+	Name               *string                  `json:"name,omitempty"`
+	NameNot            *string                  `json:"name_not,omitempty"`
+	NameIn             []string                 `json:"name_in,omitempty"`
+	NameNotIn          []string                 `json:"name_not_in,omitempty"`
+	NameLt             *string                  `json:"name_lt,omitempty"`
+	NameLte            *string                  `json:"name_lte,omitempty"`
+	NameGt             *string                  `json:"name_gt,omitempty"`
+	NameGte            *string                  `json:"name_gte,omitempty"`
+	NameContains       *string                  `json:"name_contains,omitempty"`
+	NameNotContains    *string                  `json:"name_not_contains,omitempty"`
+	NameStartsWith     *string                  `json:"name_starts_with,omitempty"`
+	NameNotStartsWith  *string                  `json:"name_not_starts_with,omitempty"`
+	NameEndsWith       *string                  `json:"name_ends_with,omitempty"`
+	NameNotEndsWith    *string                  `json:"name_not_ends_with,omitempty"`
+	Photo              *string                  `json:"photo,omitempty"`
+	PhotoNot           *string                  `json:"photo_not,omitempty"`
+	PhotoIn            []string                 `json:"photo_in,omitempty"`
+	PhotoNotIn         []string                 `json:"photo_not_in,omitempty"`
+	PhotoLt            *string                  `json:"photo_lt,omitempty"`
+	PhotoLte           *string                  `json:"photo_lte,omitempty"`
+	PhotoGt            *string                  `json:"photo_gt,omitempty"`
+	PhotoGte           *string                  `json:"photo_gte,omitempty"`
+	PhotoContains      *string                  `json:"photo_contains,omitempty"`
+	PhotoNotContains   *string                  `json:"photo_not_contains,omitempty"`
+	PhotoStartsWith    *string                  `json:"photo_starts_with,omitempty"`
+	PhotoNotStartsWith *string                  `json:"photo_not_starts_with,omitempty"`
+	PhotoEndsWith      *string                  `json:"photo_ends_with,omitempty"`
+	PhotoNotEndsWith   *string                  `json:"photo_not_ends_with,omitempty"`
+	Birthday           *string                  `json:"birthday,omitempty"`
+	BirthdayNot        *string                  `json:"birthday_not,omitempty"`
+	BirthdayIn         []string                 `json:"birthday_in,omitempty"`
+	BirthdayNotIn      []string                 `json:"birthday_not_in,omitempty"`
+	BirthdayLt         *string                  `json:"birthday_lt,omitempty"`
+	BirthdayLte        *string                  `json:"birthday_lte,omitempty"`
+	BirthdayGt         *string                  `json:"birthday_gt,omitempty"`
+	BirthdayGte        *string                  `json:"birthday_gte,omitempty"`
+	From               *string                  `json:"from,omitempty"`
+	FromNot            *string                  `json:"from_not,omitempty"`
+	FromIn             []string                 `json:"from_in,omitempty"`
+	FromNotIn          []string                 `json:"from_not_in,omitempty"`
+	FromLt             *string                  `json:"from_lt,omitempty"`
+	FromLte            *string                  `json:"from_lte,omitempty"`
+	FromGt             *string                  `json:"from_gt,omitempty"`
+	FromGte            *string                  `json:"from_gte,omitempty"`
+	FromContains       *string                  `json:"from_contains,omitempty"`
+	FromNotContains    *string                  `json:"from_not_contains,omitempty"`
+	FromStartsWith     *string                  `json:"from_starts_with,omitempty"`
+	FromNotStartsWith  *string                  `json:"from_not_starts_with,omitempty"`
+	FromEndsWith       *string                  `json:"from_ends_with,omitempty"`
+	FromNotEndsWith    *string                  `json:"from_not_ends_with,omitempty"`
+	And                []PersonScalarWhereInput `json:"AND,omitempty"`
+	Or                 []PersonScalarWhereInput `json:"OR,omitempty"`
+	Not                []PersonScalarWhereInput `json:"NOT,omitempty"`
+}
+
+type FeatureCreateManyInput struct {
+	Create []FeatureCreateInput `json:"create,omitempty"`
+}
+
+type PersonUpdateManyWithWhereNestedInput struct {
+	Where PersonScalarWhereInput    `json:"where"`
+	Data  PersonUpdateManyDataInput `json:"data"`
+}
+
+type OpeningHoursCreateOneInput struct {
+	Create *OpeningHoursCreateInput `json:"create,omitempty"`
+}
+
+type PersonUpdateManyDataInput struct {
+	MId      *string                `json:"mID,omitempty"`
+	Name     *string                `json:"name,omitempty"`
+	Photo    *string                `json:"photo,omitempty"`
+	Birthday *string                `json:"birthday,omitempty"`
+	From     *string                `json:"from,omitempty"`
+	Tags     *PersonUpdatetagsInput `json:"tags,omitempty"`
+}
+
+type TravelerSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                   `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                          `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                         `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                         `json:"updatedFields_contains_some,omitempty"`
+	Node                       *TravelerWhereInput              `json:"node,omitempty"`
+	And                        []TravelerSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []TravelerSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []TravelerSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type AttractionUpdatetypesInput struct {
+	Set []AttractionType `json:"set,omitempty"`
+}
+
+type IDentificationDocumentWhereInput struct {
+	ID                 *string                            `json:"id,omitempty"`
+	IDNot              *string                            `json:"id_not,omitempty"`
+	IDIn               []string                           `json:"id_in,omitempty"`
+	IDNotIn            []string                           `json:"id_not_in,omitempty"`
+	IDLt               *string                            `json:"id_lt,omitempty"`
+	IDLte              *string                            `json:"id_lte,omitempty"`
+	IDGt               *string                            `json:"id_gt,omitempty"`
+	IDGte              *string                            `json:"id_gte,omitempty"`
+	IDContains         *string                            `json:"id_contains,omitempty"`
+	IDNotContains      *string                            `json:"id_not_contains,omitempty"`
+	IDStartsWith       *string                            `json:"id_starts_with,omitempty"`
+	IDNotStartsWith    *string                            `json:"id_not_starts_with,omitempty"`
+	IDEndsWith         *string                            `json:"id_ends_with,omitempty"`
+	IDNotEndsWith      *string                            `json:"id_not_ends_with,omitempty"`
+	CreatedAt          *string                            `json:"createdAt,omitempty"`
+	CreatedAtNot       *string                            `json:"createdAt_not,omitempty"`
+	CreatedAtIn        []string                           `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn     []string                           `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt        *string                            `json:"createdAt_lt,omitempty"`
+	CreatedAtLte       *string                            `json:"createdAt_lte,omitempty"`
+	CreatedAtGt        *string                            `json:"createdAt_gt,omitempty"`
+	CreatedAtGte       *string                            `json:"createdAt_gte,omitempty"`
+	UpdatedAt          *string                            `json:"updatedAt,omitempty"`
+	UpdatedAtNot       *string                            `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn        []string                           `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn     []string                           `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt        *string                            `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte       *string                            `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt        *string                            `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte       *string                            `json:"updatedAt_gte,omitempty"`
+	Person             *PersonWhereInput                  `json:"person,omitempty"`
+	Type               *IDentificationType                `json:"type,omitempty"`
+	TypeNot            *IDentificationType                `json:"type_not,omitempty"`
+	TypeIn             []IDentificationType               `json:"type_in,omitempty"`
+	TypeNotIn          []IDentificationType               `json:"type_not_in,omitempty"`
+	Value              *string                            `json:"value,omitempty"`
+	ValueNot           *string                            `json:"value_not,omitempty"`
+	ValueIn            []string                           `json:"value_in,omitempty"`
+	ValueNotIn         []string                           `json:"value_not_in,omitempty"`
+	ValueLt            *string                            `json:"value_lt,omitempty"`
+	ValueLte           *string                            `json:"value_lte,omitempty"`
+	ValueGt            *string                            `json:"value_gt,omitempty"`
+	ValueGte           *string                            `json:"value_gte,omitempty"`
+	ValueContains      *string                            `json:"value_contains,omitempty"`
+	ValueNotContains   *string                            `json:"value_not_contains,omitempty"`
+	ValueStartsWith    *string                            `json:"value_starts_with,omitempty"`
+	ValueNotStartsWith *string                            `json:"value_not_starts_with,omitempty"`
+	ValueEndsWith      *string                            `json:"value_ends_with,omitempty"`
+	ValueNotEndsWith   *string                            `json:"value_not_ends_with,omitempty"`
+	Validated          *bool                              `json:"validated,omitempty"`
+	ValidatedNot       *bool                              `json:"validated_not,omitempty"`
+	And                []IDentificationDocumentWhereInput `json:"AND,omitempty"`
+	Or                 []IDentificationDocumentWhereInput `json:"OR,omitempty"`
+	Not                []IDentificationDocumentWhereInput `json:"NOT,omitempty"`
+}
+
+type AttractionUpdatetagsInput struct {
+	Set []string `json:"set,omitempty"`
+}
+
+type PaymentEntrySubscriptionWhereInput struct {
+	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
+	Node                       *PaymentEntryWhereInput              `json:"node,omitempty"`
+	And                        []PaymentEntrySubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []PaymentEntrySubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []PaymentEntrySubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PersonReviewsUpdateManyInput struct {
+	Create     []PersonReviewsCreateInput                      `json:"create,omitempty"`
+	Update     []PersonReviewsUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []PersonReviewsUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []PersonReviewsWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []PersonReviewsWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []PersonReviewsWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []PersonReviewsWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []PersonReviewsScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []PersonReviewsUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
+}
+
+type CredentialWhereUniqueInput struct {
+	ID    *string `json:"id,omitempty"`
+	Value *string `json:"value,omitempty"`
+}
+
+type PersonReviewsUpdateWithWhereUniqueNestedInput struct {
+	Where PersonReviewsWhereUniqueInput `json:"where"`
+	Data  PersonReviewsUpdateDataInput  `json:"data"`
+}
+
+type CreditCardWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type PersonReviewsUpdateDataInput struct {
+	Person        *PersonUpdateOneRequiredInput `json:"person,omitempty"`
+	Title         *string                       `json:"title,omitempty"`
+	Description   *string                       `json:"description,omitempty"`
+	AproveNumber  *int32                        `json:"aproveNumber,omitempty"`
+	DeclineNumber *int32                        `json:"declineNumber,omitempty"`
+	Comments      *PersonReviewsUpdateManyInput `json:"comments,omitempty"`
+}
+
+type TravelerWhereInput struct {
+	ID                    *string               `json:"id,omitempty"`
+	IDNot                 *string               `json:"id_not,omitempty"`
+	IDIn                  []string              `json:"id_in,omitempty"`
+	IDNotIn               []string              `json:"id_not_in,omitempty"`
+	IDLt                  *string               `json:"id_lt,omitempty"`
+	IDLte                 *string               `json:"id_lte,omitempty"`
+	IDGt                  *string               `json:"id_gt,omitempty"`
+	IDGte                 *string               `json:"id_gte,omitempty"`
+	IDContains            *string               `json:"id_contains,omitempty"`
+	IDNotContains         *string               `json:"id_not_contains,omitempty"`
+	IDStartsWith          *string               `json:"id_starts_with,omitempty"`
+	IDNotStartsWith       *string               `json:"id_not_starts_with,omitempty"`
+	IDEndsWith            *string               `json:"id_ends_with,omitempty"`
+	IDNotEndsWith         *string               `json:"id_not_ends_with,omitempty"`
+	CreatedAt             *string               `json:"createdAt,omitempty"`
+	CreatedAtNot          *string               `json:"createdAt_not,omitempty"`
+	CreatedAtIn           []string              `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn        []string              `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt           *string               `json:"createdAt_lt,omitempty"`
+	CreatedAtLte          *string               `json:"createdAt_lte,omitempty"`
+	CreatedAtGt           *string               `json:"createdAt_gt,omitempty"`
+	CreatedAtGte          *string               `json:"createdAt_gte,omitempty"`
+	UpdatedAt             *string               `json:"updatedAt,omitempty"`
+	UpdatedAtNot          *string               `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn           []string              `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn        []string              `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt           *string               `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte          *string               `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt           *string               `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte          *string               `json:"updatedAt_gte,omitempty"`
+	Person                *PersonWhereInput     `json:"person,omitempty"`
+	Username              *string               `json:"username,omitempty"`
+	UsernameNot           *string               `json:"username_not,omitempty"`
+	UsernameIn            []string              `json:"username_in,omitempty"`
+	UsernameNotIn         []string              `json:"username_not_in,omitempty"`
+	UsernameLt            *string               `json:"username_lt,omitempty"`
+	UsernameLte           *string               `json:"username_lte,omitempty"`
+	UsernameGt            *string               `json:"username_gt,omitempty"`
+	UsernameGte           *string               `json:"username_gte,omitempty"`
+	UsernameContains      *string               `json:"username_contains,omitempty"`
+	UsernameNotContains   *string               `json:"username_not_contains,omitempty"`
+	UsernameStartsWith    *string               `json:"username_starts_with,omitempty"`
+	UsernameNotStartsWith *string               `json:"username_not_starts_with,omitempty"`
+	UsernameEndsWith      *string               `json:"username_ends_with,omitempty"`
+	UsernameNotEndsWith   *string               `json:"username_not_ends_with,omitempty"`
+	CardsEvery            *CreditCardWhereInput `json:"cards_every,omitempty"`
+	CardsSome             *CreditCardWhereInput `json:"cards_some,omitempty"`
+	CardsNone             *CreditCardWhereInput `json:"cards_none,omitempty"`
+	TicketsEvery          *TicketWhereInput     `json:"tickets_every,omitempty"`
+	TicketsSome           *TicketWhereInput     `json:"tickets_some,omitempty"`
+	TicketsNone           *TicketWhereInput     `json:"tickets_none,omitempty"`
+	And                   []TravelerWhereInput  `json:"AND,omitempty"`
+	Or                    []TravelerWhereInput  `json:"OR,omitempty"`
+	Not                   []TravelerWhereInput  `json:"NOT,omitempty"`
+}
+
+type PersonReviewsUpsertWithWhereUniqueNestedInput struct {
+	Where  PersonReviewsWhereUniqueInput `json:"where"`
+	Update PersonReviewsUpdateDataInput  `json:"update"`
+	Create PersonReviewsCreateInput      `json:"create"`
 }
 
 type CredentialWhereInput struct {
@@ -3440,1298 +4946,6 @@ type CredentialWhereInput struct {
 	Not                         []CredentialWhereInput `json:"NOT,omitempty"`
 }
 
-type PersonUpdateOneRequiredInput struct {
-	Create  *PersonCreateInput       `json:"create,omitempty"`
-	Update  *PersonUpdateDataInput   `json:"update,omitempty"`
-	Upsert  *PersonUpsertNestedInput `json:"upsert,omitempty"`
-	Connect *PersonWhereUniqueInput  `json:"connect,omitempty"`
-}
-
-type AttractionSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
-	Node                       *AttractionWhereInput              `json:"node,omitempty"`
-	And                        []AttractionSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []AttractionSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []AttractionSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonUpdateDataInput struct {
-	MId            *string                                                    `json:"mID,omitempty"`
-	Name           *string                                                    `json:"name,omitempty"`
-	Photo          *string                                                    `json:"photo,omitempty"`
-	Birthday       *string                                                    `json:"birthday,omitempty"`
-	From           *string                                                    `json:"from,omitempty"`
-	ChannelsPhone  *PhoneUpdateManyInput                                      `json:"channelsPhone,omitempty"`
-	ChannelsEmail  *EmailUpdateManyInput                                      `json:"channelsEmail,omitempty"`
-	IDentification *IDentificationDocumentUpdateOneRequiredWithoutPersonInput `json:"identification,omitempty"`
-	Tags           *PersonUpdatetagsInput                                     `json:"tags,omitempty"`
-	Credentials    *CredentialUpdateManyWithoutOwnerInput                     `json:"credentials,omitempty"`
-}
-
-type CreditCardUpdateManyDataInput struct {
-	CardNumber *string         `json:"cardNumber,omitempty"`
-	CardToken  *string         `json:"cardToken,omitempty"`
-	Type       *CreditCardType `json:"type,omitempty"`
-	LastUsed   *string         `json:"lastUsed,omitempty"`
-}
-
-type PhoneUpdateManyInput struct {
-	Create     []PhoneCreateInput                    `json:"create,omitempty"`
-	DeleteMany []PhoneScalarWhereInput               `json:"deleteMany,omitempty"`
-	UpdateMany []PhoneUpdateManyWithWhereNestedInput `json:"updateMany,omitempty"`
-}
-
-type CreditCardScalarWhereInput struct {
-	ID                      *string                      `json:"id,omitempty"`
-	IDNot                   *string                      `json:"id_not,omitempty"`
-	IDIn                    []string                     `json:"id_in,omitempty"`
-	IDNotIn                 []string                     `json:"id_not_in,omitempty"`
-	IDLt                    *string                      `json:"id_lt,omitempty"`
-	IDLte                   *string                      `json:"id_lte,omitempty"`
-	IDGt                    *string                      `json:"id_gt,omitempty"`
-	IDGte                   *string                      `json:"id_gte,omitempty"`
-	IDContains              *string                      `json:"id_contains,omitempty"`
-	IDNotContains           *string                      `json:"id_not_contains,omitempty"`
-	IDStartsWith            *string                      `json:"id_starts_with,omitempty"`
-	IDNotStartsWith         *string                      `json:"id_not_starts_with,omitempty"`
-	IDEndsWith              *string                      `json:"id_ends_with,omitempty"`
-	IDNotEndsWith           *string                      `json:"id_not_ends_with,omitempty"`
-	CreatedAt               *string                      `json:"createdAt,omitempty"`
-	CreatedAtNot            *string                      `json:"createdAt_not,omitempty"`
-	CreatedAtIn             []string                     `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn          []string                     `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt             *string                      `json:"createdAt_lt,omitempty"`
-	CreatedAtLte            *string                      `json:"createdAt_lte,omitempty"`
-	CreatedAtGt             *string                      `json:"createdAt_gt,omitempty"`
-	CreatedAtGte            *string                      `json:"createdAt_gte,omitempty"`
-	UpdatedAt               *string                      `json:"updatedAt,omitempty"`
-	UpdatedAtNot            *string                      `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn             []string                     `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn          []string                     `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt             *string                      `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte            *string                      `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt             *string                      `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte            *string                      `json:"updatedAt_gte,omitempty"`
-	CardNumber              *string                      `json:"cardNumber,omitempty"`
-	CardNumberNot           *string                      `json:"cardNumber_not,omitempty"`
-	CardNumberIn            []string                     `json:"cardNumber_in,omitempty"`
-	CardNumberNotIn         []string                     `json:"cardNumber_not_in,omitempty"`
-	CardNumberLt            *string                      `json:"cardNumber_lt,omitempty"`
-	CardNumberLte           *string                      `json:"cardNumber_lte,omitempty"`
-	CardNumberGt            *string                      `json:"cardNumber_gt,omitempty"`
-	CardNumberGte           *string                      `json:"cardNumber_gte,omitempty"`
-	CardNumberContains      *string                      `json:"cardNumber_contains,omitempty"`
-	CardNumberNotContains   *string                      `json:"cardNumber_not_contains,omitempty"`
-	CardNumberStartsWith    *string                      `json:"cardNumber_starts_with,omitempty"`
-	CardNumberNotStartsWith *string                      `json:"cardNumber_not_starts_with,omitempty"`
-	CardNumberEndsWith      *string                      `json:"cardNumber_ends_with,omitempty"`
-	CardNumberNotEndsWith   *string                      `json:"cardNumber_not_ends_with,omitempty"`
-	CardToken               *string                      `json:"cardToken,omitempty"`
-	CardTokenNot            *string                      `json:"cardToken_not,omitempty"`
-	CardTokenIn             []string                     `json:"cardToken_in,omitempty"`
-	CardTokenNotIn          []string                     `json:"cardToken_not_in,omitempty"`
-	CardTokenLt             *string                      `json:"cardToken_lt,omitempty"`
-	CardTokenLte            *string                      `json:"cardToken_lte,omitempty"`
-	CardTokenGt             *string                      `json:"cardToken_gt,omitempty"`
-	CardTokenGte            *string                      `json:"cardToken_gte,omitempty"`
-	CardTokenContains       *string                      `json:"cardToken_contains,omitempty"`
-	CardTokenNotContains    *string                      `json:"cardToken_not_contains,omitempty"`
-	CardTokenStartsWith     *string                      `json:"cardToken_starts_with,omitempty"`
-	CardTokenNotStartsWith  *string                      `json:"cardToken_not_starts_with,omitempty"`
-	CardTokenEndsWith       *string                      `json:"cardToken_ends_with,omitempty"`
-	CardTokenNotEndsWith    *string                      `json:"cardToken_not_ends_with,omitempty"`
-	Type                    *CreditCardType              `json:"type,omitempty"`
-	TypeNot                 *CreditCardType              `json:"type_not,omitempty"`
-	TypeIn                  []CreditCardType             `json:"type_in,omitempty"`
-	TypeNotIn               []CreditCardType             `json:"type_not_in,omitempty"`
-	LastUsed                *string                      `json:"lastUsed,omitempty"`
-	LastUsedNot             *string                      `json:"lastUsed_not,omitempty"`
-	LastUsedIn              []string                     `json:"lastUsed_in,omitempty"`
-	LastUsedNotIn           []string                     `json:"lastUsed_not_in,omitempty"`
-	LastUsedLt              *string                      `json:"lastUsed_lt,omitempty"`
-	LastUsedLte             *string                      `json:"lastUsed_lte,omitempty"`
-	LastUsedGt              *string                      `json:"lastUsed_gt,omitempty"`
-	LastUsedGte             *string                      `json:"lastUsed_gte,omitempty"`
-	And                     []CreditCardScalarWhereInput `json:"AND,omitempty"`
-	Or                      []CreditCardScalarWhereInput `json:"OR,omitempty"`
-	Not                     []CreditCardScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type PhoneScalarWhereInput struct {
-	Type                     *CommunicationType      `json:"type,omitempty"`
-	TypeNot                  *CommunicationType      `json:"type_not,omitempty"`
-	TypeIn                   []CommunicationType     `json:"type_in,omitempty"`
-	TypeNotIn                []CommunicationType     `json:"type_not_in,omitempty"`
-	CountryCode              *string                 `json:"countryCode,omitempty"`
-	CountryCodeNot           *string                 `json:"countryCode_not,omitempty"`
-	CountryCodeIn            []string                `json:"countryCode_in,omitempty"`
-	CountryCodeNotIn         []string                `json:"countryCode_not_in,omitempty"`
-	CountryCodeLt            *string                 `json:"countryCode_lt,omitempty"`
-	CountryCodeLte           *string                 `json:"countryCode_lte,omitempty"`
-	CountryCodeGt            *string                 `json:"countryCode_gt,omitempty"`
-	CountryCodeGte           *string                 `json:"countryCode_gte,omitempty"`
-	CountryCodeContains      *string                 `json:"countryCode_contains,omitempty"`
-	CountryCodeNotContains   *string                 `json:"countryCode_not_contains,omitempty"`
-	CountryCodeStartsWith    *string                 `json:"countryCode_starts_with,omitempty"`
-	CountryCodeNotStartsWith *string                 `json:"countryCode_not_starts_with,omitempty"`
-	CountryCodeEndsWith      *string                 `json:"countryCode_ends_with,omitempty"`
-	CountryCodeNotEndsWith   *string                 `json:"countryCode_not_ends_with,omitempty"`
-	Number                   *string                 `json:"number,omitempty"`
-	NumberNot                *string                 `json:"number_not,omitempty"`
-	NumberIn                 []string                `json:"number_in,omitempty"`
-	NumberNotIn              []string                `json:"number_not_in,omitempty"`
-	NumberLt                 *string                 `json:"number_lt,omitempty"`
-	NumberLte                *string                 `json:"number_lte,omitempty"`
-	NumberGt                 *string                 `json:"number_gt,omitempty"`
-	NumberGte                *string                 `json:"number_gte,omitempty"`
-	NumberContains           *string                 `json:"number_contains,omitempty"`
-	NumberNotContains        *string                 `json:"number_not_contains,omitempty"`
-	NumberStartsWith         *string                 `json:"number_starts_with,omitempty"`
-	NumberNotStartsWith      *string                 `json:"number_not_starts_with,omitempty"`
-	NumberEndsWith           *string                 `json:"number_ends_with,omitempty"`
-	NumberNotEndsWith        *string                 `json:"number_not_ends_with,omitempty"`
-	And                      []PhoneScalarWhereInput `json:"AND,omitempty"`
-	Or                       []PhoneScalarWhereInput `json:"OR,omitempty"`
-	Not                      []PhoneScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type CreditCardUpdateWithoutOwnerDataInput struct {
-	CardNumber *string                                     `json:"cardNumber,omitempty"`
-	CardToken  *string                                     `json:"cardToken,omitempty"`
-	Type       *CreditCardType                             `json:"type,omitempty"`
-	LastUsed   *string                                     `json:"lastUsed,omitempty"`
-	Uses       *PaymentEntryUpdateManyWithoutWithCardInput `json:"uses,omitempty"`
-}
-
-type PhoneUpdateManyWithWhereNestedInput struct {
-	Where PhoneScalarWhereInput    `json:"where"`
-	Data  PhoneUpdateManyDataInput `json:"data"`
-}
-
-type CreditCardUpdateWithWhereUniqueWithoutOwnerInput struct {
-	Where CreditCardWhereUniqueInput            `json:"where"`
-	Data  CreditCardUpdateWithoutOwnerDataInput `json:"data"`
-}
-
-type PhoneUpdateManyDataInput struct {
-	Type        *CommunicationType `json:"type,omitempty"`
-	CountryCode *string            `json:"countryCode,omitempty"`
-	Number      *string            `json:"number,omitempty"`
-}
-
-type TravelerUpdateInput struct {
-	Person   *PersonUpdateOneRequiredInput          `json:"person,omitempty"`
-	Username *string                                `json:"username,omitempty"`
-	Cards    *CreditCardUpdateManyWithoutOwnerInput `json:"cards,omitempty"`
-	Tickets  *TicketUpdateManyInput                 `json:"tickets,omitempty"`
-}
-
-type EmailUpdateManyInput struct {
-	Create     []EmailCreateInput                    `json:"create,omitempty"`
-	DeleteMany []EmailScalarWhereInput               `json:"deleteMany,omitempty"`
-	UpdateMany []EmailUpdateManyWithWhereNestedInput `json:"updateMany,omitempty"`
-}
-
-type CreditCardCreateManyWithoutOwnerInput struct {
-	Create  []CreditCardCreateWithoutOwnerInput `json:"create,omitempty"`
-	Connect []CreditCardWhereUniqueInput        `json:"connect,omitempty"`
-}
-
-type EmailScalarWhereInput struct {
-	Type               *CommunicationType      `json:"type,omitempty"`
-	TypeNot            *CommunicationType      `json:"type_not,omitempty"`
-	TypeIn             []CommunicationType     `json:"type_in,omitempty"`
-	TypeNotIn          []CommunicationType     `json:"type_not_in,omitempty"`
-	Value              *string                 `json:"value,omitempty"`
-	ValueNot           *string                 `json:"value_not,omitempty"`
-	ValueIn            []string                `json:"value_in,omitempty"`
-	ValueNotIn         []string                `json:"value_not_in,omitempty"`
-	ValueLt            *string                 `json:"value_lt,omitempty"`
-	ValueLte           *string                 `json:"value_lte,omitempty"`
-	ValueGt            *string                 `json:"value_gt,omitempty"`
-	ValueGte           *string                 `json:"value_gte,omitempty"`
-	ValueContains      *string                 `json:"value_contains,omitempty"`
-	ValueNotContains   *string                 `json:"value_not_contains,omitempty"`
-	ValueStartsWith    *string                 `json:"value_starts_with,omitempty"`
-	ValueNotStartsWith *string                 `json:"value_not_starts_with,omitempty"`
-	ValueEndsWith      *string                 `json:"value_ends_with,omitempty"`
-	ValueNotEndsWith   *string                 `json:"value_not_ends_with,omitempty"`
-	And                []EmailScalarWhereInput `json:"AND,omitempty"`
-	Or                 []EmailScalarWhereInput `json:"OR,omitempty"`
-	Not                []EmailScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type TicketTypeUpdateManyMutationInput struct {
-	CreatorId *string  `json:"creatorID,omitempty"`
-	Cost      *float64 `json:"cost,omitempty"`
-}
-
-type EmailUpdateManyWithWhereNestedInput struct {
-	Where EmailScalarWhereInput    `json:"where"`
-	Data  EmailUpdateManyDataInput `json:"data"`
-}
-
-type TicketUpdateManyMutationInput struct {
-	ExpireAt *string `json:"expireAt,omitempty"`
-}
-
-type EmailUpdateManyDataInput struct {
-	Type   *CommunicationType      `json:"type,omitempty"`
-	Value  *string                 `json:"value,omitempty"`
-	Extras *EmailUpdateextrasInput `json:"extras,omitempty"`
-}
-
-type TicketUpdateInput struct {
-	Type     *TicketTypeUpdateOneRequiredInput   `json:"type,omitempty"`
-	Owner    *PersonUpdateOneRequiredInput       `json:"owner,omitempty"`
-	Receive  *PaymentEntryUpdateOneRequiredInput `json:"receive,omitempty"`
-	ExpireAt *string                             `json:"expireAt,omitempty"`
-	Visited  *AttractionUpdateManyInput          `json:"visited,omitempty"`
-}
-
-type EmailUpdateextrasInput struct {
-	Set []string `json:"set,omitempty"`
-}
-
-type PersonReviewsUpdateManyMutationInput struct {
-	Title         *string `json:"title,omitempty"`
-	Description   *string `json:"description,omitempty"`
-	AproveNumber  *int32  `json:"aproveNumber,omitempty"`
-	DeclineNumber *int32  `json:"declineNumber,omitempty"`
-}
-
-type IDentificationDocumentUpdateOneRequiredWithoutPersonInput struct {
-	Create  *IDentificationDocumentCreateWithoutPersonInput     `json:"create,omitempty"`
-	Update  *IDentificationDocumentUpdateWithoutPersonDataInput `json:"update,omitempty"`
-	Upsert  *IDentificationDocumentUpsertWithoutPersonInput     `json:"upsert,omitempty"`
-	Connect *IDentificationDocumentWhereUniqueInput             `json:"connect,omitempty"`
-}
-
-type PersonUpdateManyMutationInput struct {
-	MId      *string                `json:"mID,omitempty"`
-	Name     *string                `json:"name,omitempty"`
-	Photo    *string                `json:"photo,omitempty"`
-	Birthday *string                `json:"birthday,omitempty"`
-	From     *string                `json:"from,omitempty"`
-	Tags     *PersonUpdatetagsInput `json:"tags,omitempty"`
-}
-
-type IDentificationDocumentUpdateWithoutPersonDataInput struct {
-	Type  *IDentificationType `json:"type,omitempty"`
-	Value *string             `json:"value,omitempty"`
-}
-
-type PaymentEntryUpdateManyMutationInput struct {
-	ExternalId      *string `json:"externalID,omitempty"`
-	ProductId       *string `json:"productID,omitempty"`
-	Product         *string `json:"product,omitempty"`
-	GatewayResponse *string `json:"gatewayResponse,omitempty"`
-	Amount          *int32  `json:"amount,omitempty"`
-	DiscountId      *string `json:"discountID,omitempty"`
-	Discount        *int32  `json:"discount,omitempty"`
-}
-
-type IDentificationDocumentUpsertWithoutPersonInput struct {
-	Update IDentificationDocumentUpdateWithoutPersonDataInput `json:"update"`
-	Create IDentificationDocumentCreateWithoutPersonInput     `json:"create"`
-}
-
-type PhoneWhereInput struct {
-	Type                     *CommunicationType  `json:"type,omitempty"`
-	TypeNot                  *CommunicationType  `json:"type_not,omitempty"`
-	TypeIn                   []CommunicationType `json:"type_in,omitempty"`
-	TypeNotIn                []CommunicationType `json:"type_not_in,omitempty"`
-	CountryCode              *string             `json:"countryCode,omitempty"`
-	CountryCodeNot           *string             `json:"countryCode_not,omitempty"`
-	CountryCodeIn            []string            `json:"countryCode_in,omitempty"`
-	CountryCodeNotIn         []string            `json:"countryCode_not_in,omitempty"`
-	CountryCodeLt            *string             `json:"countryCode_lt,omitempty"`
-	CountryCodeLte           *string             `json:"countryCode_lte,omitempty"`
-	CountryCodeGt            *string             `json:"countryCode_gt,omitempty"`
-	CountryCodeGte           *string             `json:"countryCode_gte,omitempty"`
-	CountryCodeContains      *string             `json:"countryCode_contains,omitempty"`
-	CountryCodeNotContains   *string             `json:"countryCode_not_contains,omitempty"`
-	CountryCodeStartsWith    *string             `json:"countryCode_starts_with,omitempty"`
-	CountryCodeNotStartsWith *string             `json:"countryCode_not_starts_with,omitempty"`
-	CountryCodeEndsWith      *string             `json:"countryCode_ends_with,omitempty"`
-	CountryCodeNotEndsWith   *string             `json:"countryCode_not_ends_with,omitempty"`
-	Number                   *string             `json:"number,omitempty"`
-	NumberNot                *string             `json:"number_not,omitempty"`
-	NumberIn                 []string            `json:"number_in,omitempty"`
-	NumberNotIn              []string            `json:"number_not_in,omitempty"`
-	NumberLt                 *string             `json:"number_lt,omitempty"`
-	NumberLte                *string             `json:"number_lte,omitempty"`
-	NumberGt                 *string             `json:"number_gt,omitempty"`
-	NumberGte                *string             `json:"number_gte,omitempty"`
-	NumberContains           *string             `json:"number_contains,omitempty"`
-	NumberNotContains        *string             `json:"number_not_contains,omitempty"`
-	NumberStartsWith         *string             `json:"number_starts_with,omitempty"`
-	NumberNotStartsWith      *string             `json:"number_not_starts_with,omitempty"`
-	NumberEndsWith           *string             `json:"number_ends_with,omitempty"`
-	NumberNotEndsWith        *string             `json:"number_not_ends_with,omitempty"`
-	And                      []PhoneWhereInput   `json:"AND,omitempty"`
-	Or                       []PhoneWhereInput   `json:"OR,omitempty"`
-	Not                      []PhoneWhereInput   `json:"NOT,omitempty"`
-}
-
-type PersonUpdatetagsInput struct {
-	Set []string `json:"set,omitempty"`
-}
-
-type AttractionUpsertWithWhereUniqueWithoutOwnerInput struct {
-	Where  AttractionWhereUniqueInput            `json:"where"`
-	Update AttractionUpdateWithoutOwnerDataInput `json:"update"`
-	Create AttractionCreateWithoutOwnerInput     `json:"create"`
-}
-
-type CredentialUpdateManyWithoutOwnerInput struct {
-	Create     []CredentialCreateWithoutOwnerInput                `json:"create,omitempty"`
-	Delete     []CredentialWhereUniqueInput                       `json:"delete,omitempty"`
-	Connect    []CredentialWhereUniqueInput                       `json:"connect,omitempty"`
-	Set        []CredentialWhereUniqueInput                       `json:"set,omitempty"`
-	Disconnect []CredentialWhereUniqueInput                       `json:"disconnect,omitempty"`
-	Update     []CredentialUpdateWithWhereUniqueWithoutOwnerInput `json:"update,omitempty"`
-	Upsert     []CredentialUpsertWithWhereUniqueWithoutOwnerInput `json:"upsert,omitempty"`
-	DeleteMany []CredentialScalarWhereInput                       `json:"deleteMany,omitempty"`
-	UpdateMany []CredentialUpdateManyWithWhereNestedInput         `json:"updateMany,omitempty"`
-}
-
-type AttractionUpdateWithWhereUniqueWithoutOwnerInput struct {
-	Where AttractionWhereUniqueInput            `json:"where"`
-	Data  AttractionUpdateWithoutOwnerDataInput `json:"data"`
-}
-
-type CredentialUpdateWithWhereUniqueWithoutOwnerInput struct {
-	Where CredentialWhereUniqueInput            `json:"where"`
-	Data  CredentialUpdateWithoutOwnerDataInput `json:"data"`
-}
-
-type PartnerUpdateInput struct {
-	Person       *PersonUpdateOneRequiredInput          `json:"person,omitempty"`
-	Attractions  *AttractionUpdateManyWithoutOwnerInput `json:"attractions,omitempty"`
-	BrandName    *string                                `json:"brandName,omitempty"`
-	SocialReason *string                                `json:"socialReason,omitempty"`
-	Ruc          *string                                `json:"ruc,omitempty"`
-	Address      *string                                `json:"address,omitempty"`
-	Location     *LocationUpdateOneRequiredInput        `json:"location,omitempty"`
-	Features     *FeatureUpdateManyInput                `json:"features,omitempty"`
-	OpeningHours *OpeningHoursUpdateOneRequiredInput    `json:"openingHours,omitempty"`
-}
-
-type CredentialUpdateWithoutOwnerDataInput struct {
-	DisplayName    *string         `json:"displayName,omitempty"`
-	IsMain         *bool           `json:"isMain,omitempty"`
-	Type           *CredentialType `json:"type,omitempty"`
-	Validated      *bool           `json:"validated,omitempty"`
-	ValidationId   *string         `json:"validationID,omitempty"`
-	Value          *string         `json:"value,omitempty"`
-	RawPassword    *string         `json:"rawPassword,omitempty"`
-	HashedPassword *string         `json:"hashedPassword,omitempty"`
-}
-
-type PartnerWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
-}
-
-type CredentialUpsertWithWhereUniqueWithoutOwnerInput struct {
-	Where  CredentialWhereUniqueInput            `json:"where"`
-	Update CredentialUpdateWithoutOwnerDataInput `json:"update"`
-	Create CredentialCreateWithoutOwnerInput     `json:"create"`
-}
-
-type PartnerCreateInput struct {
-	Person       PersonCreateOneInput                   `json:"person"`
-	Attractions  *AttractionCreateManyWithoutOwnerInput `json:"attractions,omitempty"`
-	BrandName    string                                 `json:"brandName"`
-	SocialReason string                                 `json:"socialReason"`
-	Ruc          string                                 `json:"ruc"`
-	Address      string                                 `json:"address"`
-	Location     LocationCreateOneInput                 `json:"location"`
-	Features     *FeatureCreateManyInput                `json:"features,omitempty"`
-	OpeningHours OpeningHoursCreateOneInput             `json:"openingHours"`
-}
-
-type CredentialScalarWhereInput struct {
-	ID                          *string                      `json:"id,omitempty"`
-	IDNot                       *string                      `json:"id_not,omitempty"`
-	IDIn                        []string                     `json:"id_in,omitempty"`
-	IDNotIn                     []string                     `json:"id_not_in,omitempty"`
-	IDLt                        *string                      `json:"id_lt,omitempty"`
-	IDLte                       *string                      `json:"id_lte,omitempty"`
-	IDGt                        *string                      `json:"id_gt,omitempty"`
-	IDGte                       *string                      `json:"id_gte,omitempty"`
-	IDContains                  *string                      `json:"id_contains,omitempty"`
-	IDNotContains               *string                      `json:"id_not_contains,omitempty"`
-	IDStartsWith                *string                      `json:"id_starts_with,omitempty"`
-	IDNotStartsWith             *string                      `json:"id_not_starts_with,omitempty"`
-	IDEndsWith                  *string                      `json:"id_ends_with,omitempty"`
-	IDNotEndsWith               *string                      `json:"id_not_ends_with,omitempty"`
-	CreatedAt                   *string                      `json:"createdAt,omitempty"`
-	CreatedAtNot                *string                      `json:"createdAt_not,omitempty"`
-	CreatedAtIn                 []string                     `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn              []string                     `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt                 *string                      `json:"createdAt_lt,omitempty"`
-	CreatedAtLte                *string                      `json:"createdAt_lte,omitempty"`
-	CreatedAtGt                 *string                      `json:"createdAt_gt,omitempty"`
-	CreatedAtGte                *string                      `json:"createdAt_gte,omitempty"`
-	UpdatedAt                   *string                      `json:"updatedAt,omitempty"`
-	UpdatedAtNot                *string                      `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn                 []string                     `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn              []string                     `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt                 *string                      `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte                *string                      `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt                 *string                      `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte                *string                      `json:"updatedAt_gte,omitempty"`
-	DisplayName                 *string                      `json:"displayName,omitempty"`
-	DisplayNameNot              *string                      `json:"displayName_not,omitempty"`
-	DisplayNameIn               []string                     `json:"displayName_in,omitempty"`
-	DisplayNameNotIn            []string                     `json:"displayName_not_in,omitempty"`
-	DisplayNameLt               *string                      `json:"displayName_lt,omitempty"`
-	DisplayNameLte              *string                      `json:"displayName_lte,omitempty"`
-	DisplayNameGt               *string                      `json:"displayName_gt,omitempty"`
-	DisplayNameGte              *string                      `json:"displayName_gte,omitempty"`
-	DisplayNameContains         *string                      `json:"displayName_contains,omitempty"`
-	DisplayNameNotContains      *string                      `json:"displayName_not_contains,omitempty"`
-	DisplayNameStartsWith       *string                      `json:"displayName_starts_with,omitempty"`
-	DisplayNameNotStartsWith    *string                      `json:"displayName_not_starts_with,omitempty"`
-	DisplayNameEndsWith         *string                      `json:"displayName_ends_with,omitempty"`
-	DisplayNameNotEndsWith      *string                      `json:"displayName_not_ends_with,omitempty"`
-	IsMain                      *bool                        `json:"isMain,omitempty"`
-	IsMainNot                   *bool                        `json:"isMain_not,omitempty"`
-	Type                        *CredentialType              `json:"type,omitempty"`
-	TypeNot                     *CredentialType              `json:"type_not,omitempty"`
-	TypeIn                      []CredentialType             `json:"type_in,omitempty"`
-	TypeNotIn                   []CredentialType             `json:"type_not_in,omitempty"`
-	Validated                   *bool                        `json:"validated,omitempty"`
-	ValidatedNot                *bool                        `json:"validated_not,omitempty"`
-	ValidationId                *string                      `json:"validationID,omitempty"`
-	ValidationIdNot             *string                      `json:"validationID_not,omitempty"`
-	ValidationIdIn              []string                     `json:"validationID_in,omitempty"`
-	ValidationIdNotIn           []string                     `json:"validationID_not_in,omitempty"`
-	ValidationIdLt              *string                      `json:"validationID_lt,omitempty"`
-	ValidationIdLte             *string                      `json:"validationID_lte,omitempty"`
-	ValidationIdGt              *string                      `json:"validationID_gt,omitempty"`
-	ValidationIdGte             *string                      `json:"validationID_gte,omitempty"`
-	ValidationIdContains        *string                      `json:"validationID_contains,omitempty"`
-	ValidationIdNotContains     *string                      `json:"validationID_not_contains,omitempty"`
-	ValidationIdStartsWith      *string                      `json:"validationID_starts_with,omitempty"`
-	ValidationIdNotStartsWith   *string                      `json:"validationID_not_starts_with,omitempty"`
-	ValidationIdEndsWith        *string                      `json:"validationID_ends_with,omitempty"`
-	ValidationIdNotEndsWith     *string                      `json:"validationID_not_ends_with,omitempty"`
-	Value                       *string                      `json:"value,omitempty"`
-	ValueNot                    *string                      `json:"value_not,omitempty"`
-	ValueIn                     []string                     `json:"value_in,omitempty"`
-	ValueNotIn                  []string                     `json:"value_not_in,omitempty"`
-	ValueLt                     *string                      `json:"value_lt,omitempty"`
-	ValueLte                    *string                      `json:"value_lte,omitempty"`
-	ValueGt                     *string                      `json:"value_gt,omitempty"`
-	ValueGte                    *string                      `json:"value_gte,omitempty"`
-	ValueContains               *string                      `json:"value_contains,omitempty"`
-	ValueNotContains            *string                      `json:"value_not_contains,omitempty"`
-	ValueStartsWith             *string                      `json:"value_starts_with,omitempty"`
-	ValueNotStartsWith          *string                      `json:"value_not_starts_with,omitempty"`
-	ValueEndsWith               *string                      `json:"value_ends_with,omitempty"`
-	ValueNotEndsWith            *string                      `json:"value_not_ends_with,omitempty"`
-	RawPassword                 *string                      `json:"rawPassword,omitempty"`
-	RawPasswordNot              *string                      `json:"rawPassword_not,omitempty"`
-	RawPasswordIn               []string                     `json:"rawPassword_in,omitempty"`
-	RawPasswordNotIn            []string                     `json:"rawPassword_not_in,omitempty"`
-	RawPasswordLt               *string                      `json:"rawPassword_lt,omitempty"`
-	RawPasswordLte              *string                      `json:"rawPassword_lte,omitempty"`
-	RawPasswordGt               *string                      `json:"rawPassword_gt,omitempty"`
-	RawPasswordGte              *string                      `json:"rawPassword_gte,omitempty"`
-	RawPasswordContains         *string                      `json:"rawPassword_contains,omitempty"`
-	RawPasswordNotContains      *string                      `json:"rawPassword_not_contains,omitempty"`
-	RawPasswordStartsWith       *string                      `json:"rawPassword_starts_with,omitempty"`
-	RawPasswordNotStartsWith    *string                      `json:"rawPassword_not_starts_with,omitempty"`
-	RawPasswordEndsWith         *string                      `json:"rawPassword_ends_with,omitempty"`
-	RawPasswordNotEndsWith      *string                      `json:"rawPassword_not_ends_with,omitempty"`
-	HashedPassword              *string                      `json:"hashedPassword,omitempty"`
-	HashedPasswordNot           *string                      `json:"hashedPassword_not,omitempty"`
-	HashedPasswordIn            []string                     `json:"hashedPassword_in,omitempty"`
-	HashedPasswordNotIn         []string                     `json:"hashedPassword_not_in,omitempty"`
-	HashedPasswordLt            *string                      `json:"hashedPassword_lt,omitempty"`
-	HashedPasswordLte           *string                      `json:"hashedPassword_lte,omitempty"`
-	HashedPasswordGt            *string                      `json:"hashedPassword_gt,omitempty"`
-	HashedPasswordGte           *string                      `json:"hashedPassword_gte,omitempty"`
-	HashedPasswordContains      *string                      `json:"hashedPassword_contains,omitempty"`
-	HashedPasswordNotContains   *string                      `json:"hashedPassword_not_contains,omitempty"`
-	HashedPasswordStartsWith    *string                      `json:"hashedPassword_starts_with,omitempty"`
-	HashedPasswordNotStartsWith *string                      `json:"hashedPassword_not_starts_with,omitempty"`
-	HashedPasswordEndsWith      *string                      `json:"hashedPassword_ends_with,omitempty"`
-	HashedPasswordNotEndsWith   *string                      `json:"hashedPassword_not_ends_with,omitempty"`
-	And                         []CredentialScalarWhereInput `json:"AND,omitempty"`
-	Or                          []CredentialScalarWhereInput `json:"OR,omitempty"`
-	Not                         []CredentialScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type OpeningHoursUpdateManyMutationInput struct {
-	From *string `json:"from,omitempty"`
-	To   *string `json:"to,omitempty"`
-}
-
-type CredentialUpdateManyWithWhereNestedInput struct {
-	Where CredentialScalarWhereInput    `json:"where"`
-	Data  CredentialUpdateManyDataInput `json:"data"`
-}
-
-type LocationUpdateManyMutationInput struct {
-	Longitude   *float64 `json:"longitude,omitempty"`
-	Latitude    *float64 `json:"latitude,omitempty"`
-	Description *string  `json:"description,omitempty"`
-}
-
-type CredentialUpdateManyDataInput struct {
-	DisplayName    *string         `json:"displayName,omitempty"`
-	IsMain         *bool           `json:"isMain,omitempty"`
-	Type           *CredentialType `json:"type,omitempty"`
-	Validated      *bool           `json:"validated,omitempty"`
-	ValidationId   *string         `json:"validationID,omitempty"`
-	Value          *string         `json:"value,omitempty"`
-	RawPassword    *string         `json:"rawPassword,omitempty"`
-	HashedPassword *string         `json:"hashedPassword,omitempty"`
-}
-
-type PersonUpsertWithoutIdentificationInput struct {
-	Update PersonUpdateWithoutIdentificationDataInput `json:"update"`
-	Create PersonCreateWithoutIdentificationInput     `json:"create"`
-}
-
-type PersonUpsertNestedInput struct {
-	Update PersonUpdateDataInput `json:"update"`
-	Create PersonCreateInput     `json:"create"`
-}
-
-type PersonUpdateWithoutIdentificationDataInput struct {
-	MId           *string                                `json:"mID,omitempty"`
-	Name          *string                                `json:"name,omitempty"`
-	Photo         *string                                `json:"photo,omitempty"`
-	Birthday      *string                                `json:"birthday,omitempty"`
-	From          *string                                `json:"from,omitempty"`
-	ChannelsPhone *PhoneUpdateManyInput                  `json:"channelsPhone,omitempty"`
-	ChannelsEmail *EmailUpdateManyInput                  `json:"channelsEmail,omitempty"`
-	Tags          *PersonUpdatetagsInput                 `json:"tags,omitempty"`
-	Credentials   *CredentialUpdateManyWithoutOwnerInput `json:"credentials,omitempty"`
-}
-
-type LocationUpdateOneRequiredInput struct {
-	Create *LocationCreateInput       `json:"create,omitempty"`
-	Update *LocationUpdateDataInput   `json:"update,omitempty"`
-	Upsert *LocationUpsertNestedInput `json:"upsert,omitempty"`
-}
-
-type IDentificationDocumentUpdateInput struct {
-	Person *PersonUpdateOneRequiredWithoutIdentificationInput `json:"person,omitempty"`
-	Type   *IDentificationType                                `json:"type,omitempty"`
-	Value  *string                                            `json:"value,omitempty"`
-}
-
-type LocationUpdateDataInput struct {
-	Longitude   *float64 `json:"longitude,omitempty"`
-	Latitude    *float64 `json:"latitude,omitempty"`
-	Description *string  `json:"description,omitempty"`
-}
-
-type PersonCreateWithoutIdentificationInput struct {
-	MId           *string                                `json:"mID,omitempty"`
-	Name          string                                 `json:"name"`
-	Photo         *string                                `json:"photo,omitempty"`
-	Birthday      string                                 `json:"birthday"`
-	From          *string                                `json:"from,omitempty"`
-	ChannelsPhone *PhoneCreateManyInput                  `json:"channelsPhone,omitempty"`
-	ChannelsEmail *EmailCreateManyInput                  `json:"channelsEmail,omitempty"`
-	Tags          *PersonCreatetagsInput                 `json:"tags,omitempty"`
-	Credentials   *CredentialCreateManyWithoutOwnerInput `json:"credentials,omitempty"`
-}
-
-type TicketScalarWhereInput struct {
-	ID              *string                  `json:"id,omitempty"`
-	IDNot           *string                  `json:"id_not,omitempty"`
-	IDIn            []string                 `json:"id_in,omitempty"`
-	IDNotIn         []string                 `json:"id_not_in,omitempty"`
-	IDLt            *string                  `json:"id_lt,omitempty"`
-	IDLte           *string                  `json:"id_lte,omitempty"`
-	IDGt            *string                  `json:"id_gt,omitempty"`
-	IDGte           *string                  `json:"id_gte,omitempty"`
-	IDContains      *string                  `json:"id_contains,omitempty"`
-	IDNotContains   *string                  `json:"id_not_contains,omitempty"`
-	IDStartsWith    *string                  `json:"id_starts_with,omitempty"`
-	IDNotStartsWith *string                  `json:"id_not_starts_with,omitempty"`
-	IDEndsWith      *string                  `json:"id_ends_with,omitempty"`
-	IDNotEndsWith   *string                  `json:"id_not_ends_with,omitempty"`
-	CreatedAt       *string                  `json:"createdAt,omitempty"`
-	CreatedAtNot    *string                  `json:"createdAt_not,omitempty"`
-	CreatedAtIn     []string                 `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn  []string                 `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt     *string                  `json:"createdAt_lt,omitempty"`
-	CreatedAtLte    *string                  `json:"createdAt_lte,omitempty"`
-	CreatedAtGt     *string                  `json:"createdAt_gt,omitempty"`
-	CreatedAtGte    *string                  `json:"createdAt_gte,omitempty"`
-	UpdatedAt       *string                  `json:"updatedAt,omitempty"`
-	UpdatedAtNot    *string                  `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn     []string                 `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn  []string                 `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt     *string                  `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte    *string                  `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt     *string                  `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte    *string                  `json:"updatedAt_gte,omitempty"`
-	ExpireAt        *string                  `json:"expireAt,omitempty"`
-	ExpireAtNot     *string                  `json:"expireAt_not,omitempty"`
-	ExpireAtIn      []string                 `json:"expireAt_in,omitempty"`
-	ExpireAtNotIn   []string                 `json:"expireAt_not_in,omitempty"`
-	ExpireAtLt      *string                  `json:"expireAt_lt,omitempty"`
-	ExpireAtLte     *string                  `json:"expireAt_lte,omitempty"`
-	ExpireAtGt      *string                  `json:"expireAt_gt,omitempty"`
-	ExpireAtGte     *string                  `json:"expireAt_gte,omitempty"`
-	And             []TicketScalarWhereInput `json:"AND,omitempty"`
-	Or              []TicketScalarWhereInput `json:"OR,omitempty"`
-	Not             []TicketScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type IDentificationDocumentCreateInput struct {
-	Person PersonCreateOneWithoutIdentificationInput `json:"person"`
-	Type   IDentificationType                        `json:"type"`
-	Value  string                                    `json:"value"`
-}
-
-type FeatureUpdateManyInput struct {
-	Create     []FeatureCreateInput                    `json:"create,omitempty"`
-	DeleteMany []FeatureScalarWhereInput               `json:"deleteMany,omitempty"`
-	UpdateMany []FeatureUpdateManyWithWhereNestedInput `json:"updateMany,omitempty"`
-}
-
-type EmailUpdateManyMutationInput struct {
-	Type   *CommunicationType      `json:"type,omitempty"`
-	Value  *string                 `json:"value,omitempty"`
-	Extras *EmailUpdateextrasInput `json:"extras,omitempty"`
-}
-
-type FeatureScalarWhereInput struct {
-	Name               *string                   `json:"name,omitempty"`
-	NameNot            *string                   `json:"name_not,omitempty"`
-	NameIn             []string                  `json:"name_in,omitempty"`
-	NameNotIn          []string                  `json:"name_not_in,omitempty"`
-	NameLt             *string                   `json:"name_lt,omitempty"`
-	NameLte            *string                   `json:"name_lte,omitempty"`
-	NameGt             *string                   `json:"name_gt,omitempty"`
-	NameGte            *string                   `json:"name_gte,omitempty"`
-	NameContains       *string                   `json:"name_contains,omitempty"`
-	NameNotContains    *string                   `json:"name_not_contains,omitempty"`
-	NameStartsWith     *string                   `json:"name_starts_with,omitempty"`
-	NameNotStartsWith  *string                   `json:"name_not_starts_with,omitempty"`
-	NameEndsWith       *string                   `json:"name_ends_with,omitempty"`
-	NameNotEndsWith    *string                   `json:"name_not_ends_with,omitempty"`
-	Image              *string                   `json:"image,omitempty"`
-	ImageNot           *string                   `json:"image_not,omitempty"`
-	ImageIn            []string                  `json:"image_in,omitempty"`
-	ImageNotIn         []string                  `json:"image_not_in,omitempty"`
-	ImageLt            *string                   `json:"image_lt,omitempty"`
-	ImageLte           *string                   `json:"image_lte,omitempty"`
-	ImageGt            *string                   `json:"image_gt,omitempty"`
-	ImageGte           *string                   `json:"image_gte,omitempty"`
-	ImageContains      *string                   `json:"image_contains,omitempty"`
-	ImageNotContains   *string                   `json:"image_not_contains,omitempty"`
-	ImageStartsWith    *string                   `json:"image_starts_with,omitempty"`
-	ImageNotStartsWith *string                   `json:"image_not_starts_with,omitempty"`
-	ImageEndsWith      *string                   `json:"image_ends_with,omitempty"`
-	ImageNotEndsWith   *string                   `json:"image_not_ends_with,omitempty"`
-	And                []FeatureScalarWhereInput `json:"AND,omitempty"`
-	Or                 []FeatureScalarWhereInput `json:"OR,omitempty"`
-	Not                []FeatureScalarWhereInput `json:"NOT,omitempty"`
-}
-
-type TicketWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
-}
-
-type FeatureUpdateManyWithWhereNestedInput struct {
-	Where FeatureScalarWhereInput    `json:"where"`
-	Data  FeatureUpdateManyDataInput `json:"data"`
-}
-
-type PaymentEntryUpdateManyDataInput struct {
-	ExternalId      *string `json:"externalID,omitempty"`
-	ProductId       *string `json:"productID,omitempty"`
-	Product         *string `json:"product,omitempty"`
-	GatewayResponse *string `json:"gatewayResponse,omitempty"`
-	Amount          *int32  `json:"amount,omitempty"`
-	DiscountId      *string `json:"discountID,omitempty"`
-	Discount        *int32  `json:"discount,omitempty"`
-}
-
-type FeatureUpdateManyDataInput struct {
-	Name  *string `json:"name,omitempty"`
-	Image *string `json:"image,omitempty"`
-}
-
-type TicketTypeWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
-}
-
-type OpeningHoursUpdateOneRequiredInput struct {
-	Create *OpeningHoursCreateInput       `json:"create,omitempty"`
-	Update *OpeningHoursUpdateDataInput   `json:"update,omitempty"`
-	Upsert *OpeningHoursUpsertNestedInput `json:"upsert,omitempty"`
-}
-
-type PaymentEntryUpsertWithWhereUniqueWithoutWithCardInput struct {
-	Where  PaymentEntryWhereUniqueInput               `json:"where"`
-	Update PaymentEntryUpdateWithoutWithCardDataInput `json:"update"`
-	Create PaymentEntryCreateWithoutWithCardInput     `json:"create"`
-}
-
-type OpeningHoursUpdateDataInput struct {
-	From *string `json:"from,omitempty"`
-	To   *string `json:"to,omitempty"`
-}
-
-type PaymentEntryUpdateWithWhereUniqueWithoutWithCardInput struct {
-	Where PaymentEntryWhereUniqueInput               `json:"where"`
-	Data  PaymentEntryUpdateWithoutWithCardDataInput `json:"data"`
-}
-
-type OpeningHoursUpsertNestedInput struct {
-	Update OpeningHoursUpdateDataInput `json:"update"`
-	Create OpeningHoursCreateInput     `json:"create"`
-}
-
-type PaymentEntryUpdateManyWithoutWithCardInput struct {
-	Create     []PaymentEntryCreateWithoutWithCardInput                `json:"create,omitempty"`
-	Delete     []PaymentEntryWhereUniqueInput                          `json:"delete,omitempty"`
-	Connect    []PaymentEntryWhereUniqueInput                          `json:"connect,omitempty"`
-	Set        []PaymentEntryWhereUniqueInput                          `json:"set,omitempty"`
-	Disconnect []PaymentEntryWhereUniqueInput                          `json:"disconnect,omitempty"`
-	Update     []PaymentEntryUpdateWithWhereUniqueWithoutWithCardInput `json:"update,omitempty"`
-	Upsert     []PaymentEntryUpsertWithWhereUniqueWithoutWithCardInput `json:"upsert,omitempty"`
-	DeleteMany []PaymentEntryScalarWhereInput                          `json:"deleteMany,omitempty"`
-	UpdateMany []PaymentEntryUpdateManyWithWhereNestedInput            `json:"updateMany,omitempty"`
-}
-
-type PartnerUpsertWithoutAttractionsInput struct {
-	Update PartnerUpdateWithoutAttractionsDataInput `json:"update"`
-	Create PartnerCreateWithoutAttractionsInput     `json:"create"`
-}
-
-type TicketUpdateManyDataInput struct {
-	ExpireAt *string `json:"expireAt,omitempty"`
-}
-
-type OverviewUpdateOneRequiredInput struct {
-	Create *OverviewCreateInput       `json:"create,omitempty"`
-	Update *OverviewUpdateDataInput   `json:"update,omitempty"`
-	Upsert *OverviewUpsertNestedInput `json:"upsert,omitempty"`
-}
-
-type PartnerCreateOneWithoutAttractionsInput struct {
-	Create  *PartnerCreateWithoutAttractionsInput `json:"create,omitempty"`
-	Connect *PartnerWhereUniqueInput              `json:"connect,omitempty"`
-}
-
-type OverviewUpdateDataInput struct {
-	Name        *string `json:"name,omitempty"`
-	Description *string `json:"description,omitempty"`
-}
-
-type PersonCreateOneInput struct {
-	Create  *PersonCreateInput      `json:"create,omitempty"`
-	Connect *PersonWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type OverviewUpsertNestedInput struct {
-	Update OverviewUpdateDataInput `json:"update"`
-	Create OverviewCreateInput     `json:"create"`
-}
-
-type PhoneCreateManyInput struct {
-	Create []PhoneCreateInput `json:"create,omitempty"`
-}
-
-type PersonUpdateManyInput struct {
-	Create     []PersonCreateInput                      `json:"create,omitempty"`
-	Update     []PersonUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
-	Upsert     []PersonUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
-	Delete     []PersonWhereUniqueInput                 `json:"delete,omitempty"`
-	Connect    []PersonWhereUniqueInput                 `json:"connect,omitempty"`
-	Set        []PersonWhereUniqueInput                 `json:"set,omitempty"`
-	Disconnect []PersonWhereUniqueInput                 `json:"disconnect,omitempty"`
-	DeleteMany []PersonScalarWhereInput                 `json:"deleteMany,omitempty"`
-	UpdateMany []PersonUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
-}
-
-type EmailCreateManyInput struct {
-	Create []EmailCreateInput `json:"create,omitempty"`
-}
-
-type TicketUpsertWithWhereUniqueNestedInput struct {
-	Where  TicketWhereUniqueInput `json:"where"`
-	Update TicketUpdateDataInput  `json:"update"`
-	Create TicketCreateInput      `json:"create"`
-}
-
-type EmailCreateextrasInput struct {
-	Set []string `json:"set,omitempty"`
-}
-
-type OpeningHoursWhereInput struct {
-	From      *string                  `json:"from,omitempty"`
-	FromNot   *string                  `json:"from_not,omitempty"`
-	FromIn    []string                 `json:"from_in,omitempty"`
-	FromNotIn []string                 `json:"from_not_in,omitempty"`
-	FromLt    *string                  `json:"from_lt,omitempty"`
-	FromLte   *string                  `json:"from_lte,omitempty"`
-	FromGt    *string                  `json:"from_gt,omitempty"`
-	FromGte   *string                  `json:"from_gte,omitempty"`
-	To        *string                  `json:"to,omitempty"`
-	ToNot     *string                  `json:"to_not,omitempty"`
-	ToIn      []string                 `json:"to_in,omitempty"`
-	ToNotIn   []string                 `json:"to_not_in,omitempty"`
-	ToLt      *string                  `json:"to_lt,omitempty"`
-	ToLte     *string                  `json:"to_lte,omitempty"`
-	ToGt      *string                  `json:"to_gt,omitempty"`
-	ToGte     *string                  `json:"to_gte,omitempty"`
-	And       []OpeningHoursWhereInput `json:"AND,omitempty"`
-	Or        []OpeningHoursWhereInput `json:"OR,omitempty"`
-	Not       []OpeningHoursWhereInput `json:"NOT,omitempty"`
-}
-
-type IDentificationDocumentCreateWithoutPersonInput struct {
-	Type  IDentificationType `json:"type"`
-	Value string             `json:"value"`
-}
-
-type PersonReviewsWhereInput struct {
-	ID                       *string                   `json:"id,omitempty"`
-	IDNot                    *string                   `json:"id_not,omitempty"`
-	IDIn                     []string                  `json:"id_in,omitempty"`
-	IDNotIn                  []string                  `json:"id_not_in,omitempty"`
-	IDLt                     *string                   `json:"id_lt,omitempty"`
-	IDLte                    *string                   `json:"id_lte,omitempty"`
-	IDGt                     *string                   `json:"id_gt,omitempty"`
-	IDGte                    *string                   `json:"id_gte,omitempty"`
-	IDContains               *string                   `json:"id_contains,omitempty"`
-	IDNotContains            *string                   `json:"id_not_contains,omitempty"`
-	IDStartsWith             *string                   `json:"id_starts_with,omitempty"`
-	IDNotStartsWith          *string                   `json:"id_not_starts_with,omitempty"`
-	IDEndsWith               *string                   `json:"id_ends_with,omitempty"`
-	IDNotEndsWith            *string                   `json:"id_not_ends_with,omitempty"`
-	CreatedAt                *string                   `json:"createdAt,omitempty"`
-	CreatedAtNot             *string                   `json:"createdAt_not,omitempty"`
-	CreatedAtIn              []string                  `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn           []string                  `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt              *string                   `json:"createdAt_lt,omitempty"`
-	CreatedAtLte             *string                   `json:"createdAt_lte,omitempty"`
-	CreatedAtGt              *string                   `json:"createdAt_gt,omitempty"`
-	CreatedAtGte             *string                   `json:"createdAt_gte,omitempty"`
-	UpdatedAt                *string                   `json:"updatedAt,omitempty"`
-	UpdatedAtNot             *string                   `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn              []string                  `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn           []string                  `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt              *string                   `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte             *string                   `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt              *string                   `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte             *string                   `json:"updatedAt_gte,omitempty"`
-	Person                   *PersonWhereInput         `json:"person,omitempty"`
-	Title                    *string                   `json:"title,omitempty"`
-	TitleNot                 *string                   `json:"title_not,omitempty"`
-	TitleIn                  []string                  `json:"title_in,omitempty"`
-	TitleNotIn               []string                  `json:"title_not_in,omitempty"`
-	TitleLt                  *string                   `json:"title_lt,omitempty"`
-	TitleLte                 *string                   `json:"title_lte,omitempty"`
-	TitleGt                  *string                   `json:"title_gt,omitempty"`
-	TitleGte                 *string                   `json:"title_gte,omitempty"`
-	TitleContains            *string                   `json:"title_contains,omitempty"`
-	TitleNotContains         *string                   `json:"title_not_contains,omitempty"`
-	TitleStartsWith          *string                   `json:"title_starts_with,omitempty"`
-	TitleNotStartsWith       *string                   `json:"title_not_starts_with,omitempty"`
-	TitleEndsWith            *string                   `json:"title_ends_with,omitempty"`
-	TitleNotEndsWith         *string                   `json:"title_not_ends_with,omitempty"`
-	Description              *string                   `json:"description,omitempty"`
-	DescriptionNot           *string                   `json:"description_not,omitempty"`
-	DescriptionIn            []string                  `json:"description_in,omitempty"`
-	DescriptionNotIn         []string                  `json:"description_not_in,omitempty"`
-	DescriptionLt            *string                   `json:"description_lt,omitempty"`
-	DescriptionLte           *string                   `json:"description_lte,omitempty"`
-	DescriptionGt            *string                   `json:"description_gt,omitempty"`
-	DescriptionGte           *string                   `json:"description_gte,omitempty"`
-	DescriptionContains      *string                   `json:"description_contains,omitempty"`
-	DescriptionNotContains   *string                   `json:"description_not_contains,omitempty"`
-	DescriptionStartsWith    *string                   `json:"description_starts_with,omitempty"`
-	DescriptionNotStartsWith *string                   `json:"description_not_starts_with,omitempty"`
-	DescriptionEndsWith      *string                   `json:"description_ends_with,omitempty"`
-	DescriptionNotEndsWith   *string                   `json:"description_not_ends_with,omitempty"`
-	AproveNumber             *int32                    `json:"aproveNumber,omitempty"`
-	AproveNumberNot          *int32                    `json:"aproveNumber_not,omitempty"`
-	AproveNumberIn           []int32                   `json:"aproveNumber_in,omitempty"`
-	AproveNumberNotIn        []int32                   `json:"aproveNumber_not_in,omitempty"`
-	AproveNumberLt           *int32                    `json:"aproveNumber_lt,omitempty"`
-	AproveNumberLte          *int32                    `json:"aproveNumber_lte,omitempty"`
-	AproveNumberGt           *int32                    `json:"aproveNumber_gt,omitempty"`
-	AproveNumberGte          *int32                    `json:"aproveNumber_gte,omitempty"`
-	DeclineNumber            *int32                    `json:"declineNumber,omitempty"`
-	DeclineNumberNot         *int32                    `json:"declineNumber_not,omitempty"`
-	DeclineNumberIn          []int32                   `json:"declineNumber_in,omitempty"`
-	DeclineNumberNotIn       []int32                   `json:"declineNumber_not_in,omitempty"`
-	DeclineNumberLt          *int32                    `json:"declineNumber_lt,omitempty"`
-	DeclineNumberLte         *int32                    `json:"declineNumber_lte,omitempty"`
-	DeclineNumberGt          *int32                    `json:"declineNumber_gt,omitempty"`
-	DeclineNumberGte         *int32                    `json:"declineNumber_gte,omitempty"`
-	CommentsEvery            *PersonReviewsWhereInput  `json:"comments_every,omitempty"`
-	CommentsSome             *PersonReviewsWhereInput  `json:"comments_some,omitempty"`
-	CommentsNone             *PersonReviewsWhereInput  `json:"comments_none,omitempty"`
-	And                      []PersonReviewsWhereInput `json:"AND,omitempty"`
-	Or                       []PersonReviewsWhereInput `json:"OR,omitempty"`
-	Not                      []PersonReviewsWhereInput `json:"NOT,omitempty"`
-}
-
-type CredentialCreateManyWithoutOwnerInput struct {
-	Create  []CredentialCreateWithoutOwnerInput `json:"create,omitempty"`
-	Connect []CredentialWhereUniqueInput        `json:"connect,omitempty"`
-}
-
-type PartnerWhereInput struct {
-	ID                        *string                 `json:"id,omitempty"`
-	IDNot                     *string                 `json:"id_not,omitempty"`
-	IDIn                      []string                `json:"id_in,omitempty"`
-	IDNotIn                   []string                `json:"id_not_in,omitempty"`
-	IDLt                      *string                 `json:"id_lt,omitempty"`
-	IDLte                     *string                 `json:"id_lte,omitempty"`
-	IDGt                      *string                 `json:"id_gt,omitempty"`
-	IDGte                     *string                 `json:"id_gte,omitempty"`
-	IDContains                *string                 `json:"id_contains,omitempty"`
-	IDNotContains             *string                 `json:"id_not_contains,omitempty"`
-	IDStartsWith              *string                 `json:"id_starts_with,omitempty"`
-	IDNotStartsWith           *string                 `json:"id_not_starts_with,omitempty"`
-	IDEndsWith                *string                 `json:"id_ends_with,omitempty"`
-	IDNotEndsWith             *string                 `json:"id_not_ends_with,omitempty"`
-	CreatedAt                 *string                 `json:"createdAt,omitempty"`
-	CreatedAtNot              *string                 `json:"createdAt_not,omitempty"`
-	CreatedAtIn               []string                `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn            []string                `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt               *string                 `json:"createdAt_lt,omitempty"`
-	CreatedAtLte              *string                 `json:"createdAt_lte,omitempty"`
-	CreatedAtGt               *string                 `json:"createdAt_gt,omitempty"`
-	CreatedAtGte              *string                 `json:"createdAt_gte,omitempty"`
-	UpdatedAt                 *string                 `json:"updatedAt,omitempty"`
-	UpdatedAtNot              *string                 `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn               []string                `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn            []string                `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt               *string                 `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte              *string                 `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt               *string                 `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte              *string                 `json:"updatedAt_gte,omitempty"`
-	Person                    *PersonWhereInput       `json:"person,omitempty"`
-	AttractionsEvery          *AttractionWhereInput   `json:"attractions_every,omitempty"`
-	AttractionsSome           *AttractionWhereInput   `json:"attractions_some,omitempty"`
-	AttractionsNone           *AttractionWhereInput   `json:"attractions_none,omitempty"`
-	BrandName                 *string                 `json:"brandName,omitempty"`
-	BrandNameNot              *string                 `json:"brandName_not,omitempty"`
-	BrandNameIn               []string                `json:"brandName_in,omitempty"`
-	BrandNameNotIn            []string                `json:"brandName_not_in,omitempty"`
-	BrandNameLt               *string                 `json:"brandName_lt,omitempty"`
-	BrandNameLte              *string                 `json:"brandName_lte,omitempty"`
-	BrandNameGt               *string                 `json:"brandName_gt,omitempty"`
-	BrandNameGte              *string                 `json:"brandName_gte,omitempty"`
-	BrandNameContains         *string                 `json:"brandName_contains,omitempty"`
-	BrandNameNotContains      *string                 `json:"brandName_not_contains,omitempty"`
-	BrandNameStartsWith       *string                 `json:"brandName_starts_with,omitempty"`
-	BrandNameNotStartsWith    *string                 `json:"brandName_not_starts_with,omitempty"`
-	BrandNameEndsWith         *string                 `json:"brandName_ends_with,omitempty"`
-	BrandNameNotEndsWith      *string                 `json:"brandName_not_ends_with,omitempty"`
-	SocialReason              *string                 `json:"socialReason,omitempty"`
-	SocialReasonNot           *string                 `json:"socialReason_not,omitempty"`
-	SocialReasonIn            []string                `json:"socialReason_in,omitempty"`
-	SocialReasonNotIn         []string                `json:"socialReason_not_in,omitempty"`
-	SocialReasonLt            *string                 `json:"socialReason_lt,omitempty"`
-	SocialReasonLte           *string                 `json:"socialReason_lte,omitempty"`
-	SocialReasonGt            *string                 `json:"socialReason_gt,omitempty"`
-	SocialReasonGte           *string                 `json:"socialReason_gte,omitempty"`
-	SocialReasonContains      *string                 `json:"socialReason_contains,omitempty"`
-	SocialReasonNotContains   *string                 `json:"socialReason_not_contains,omitempty"`
-	SocialReasonStartsWith    *string                 `json:"socialReason_starts_with,omitempty"`
-	SocialReasonNotStartsWith *string                 `json:"socialReason_not_starts_with,omitempty"`
-	SocialReasonEndsWith      *string                 `json:"socialReason_ends_with,omitempty"`
-	SocialReasonNotEndsWith   *string                 `json:"socialReason_not_ends_with,omitempty"`
-	Ruc                       *string                 `json:"ruc,omitempty"`
-	RucNot                    *string                 `json:"ruc_not,omitempty"`
-	RucIn                     []string                `json:"ruc_in,omitempty"`
-	RucNotIn                  []string                `json:"ruc_not_in,omitempty"`
-	RucLt                     *string                 `json:"ruc_lt,omitempty"`
-	RucLte                    *string                 `json:"ruc_lte,omitempty"`
-	RucGt                     *string                 `json:"ruc_gt,omitempty"`
-	RucGte                    *string                 `json:"ruc_gte,omitempty"`
-	RucContains               *string                 `json:"ruc_contains,omitempty"`
-	RucNotContains            *string                 `json:"ruc_not_contains,omitempty"`
-	RucStartsWith             *string                 `json:"ruc_starts_with,omitempty"`
-	RucNotStartsWith          *string                 `json:"ruc_not_starts_with,omitempty"`
-	RucEndsWith               *string                 `json:"ruc_ends_with,omitempty"`
-	RucNotEndsWith            *string                 `json:"ruc_not_ends_with,omitempty"`
-	Address                   *string                 `json:"address,omitempty"`
-	AddressNot                *string                 `json:"address_not,omitempty"`
-	AddressIn                 []string                `json:"address_in,omitempty"`
-	AddressNotIn              []string                `json:"address_not_in,omitempty"`
-	AddressLt                 *string                 `json:"address_lt,omitempty"`
-	AddressLte                *string                 `json:"address_lte,omitempty"`
-	AddressGt                 *string                 `json:"address_gt,omitempty"`
-	AddressGte                *string                 `json:"address_gte,omitempty"`
-	AddressContains           *string                 `json:"address_contains,omitempty"`
-	AddressNotContains        *string                 `json:"address_not_contains,omitempty"`
-	AddressStartsWith         *string                 `json:"address_starts_with,omitempty"`
-	AddressNotStartsWith      *string                 `json:"address_not_starts_with,omitempty"`
-	AddressEndsWith           *string                 `json:"address_ends_with,omitempty"`
-	AddressNotEndsWith        *string                 `json:"address_not_ends_with,omitempty"`
-	Location                  *LocationWhereInput     `json:"location,omitempty"`
-	FeaturesEvery             *FeatureWhereInput      `json:"features_every,omitempty"`
-	FeaturesSome              *FeatureWhereInput      `json:"features_some,omitempty"`
-	FeaturesNone              *FeatureWhereInput      `json:"features_none,omitempty"`
-	OpeningHours              *OpeningHoursWhereInput `json:"openingHours,omitempty"`
-	And                       []PartnerWhereInput     `json:"AND,omitempty"`
-	Or                        []PartnerWhereInput     `json:"OR,omitempty"`
-	Not                       []PartnerWhereInput     `json:"NOT,omitempty"`
-}
-
-type LocationCreateOneInput struct {
-	Create *LocationCreateInput `json:"create,omitempty"`
-}
-
-type AttractionWhereInput struct {
-	ID                   *string                  `json:"id,omitempty"`
-	IDNot                *string                  `json:"id_not,omitempty"`
-	IDIn                 []string                 `json:"id_in,omitempty"`
-	IDNotIn              []string                 `json:"id_not_in,omitempty"`
-	IDLt                 *string                  `json:"id_lt,omitempty"`
-	IDLte                *string                  `json:"id_lte,omitempty"`
-	IDGt                 *string                  `json:"id_gt,omitempty"`
-	IDGte                *string                  `json:"id_gte,omitempty"`
-	IDContains           *string                  `json:"id_contains,omitempty"`
-	IDNotContains        *string                  `json:"id_not_contains,omitempty"`
-	IDStartsWith         *string                  `json:"id_starts_with,omitempty"`
-	IDNotStartsWith      *string                  `json:"id_not_starts_with,omitempty"`
-	IDEndsWith           *string                  `json:"id_ends_with,omitempty"`
-	IDNotEndsWith        *string                  `json:"id_not_ends_with,omitempty"`
-	CreatedAt            *string                  `json:"createdAt,omitempty"`
-	CreatedAtNot         *string                  `json:"createdAt_not,omitempty"`
-	CreatedAtIn          []string                 `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn       []string                 `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt          *string                  `json:"createdAt_lt,omitempty"`
-	CreatedAtLte         *string                  `json:"createdAt_lte,omitempty"`
-	CreatedAtGt          *string                  `json:"createdAt_gt,omitempty"`
-	CreatedAtGte         *string                  `json:"createdAt_gte,omitempty"`
-	UpdatedAt            *string                  `json:"updatedAt,omitempty"`
-	UpdatedAtNot         *string                  `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn          []string                 `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn       []string                 `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt          *string                  `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte         *string                  `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt          *string                  `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte         *string                  `json:"updatedAt_gte,omitempty"`
-	Owner                *PartnerWhereInput       `json:"owner,omitempty"`
-	Overview             *OverviewWhereInput      `json:"overview,omitempty"`
-	MaxUses              *int32                   `json:"maxUses,omitempty"`
-	MaxUsesNot           *int32                   `json:"maxUses_not,omitempty"`
-	MaxUsesIn            []int32                  `json:"maxUses_in,omitempty"`
-	MaxUsesNotIn         []int32                  `json:"maxUses_not_in,omitempty"`
-	MaxUsesLt            *int32                   `json:"maxUses_lt,omitempty"`
-	MaxUsesLte           *int32                   `json:"maxUses_lte,omitempty"`
-	MaxUsesGt            *int32                   `json:"maxUses_gt,omitempty"`
-	MaxUsesGte           *int32                   `json:"maxUses_gte,omitempty"`
-	Address              *string                  `json:"address,omitempty"`
-	AddressNot           *string                  `json:"address_not,omitempty"`
-	AddressIn            []string                 `json:"address_in,omitempty"`
-	AddressNotIn         []string                 `json:"address_not_in,omitempty"`
-	AddressLt            *string                  `json:"address_lt,omitempty"`
-	AddressLte           *string                  `json:"address_lte,omitempty"`
-	AddressGt            *string                  `json:"address_gt,omitempty"`
-	AddressGte           *string                  `json:"address_gte,omitempty"`
-	AddressContains      *string                  `json:"address_contains,omitempty"`
-	AddressNotContains   *string                  `json:"address_not_contains,omitempty"`
-	AddressStartsWith    *string                  `json:"address_starts_with,omitempty"`
-	AddressNotStartsWith *string                  `json:"address_not_starts_with,omitempty"`
-	AddressEndsWith      *string                  `json:"address_ends_with,omitempty"`
-	AddressNotEndsWith   *string                  `json:"address_not_ends_with,omitempty"`
-	Location             *LocationWhereInput      `json:"location,omitempty"`
-	Popularity           *float64                 `json:"popularity,omitempty"`
-	PopularityNot        *float64                 `json:"popularity_not,omitempty"`
-	PopularityIn         []float64                `json:"popularity_in,omitempty"`
-	PopularityNotIn      []float64                `json:"popularity_not_in,omitempty"`
-	PopularityLt         *float64                 `json:"popularity_lt,omitempty"`
-	PopularityLte        *float64                 `json:"popularity_lte,omitempty"`
-	PopularityGt         *float64                 `json:"popularity_gt,omitempty"`
-	PopularityGte        *float64                 `json:"popularity_gte,omitempty"`
-	LikedByEvery         *PersonWhereInput        `json:"likedBy_every,omitempty"`
-	LikedBySome          *PersonWhereInput        `json:"likedBy_some,omitempty"`
-	LikedByNone          *PersonWhereInput        `json:"likedBy_none,omitempty"`
-	ReviewsEvery         *PersonReviewsWhereInput `json:"reviews_every,omitempty"`
-	ReviewsSome          *PersonReviewsWhereInput `json:"reviews_some,omitempty"`
-	ReviewsNone          *PersonReviewsWhereInput `json:"reviews_none,omitempty"`
-	Details              *DetailsWhereInput       `json:"details,omitempty"`
-	And                  []AttractionWhereInput   `json:"AND,omitempty"`
-	Or                   []AttractionWhereInput   `json:"OR,omitempty"`
-	Not                  []AttractionWhereInput   `json:"NOT,omitempty"`
-}
-
-type FeatureCreateManyInput struct {
-	Create []FeatureCreateInput `json:"create,omitempty"`
-}
-
-type AttractionUpdatetypesInput struct {
-	Set []AttractionType `json:"set,omitempty"`
-}
-
-type TicketSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                 `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                        `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                       `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                       `json:"updatedFields_contains_some,omitempty"`
-	Node                       *TicketWhereInput              `json:"node,omitempty"`
-	And                        []TicketSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []TicketSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []TicketSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type AttractionUpdatetagsInput struct {
-	Set []string `json:"set,omitempty"`
-}
-
-type PersonSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                 `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                        `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                       `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                       `json:"updatedFields_contains_some,omitempty"`
-	Node                       *PersonWhereInput              `json:"node,omitempty"`
-	And                        []PersonSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []PersonSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []PersonSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonReviewsUpdateManyInput struct {
-	Create     []PersonReviewsCreateInput                      `json:"create,omitempty"`
-	Update     []PersonReviewsUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
-	Upsert     []PersonReviewsUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
-	Delete     []PersonReviewsWhereUniqueInput                 `json:"delete,omitempty"`
-	Connect    []PersonReviewsWhereUniqueInput                 `json:"connect,omitempty"`
-	Set        []PersonReviewsWhereUniqueInput                 `json:"set,omitempty"`
-	Disconnect []PersonReviewsWhereUniqueInput                 `json:"disconnect,omitempty"`
-	DeleteMany []PersonReviewsScalarWhereInput                 `json:"deleteMany,omitempty"`
-	UpdateMany []PersonReviewsUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
-}
-
-type OpeningHoursSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                       `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                              `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                             `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                             `json:"updatedFields_contains_some,omitempty"`
-	Node                       *OpeningHoursWhereInput              `json:"node,omitempty"`
-	And                        []OpeningHoursSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []OpeningHoursSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []OpeningHoursSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonReviewsUpdateWithWhereUniqueNestedInput struct {
-	Where PersonReviewsWhereUniqueInput `json:"where"`
-	Data  PersonReviewsUpdateDataInput  `json:"data"`
-}
-
-type FeatureSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                  `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                         `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                        `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                        `json:"updatedFields_contains_some,omitempty"`
-	Node                       *FeatureWhereInput              `json:"node,omitempty"`
-	And                        []FeatureSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []FeatureSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []FeatureSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonReviewsUpdateDataInput struct {
-	Person        *PersonUpdateOneRequiredInput `json:"person,omitempty"`
-	Title         *string                       `json:"title,omitempty"`
-	Description   *string                       `json:"description,omitempty"`
-	AproveNumber  *int32                        `json:"aproveNumber,omitempty"`
-	DeclineNumber *int32                        `json:"declineNumber,omitempty"`
-	Comments      *PersonReviewsUpdateManyInput `json:"comments,omitempty"`
-}
-
-type CreditCardSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
-	Node                       *CreditCardWhereInput              `json:"node,omitempty"`
-	And                        []CreditCardSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []CreditCardSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []CreditCardSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonReviewsUpsertWithWhereUniqueNestedInput struct {
-	Where  PersonReviewsWhereUniqueInput `json:"where"`
-	Update PersonReviewsUpdateDataInput  `json:"update"`
-	Create PersonReviewsCreateInput      `json:"create"`
-}
-
-type TicketTypeWhereInput struct {
-	ID                     *string                `json:"id,omitempty"`
-	IDNot                  *string                `json:"id_not,omitempty"`
-	IDIn                   []string               `json:"id_in,omitempty"`
-	IDNotIn                []string               `json:"id_not_in,omitempty"`
-	IDLt                   *string                `json:"id_lt,omitempty"`
-	IDLte                  *string                `json:"id_lte,omitempty"`
-	IDGt                   *string                `json:"id_gt,omitempty"`
-	IDGte                  *string                `json:"id_gte,omitempty"`
-	IDContains             *string                `json:"id_contains,omitempty"`
-	IDNotContains          *string                `json:"id_not_contains,omitempty"`
-	IDStartsWith           *string                `json:"id_starts_with,omitempty"`
-	IDNotStartsWith        *string                `json:"id_not_starts_with,omitempty"`
-	IDEndsWith             *string                `json:"id_ends_with,omitempty"`
-	IDNotEndsWith          *string                `json:"id_not_ends_with,omitempty"`
-	CreatedAt              *string                `json:"createdAt,omitempty"`
-	CreatedAtNot           *string                `json:"createdAt_not,omitempty"`
-	CreatedAtIn            []string               `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn         []string               `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt            *string                `json:"createdAt_lt,omitempty"`
-	CreatedAtLte           *string                `json:"createdAt_lte,omitempty"`
-	CreatedAtGt            *string                `json:"createdAt_gt,omitempty"`
-	CreatedAtGte           *string                `json:"createdAt_gte,omitempty"`
-	UpdatedAt              *string                `json:"updatedAt,omitempty"`
-	UpdatedAtNot           *string                `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn            []string               `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn         []string               `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt            *string                `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte           *string                `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt            *string                `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte           *string                `json:"updatedAt_gte,omitempty"`
-	CreatorId              *string                `json:"creatorID,omitempty"`
-	CreatorIdNot           *string                `json:"creatorID_not,omitempty"`
-	CreatorIdIn            []string               `json:"creatorID_in,omitempty"`
-	CreatorIdNotIn         []string               `json:"creatorID_not_in,omitempty"`
-	CreatorIdLt            *string                `json:"creatorID_lt,omitempty"`
-	CreatorIdLte           *string                `json:"creatorID_lte,omitempty"`
-	CreatorIdGt            *string                `json:"creatorID_gt,omitempty"`
-	CreatorIdGte           *string                `json:"creatorID_gte,omitempty"`
-	CreatorIdContains      *string                `json:"creatorID_contains,omitempty"`
-	CreatorIdNotContains   *string                `json:"creatorID_not_contains,omitempty"`
-	CreatorIdStartsWith    *string                `json:"creatorID_starts_with,omitempty"`
-	CreatorIdNotStartsWith *string                `json:"creatorID_not_starts_with,omitempty"`
-	CreatorIdEndsWith      *string                `json:"creatorID_ends_with,omitempty"`
-	CreatorIdNotEndsWith   *string                `json:"creatorID_not_ends_with,omitempty"`
-	AttractionsEvery       *AttractionWhereInput  `json:"attractions_every,omitempty"`
-	AttractionsSome        *AttractionWhereInput  `json:"attractions_some,omitempty"`
-	AttractionsNone        *AttractionWhereInput  `json:"attractions_none,omitempty"`
-	Cost                   *float64               `json:"cost,omitempty"`
-	CostNot                *float64               `json:"cost_not,omitempty"`
-	CostIn                 []float64              `json:"cost_in,omitempty"`
-	CostNotIn              []float64              `json:"cost_not_in,omitempty"`
-	CostLt                 *float64               `json:"cost_lt,omitempty"`
-	CostLte                *float64               `json:"cost_lte,omitempty"`
-	CostGt                 *float64               `json:"cost_gt,omitempty"`
-	CostGte                *float64               `json:"cost_gte,omitempty"`
-	And                    []TicketTypeWhereInput `json:"AND,omitempty"`
-	Or                     []TicketTypeWhereInput `json:"OR,omitempty"`
-	Not                    []TicketTypeWhereInput `json:"NOT,omitempty"`
-}
-
 type PersonReviewsScalarWhereInput struct {
 	ID                       *string                         `json:"id,omitempty"`
 	IDNot                    *string                         `json:"id_not,omitempty"`
@@ -4812,15 +5026,8 @@ type PersonReviewsScalarWhereInput struct {
 	Not                      []PersonReviewsScalarWhereInput `json:"NOT,omitempty"`
 }
 
-type CredentialSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
-	Node                       *CredentialWhereInput              `json:"node,omitempty"`
-	And                        []CredentialSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []CredentialSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []CredentialSubscriptionWhereInput `json:"NOT,omitempty"`
+type TravelerUpdateManyMutationInput struct {
+	Username *string `json:"username,omitempty"`
 }
 
 type PersonReviewsUpdateManyWithWhereNestedInput struct {
@@ -4828,9 +5035,80 @@ type PersonReviewsUpdateManyWithWhereNestedInput struct {
 	Data  PersonReviewsUpdateManyDataInput `json:"data"`
 }
 
-type CreditCardUpdateManyWithWhereNestedInput struct {
-	Where CreditCardScalarWhereInput    `json:"where"`
-	Data  CreditCardUpdateManyDataInput `json:"data"`
+type CreditCardScalarWhereInput struct {
+	ID                      *string                      `json:"id,omitempty"`
+	IDNot                   *string                      `json:"id_not,omitempty"`
+	IDIn                    []string                     `json:"id_in,omitempty"`
+	IDNotIn                 []string                     `json:"id_not_in,omitempty"`
+	IDLt                    *string                      `json:"id_lt,omitempty"`
+	IDLte                   *string                      `json:"id_lte,omitempty"`
+	IDGt                    *string                      `json:"id_gt,omitempty"`
+	IDGte                   *string                      `json:"id_gte,omitempty"`
+	IDContains              *string                      `json:"id_contains,omitempty"`
+	IDNotContains           *string                      `json:"id_not_contains,omitempty"`
+	IDStartsWith            *string                      `json:"id_starts_with,omitempty"`
+	IDNotStartsWith         *string                      `json:"id_not_starts_with,omitempty"`
+	IDEndsWith              *string                      `json:"id_ends_with,omitempty"`
+	IDNotEndsWith           *string                      `json:"id_not_ends_with,omitempty"`
+	CreatedAt               *string                      `json:"createdAt,omitempty"`
+	CreatedAtNot            *string                      `json:"createdAt_not,omitempty"`
+	CreatedAtIn             []string                     `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn          []string                     `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt             *string                      `json:"createdAt_lt,omitempty"`
+	CreatedAtLte            *string                      `json:"createdAt_lte,omitempty"`
+	CreatedAtGt             *string                      `json:"createdAt_gt,omitempty"`
+	CreatedAtGte            *string                      `json:"createdAt_gte,omitempty"`
+	UpdatedAt               *string                      `json:"updatedAt,omitempty"`
+	UpdatedAtNot            *string                      `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn             []string                     `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn          []string                     `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt             *string                      `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte            *string                      `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt             *string                      `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte            *string                      `json:"updatedAt_gte,omitempty"`
+	CardNumber              *string                      `json:"cardNumber,omitempty"`
+	CardNumberNot           *string                      `json:"cardNumber_not,omitempty"`
+	CardNumberIn            []string                     `json:"cardNumber_in,omitempty"`
+	CardNumberNotIn         []string                     `json:"cardNumber_not_in,omitempty"`
+	CardNumberLt            *string                      `json:"cardNumber_lt,omitempty"`
+	CardNumberLte           *string                      `json:"cardNumber_lte,omitempty"`
+	CardNumberGt            *string                      `json:"cardNumber_gt,omitempty"`
+	CardNumberGte           *string                      `json:"cardNumber_gte,omitempty"`
+	CardNumberContains      *string                      `json:"cardNumber_contains,omitempty"`
+	CardNumberNotContains   *string                      `json:"cardNumber_not_contains,omitempty"`
+	CardNumberStartsWith    *string                      `json:"cardNumber_starts_with,omitempty"`
+	CardNumberNotStartsWith *string                      `json:"cardNumber_not_starts_with,omitempty"`
+	CardNumberEndsWith      *string                      `json:"cardNumber_ends_with,omitempty"`
+	CardNumberNotEndsWith   *string                      `json:"cardNumber_not_ends_with,omitempty"`
+	CardToken               *string                      `json:"cardToken,omitempty"`
+	CardTokenNot            *string                      `json:"cardToken_not,omitempty"`
+	CardTokenIn             []string                     `json:"cardToken_in,omitempty"`
+	CardTokenNotIn          []string                     `json:"cardToken_not_in,omitempty"`
+	CardTokenLt             *string                      `json:"cardToken_lt,omitempty"`
+	CardTokenLte            *string                      `json:"cardToken_lte,omitempty"`
+	CardTokenGt             *string                      `json:"cardToken_gt,omitempty"`
+	CardTokenGte            *string                      `json:"cardToken_gte,omitempty"`
+	CardTokenContains       *string                      `json:"cardToken_contains,omitempty"`
+	CardTokenNotContains    *string                      `json:"cardToken_not_contains,omitempty"`
+	CardTokenStartsWith     *string                      `json:"cardToken_starts_with,omitempty"`
+	CardTokenNotStartsWith  *string                      `json:"cardToken_not_starts_with,omitempty"`
+	CardTokenEndsWith       *string                      `json:"cardToken_ends_with,omitempty"`
+	CardTokenNotEndsWith    *string                      `json:"cardToken_not_ends_with,omitempty"`
+	Type                    *CreditCardType              `json:"type,omitempty"`
+	TypeNot                 *CreditCardType              `json:"type_not,omitempty"`
+	TypeIn                  []CreditCardType             `json:"type_in,omitempty"`
+	TypeNotIn               []CreditCardType             `json:"type_not_in,omitempty"`
+	LastUsed                *string                      `json:"lastUsed,omitempty"`
+	LastUsedNot             *string                      `json:"lastUsed_not,omitempty"`
+	LastUsedIn              []string                     `json:"lastUsed_in,omitempty"`
+	LastUsedNotIn           []string                     `json:"lastUsed_not_in,omitempty"`
+	LastUsedLt              *string                      `json:"lastUsed_lt,omitempty"`
+	LastUsedLte             *string                      `json:"lastUsed_lte,omitempty"`
+	LastUsedGt              *string                      `json:"lastUsed_gt,omitempty"`
+	LastUsedGte             *string                      `json:"lastUsed_gte,omitempty"`
+	And                     []CreditCardScalarWhereInput `json:"AND,omitempty"`
+	Or                      []CreditCardScalarWhereInput `json:"OR,omitempty"`
+	Not                     []CreditCardScalarWhereInput `json:"NOT,omitempty"`
 }
 
 type PersonReviewsUpdateManyDataInput struct {
@@ -4840,28 +5118,16 @@ type PersonReviewsUpdateManyDataInput struct {
 	DeclineNumber *int32  `json:"declineNumber,omitempty"`
 }
 
-type EmailWhereInput struct {
-	Type               *CommunicationType  `json:"type,omitempty"`
-	TypeNot            *CommunicationType  `json:"type_not,omitempty"`
-	TypeIn             []CommunicationType `json:"type_in,omitempty"`
-	TypeNotIn          []CommunicationType `json:"type_not_in,omitempty"`
-	Value              *string             `json:"value,omitempty"`
-	ValueNot           *string             `json:"value_not,omitempty"`
-	ValueIn            []string            `json:"value_in,omitempty"`
-	ValueNotIn         []string            `json:"value_not_in,omitempty"`
-	ValueLt            *string             `json:"value_lt,omitempty"`
-	ValueLte           *string             `json:"value_lte,omitempty"`
-	ValueGt            *string             `json:"value_gt,omitempty"`
-	ValueGte           *string             `json:"value_gte,omitempty"`
-	ValueContains      *string             `json:"value_contains,omitempty"`
-	ValueNotContains   *string             `json:"value_not_contains,omitempty"`
-	ValueStartsWith    *string             `json:"value_starts_with,omitempty"`
-	ValueNotStartsWith *string             `json:"value_not_starts_with,omitempty"`
-	ValueEndsWith      *string             `json:"value_ends_with,omitempty"`
-	ValueNotEndsWith   *string             `json:"value_not_ends_with,omitempty"`
-	And                []EmailWhereInput   `json:"AND,omitempty"`
-	Or                 []EmailWhereInput   `json:"OR,omitempty"`
-	Not                []EmailWhereInput   `json:"NOT,omitempty"`
+type CreditCardUpdateManyWithoutOwnerInput struct {
+	Create     []CreditCardCreateWithoutOwnerInput                `json:"create,omitempty"`
+	Delete     []CreditCardWhereUniqueInput                       `json:"delete,omitempty"`
+	Connect    []CreditCardWhereUniqueInput                       `json:"connect,omitempty"`
+	Set        []CreditCardWhereUniqueInput                       `json:"set,omitempty"`
+	Disconnect []CreditCardWhereUniqueInput                       `json:"disconnect,omitempty"`
+	Update     []CreditCardUpdateWithWhereUniqueWithoutOwnerInput `json:"update,omitempty"`
+	Upsert     []CreditCardUpsertWithWhereUniqueWithoutOwnerInput `json:"upsert,omitempty"`
+	DeleteMany []CreditCardScalarWhereInput                       `json:"deleteMany,omitempty"`
+	UpdateMany []CreditCardUpdateManyWithWhereNestedInput         `json:"updateMany,omitempty"`
 }
 
 type DetailsUpdateOneInput struct {
@@ -4872,12 +5138,9 @@ type DetailsUpdateOneInput struct {
 	Disconnect *bool                     `json:"disconnect,omitempty"`
 }
 
-type CreditCardCreateWithoutOwnerInput struct {
-	CardNumber string                                      `json:"cardNumber"`
-	CardToken  string                                      `json:"cardToken"`
-	Type       *CreditCardType                             `json:"type,omitempty"`
-	LastUsed   *string                                     `json:"lastUsed,omitempty"`
-	Uses       *PaymentEntryCreateManyWithoutWithCardInput `json:"uses,omitempty"`
+type CreditCardCreateManyWithoutOwnerInput struct {
+	Create  []CreditCardCreateWithoutOwnerInput `json:"create,omitempty"`
+	Connect []CreditCardWhereUniqueInput        `json:"connect,omitempty"`
 }
 
 type DetailsUpdateDataInput struct {
@@ -4888,10 +5151,8 @@ type DetailsUpdateDataInput struct {
 	AddressReference *string `json:"addressReference,omitempty"`
 }
 
-type TicketTypeUpdateInput struct {
-	CreatorId   *string                    `json:"creatorID,omitempty"`
-	Attractions *AttractionUpdateManyInput `json:"attractions,omitempty"`
-	Cost        *float64                   `json:"cost,omitempty"`
+type TicketUpdateManyMutationInput struct {
+	ExpireAt *string `json:"expireAt,omitempty"`
 }
 
 type DetailsUpsertNestedInput struct {
@@ -4899,10 +5160,11 @@ type DetailsUpsertNestedInput struct {
 	Create DetailsCreateInput     `json:"create"`
 }
 
-type PhoneUpdateManyMutationInput struct {
-	Type        *CommunicationType `json:"type,omitempty"`
-	CountryCode *string            `json:"countryCode,omitempty"`
-	Number      *string            `json:"number,omitempty"`
+type PhoneChannelUpdateInput struct {
+	DisplayName *string `json:"displayName,omitempty"`
+	Valid       *bool   `json:"valid,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty"`
+	Number      *string `json:"number,omitempty"`
 }
 
 type AttractionUpdateManyMutationInput struct {
@@ -4919,16 +5181,55 @@ type PersonUpdateInput struct {
 	Photo          *string                                                    `json:"photo,omitempty"`
 	Birthday       *string                                                    `json:"birthday,omitempty"`
 	From           *string                                                    `json:"from,omitempty"`
-	ChannelsPhone  *PhoneUpdateManyInput                                      `json:"channelsPhone,omitempty"`
-	ChannelsEmail  *EmailUpdateManyInput                                      `json:"channelsEmail,omitempty"`
+	ChannelsPhone  *PhoneChannelUpdateManyInput                               `json:"channelsPhone,omitempty"`
+	ChannelsEmail  *EmailChannelUpdateManyInput                               `json:"channelsEmail,omitempty"`
 	IDentification *IDentificationDocumentUpdateOneRequiredWithoutPersonInput `json:"identification,omitempty"`
 	Tags           *PersonUpdatetagsInput                                     `json:"tags,omitempty"`
 	Credentials    *CredentialUpdateManyWithoutOwnerInput                     `json:"credentials,omitempty"`
 }
 
-type PaymentEntryUpsertNestedInput struct {
-	Update PaymentEntryUpdateDataInput `json:"update"`
-	Create PaymentEntryCreateInput     `json:"create"`
+type TicketScalarWhereInput struct {
+	ID              *string                  `json:"id,omitempty"`
+	IDNot           *string                  `json:"id_not,omitempty"`
+	IDIn            []string                 `json:"id_in,omitempty"`
+	IDNotIn         []string                 `json:"id_not_in,omitempty"`
+	IDLt            *string                  `json:"id_lt,omitempty"`
+	IDLte           *string                  `json:"id_lte,omitempty"`
+	IDGt            *string                  `json:"id_gt,omitempty"`
+	IDGte           *string                  `json:"id_gte,omitempty"`
+	IDContains      *string                  `json:"id_contains,omitempty"`
+	IDNotContains   *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith    *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith      *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith   *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt       *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot    *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn     []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn  []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt     *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte    *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt     *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte    *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt       *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot    *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn     []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn  []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt     *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte    *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt     *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte    *string                  `json:"updatedAt_gte,omitempty"`
+	ExpireAt        *string                  `json:"expireAt,omitempty"`
+	ExpireAtNot     *string                  `json:"expireAt_not,omitempty"`
+	ExpireAtIn      []string                 `json:"expireAt_in,omitempty"`
+	ExpireAtNotIn   []string                 `json:"expireAt_not_in,omitempty"`
+	ExpireAtLt      *string                  `json:"expireAt_lt,omitempty"`
+	ExpireAtLte     *string                  `json:"expireAt_lte,omitempty"`
+	ExpireAtGt      *string                  `json:"expireAt_gt,omitempty"`
+	ExpireAtGte     *string                  `json:"expireAt_gte,omitempty"`
+	And             []TicketScalarWhereInput `json:"AND,omitempty"`
+	Or              []TicketScalarWhereInput `json:"OR,omitempty"`
+	Not             []TicketScalarWhereInput `json:"NOT,omitempty"`
 }
 
 type PartnerUpdateManyMutationInput struct {
@@ -4938,9 +5239,10 @@ type PartnerUpdateManyMutationInput struct {
 	Address      *string `json:"address,omitempty"`
 }
 
-type CreditCardUpsertWithoutUsesInput struct {
-	Update CreditCardUpdateWithoutUsesDataInput `json:"update"`
-	Create CreditCardCreateWithoutUsesInput     `json:"create"`
+type TicketUpsertWithWhereUniqueNestedInput struct {
+	Where  TicketWhereUniqueInput `json:"where"`
+	Update TicketUpdateDataInput  `json:"update"`
+	Create TicketCreateInput      `json:"create"`
 }
 
 type AttractionUpdateManyWithoutOwnerInput struct {
@@ -4977,8 +5279,9 @@ type PersonCreateOneWithoutCredentialsInput struct {
 	Connect *PersonWhereUniqueInput              `json:"connect,omitempty"`
 }
 
-type PaymentEntryWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
+type OpeningHoursUpdateManyMutationInput struct {
+	From *string `json:"from,omitempty"`
+	To   *string `json:"to,omitempty"`
 }
 
 type PersonCreateWithoutCredentialsInput struct {
@@ -4987,14 +5290,15 @@ type PersonCreateWithoutCredentialsInput struct {
 	Photo          *string                                           `json:"photo,omitempty"`
 	Birthday       string                                            `json:"birthday"`
 	From           *string                                           `json:"from,omitempty"`
-	ChannelsPhone  *PhoneCreateManyInput                             `json:"channelsPhone,omitempty"`
-	ChannelsEmail  *EmailCreateManyInput                             `json:"channelsEmail,omitempty"`
+	ChannelsPhone  *PhoneChannelCreateManyInput                      `json:"channelsPhone,omitempty"`
+	ChannelsEmail  *EmailChannelCreateManyInput                      `json:"channelsEmail,omitempty"`
 	IDentification IDentificationDocumentCreateOneWithoutPersonInput `json:"identification"`
 	Tags           *PersonCreatetagsInput                            `json:"tags,omitempty"`
 }
 
-type PersonWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
+type PersonUpsertWithoutIdentificationInput struct {
+	Update PersonUpdateWithoutIdentificationDataInput `json:"update"`
+	Create PersonCreateWithoutIdentificationInput     `json:"create"`
 }
 
 type CredentialUpdateInput struct {
@@ -5009,8 +5313,11 @@ type CredentialUpdateInput struct {
 	HashedPassword *string                                         `json:"hashedPassword,omitempty"`
 }
 
-type PersonReviewsWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
+type IDentificationDocumentUpdateInput struct {
+	Person    *PersonUpdateOneRequiredWithoutIdentificationInput `json:"person,omitempty"`
+	Type      *IDentificationType                                `json:"type,omitempty"`
+	Value     *string                                            `json:"value,omitempty"`
+	Validated *bool                                              `json:"validated,omitempty"`
 }
 
 type PersonUpdateOneRequiredWithoutCredentialsInput struct {
@@ -5020,9 +5327,11 @@ type PersonUpdateOneRequiredWithoutCredentialsInput struct {
 	Connect *PersonWhereUniqueInput                  `json:"connect,omitempty"`
 }
 
-type FeatureUpdateManyMutationInput struct {
-	Name  *string `json:"name,omitempty"`
-	Image *string `json:"image,omitempty"`
+type IDentificationDocumentCreateInput struct {
+	Person    PersonCreateOneWithoutIdentificationInput `json:"person"`
+	Type      IDentificationType                        `json:"type"`
+	Value     string                                    `json:"value"`
+	Validated *bool                                     `json:"validated,omitempty"`
 }
 
 type PersonUpdateWithoutCredentialsDataInput struct {
@@ -5031,22 +5340,317 @@ type PersonUpdateWithoutCredentialsDataInput struct {
 	Photo          *string                                                    `json:"photo,omitempty"`
 	Birthday       *string                                                    `json:"birthday,omitempty"`
 	From           *string                                                    `json:"from,omitempty"`
-	ChannelsPhone  *PhoneUpdateManyInput                                      `json:"channelsPhone,omitempty"`
-	ChannelsEmail  *EmailUpdateManyInput                                      `json:"channelsEmail,omitempty"`
+	ChannelsPhone  *PhoneChannelUpdateManyInput                               `json:"channelsPhone,omitempty"`
+	ChannelsEmail  *EmailChannelUpdateManyInput                               `json:"channelsEmail,omitempty"`
 	IDentification *IDentificationDocumentUpdateOneRequiredWithoutPersonInput `json:"identification,omitempty"`
 	Tags           *PersonUpdatetagsInput                                     `json:"tags,omitempty"`
 }
 
-type CreditCardUpdateManyMutationInput struct {
-	CardNumber *string         `json:"cardNumber,omitempty"`
-	CardToken  *string         `json:"cardToken,omitempty"`
-	Type       *CreditCardType `json:"type,omitempty"`
-	LastUsed   *string         `json:"lastUsed,omitempty"`
+type EmailChannelUpdateInput struct {
+	DisplayName *string                        `json:"displayName,omitempty"`
+	Valid       *bool                          `json:"valid,omitempty"`
+	Value       *string                        `json:"value,omitempty"`
+	Extras      *EmailChannelUpdateextrasInput `json:"extras,omitempty"`
 }
 
 type PersonUpsertWithoutCredentialsInput struct {
 	Update PersonUpdateWithoutCredentialsDataInput `json:"update"`
 	Create PersonCreateWithoutCredentialsInput     `json:"create"`
+}
+
+type PaymentEntryUpdateManyDataInput struct {
+	ExternalId      *string `json:"externalID,omitempty"`
+	ProductId       *string `json:"productID,omitempty"`
+	Product         *string `json:"product,omitempty"`
+	GatewayResponse *string `json:"gatewayResponse,omitempty"`
+	Amount          *int32  `json:"amount,omitempty"`
+	DiscountId      *string `json:"discountID,omitempty"`
+	Discount        *int32  `json:"discount,omitempty"`
+}
+
+type CredentialUpdateManyMutationInput struct {
+	DisplayName    *string         `json:"displayName,omitempty"`
+	IsMain         *bool           `json:"isMain,omitempty"`
+	Type           *CredentialType `json:"type,omitempty"`
+	Validated      *bool           `json:"validated,omitempty"`
+	ValidationId   *string         `json:"validationID,omitempty"`
+	Value          *string         `json:"value,omitempty"`
+	RawPassword    *string         `json:"rawPassword,omitempty"`
+	HashedPassword *string         `json:"hashedPassword,omitempty"`
+}
+
+type TravelerWhereUniqueInput struct {
+	ID       *string `json:"id,omitempty"`
+	Username *string `json:"username,omitempty"`
+}
+
+type CreditCardCreateInput struct {
+	Owner      TravelerCreateOneWithoutCardsInput          `json:"owner"`
+	CardNumber string                                      `json:"cardNumber"`
+	CardToken  string                                      `json:"cardToken"`
+	Type       *CreditCardType                             `json:"type,omitempty"`
+	LastUsed   *string                                     `json:"lastUsed,omitempty"`
+	Uses       *PaymentEntryCreateManyWithoutWithCardInput `json:"uses,omitempty"`
+}
+
+type TravelerUpsertWithoutCardsInput struct {
+	Update TravelerUpdateWithoutCardsDataInput `json:"update"`
+	Create TravelerCreateWithoutCardsInput     `json:"create"`
+}
+
+type TravelerCreateOneWithoutCardsInput struct {
+	Create  *TravelerCreateWithoutCardsInput `json:"create,omitempty"`
+	Connect *TravelerWhereUniqueInput        `json:"connect,omitempty"`
+}
+
+type PartnerCreateWithoutAttractionsInput struct {
+	Person       PersonCreateOneInput       `json:"person"`
+	BrandName    string                     `json:"brandName"`
+	SocialReason string                     `json:"socialReason"`
+	Ruc          string                     `json:"ruc"`
+	Address      string                     `json:"address"`
+	Location     LocationCreateOneInput     `json:"location"`
+	Features     *FeatureCreateManyInput    `json:"features,omitempty"`
+	OpeningHours OpeningHoursCreateOneInput `json:"openingHours"`
+}
+
+type TravelerCreateWithoutCardsInput struct {
+	Person   PersonCreateOneInput   `json:"person"`
+	Username string                 `json:"username"`
+	Tickets  *TicketCreateManyInput `json:"tickets,omitempty"`
+}
+
+type PhoneChannelCreateInput struct {
+	DisplayName string  `json:"displayName"`
+	Valid       *bool   `json:"valid,omitempty"`
+	CountryCode string  `json:"countryCode"`
+	Number      *string `json:"number,omitempty"`
+}
+
+type TicketCreateManyInput struct {
+	Create  []TicketCreateInput      `json:"create,omitempty"`
+	Connect []TicketWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type IDentificationDocumentCreateOneWithoutPersonInput struct {
+	Create  *IDentificationDocumentCreateWithoutPersonInput `json:"create,omitempty"`
+	Connect *IDentificationDocumentWhereUniqueInput         `json:"connect,omitempty"`
+}
+
+type TicketCreateInput struct {
+	Type     TicketTypeCreateOneInput   `json:"type"`
+	Owner    PersonCreateOneInput       `json:"owner"`
+	Receive  PaymentEntryCreateOneInput `json:"receive"`
+	ExpireAt string                     `json:"expireAt"`
+	Visited  *AttractionCreateManyInput `json:"visited,omitempty"`
+}
+
+type CredentialCreateWithoutOwnerInput struct {
+	DisplayName    *string         `json:"displayName,omitempty"`
+	IsMain         bool            `json:"isMain"`
+	Type           *CredentialType `json:"type,omitempty"`
+	Validated      *bool           `json:"validated,omitempty"`
+	ValidationId   *string         `json:"validationID,omitempty"`
+	Value          string          `json:"value"`
+	RawPassword    *string         `json:"rawPassword,omitempty"`
+	HashedPassword string          `json:"hashedPassword"`
+}
+
+type TicketTypeCreateOneInput struct {
+	Create  *TicketTypeCreateInput      `json:"create,omitempty"`
+	Connect *TicketTypeWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type FeatureCreateInput struct {
+	Name  *string `json:"name,omitempty"`
+	Image *string `json:"image,omitempty"`
+}
+
+type TicketTypeCreateInput struct {
+	CreatorId   string                     `json:"creatorID"`
+	Attractions *AttractionCreateManyInput `json:"attractions,omitempty"`
+	Cost        float64                    `json:"cost"`
+}
+
+type TicketSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                 `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                        `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                       `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                       `json:"updatedFields_contains_some,omitempty"`
+	Node                       *TicketWhereInput              `json:"node,omitempty"`
+	And                        []TicketSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []TicketSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []TicketSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type AttractionCreateManyInput struct {
+	Create  []AttractionCreateInput      `json:"create,omitempty"`
+	Connect []AttractionWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type OverviewSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                   `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                          `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                         `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                         `json:"updatedFields_contains_some,omitempty"`
+	Node                       *OverviewWhereInput              `json:"node,omitempty"`
+	And                        []OverviewSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []OverviewSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []OverviewSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PaymentEntryCreateOneInput struct {
+	Create  *PaymentEntryCreateInput      `json:"create,omitempty"`
+	Connect *PaymentEntryWhereUniqueInput `json:"connect,omitempty"`
+}
+
+type DetailsSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                  `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                         `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                        `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                        `json:"updatedFields_contains_some,omitempty"`
+	Node                       *DetailsWhereInput              `json:"node,omitempty"`
+	And                        []DetailsSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []DetailsSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []DetailsSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type PaymentEntryCreateInput struct {
+	ExternalId      string                              `json:"externalID"`
+	WithCard        CreditCardCreateOneWithoutUsesInput `json:"withCard"`
+	ProductId       string                              `json:"productID"`
+	Product         string                              `json:"product"`
+	GatewayResponse *string                             `json:"gatewayResponse,omitempty"`
+	Amount          int32                               `json:"amount"`
+	DiscountId      *string                             `json:"discountID,omitempty"`
+	Discount        *int32                              `json:"discount,omitempty"`
+}
+
+type CredentialSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                     `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                            `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                           `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                           `json:"updatedFields_contains_some,omitempty"`
+	Node                       *CredentialWhereInput              `json:"node,omitempty"`
+	And                        []CredentialSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []CredentialSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []CredentialSubscriptionWhereInput `json:"NOT,omitempty"`
+}
+
+type CreditCardCreateOneWithoutUsesInput struct {
+	Create  *CreditCardCreateWithoutUsesInput `json:"create,omitempty"`
+	Connect *CreditCardWhereUniqueInput       `json:"connect,omitempty"`
+}
+
+type CreditCardUpdateWithoutOwnerDataInput struct {
+	CardNumber *string                                     `json:"cardNumber,omitempty"`
+	CardToken  *string                                     `json:"cardToken,omitempty"`
+	Type       *CreditCardType                             `json:"type,omitempty"`
+	LastUsed   *string                                     `json:"lastUsed,omitempty"`
+	Uses       *PaymentEntryUpdateManyWithoutWithCardInput `json:"uses,omitempty"`
+}
+
+type CreditCardCreateWithoutUsesInput struct {
+	Owner      TravelerCreateOneWithoutCardsInput `json:"owner"`
+	CardNumber string                             `json:"cardNumber"`
+	CardToken  string                             `json:"cardToken"`
+	Type       *CreditCardType                    `json:"type,omitempty"`
+	LastUsed   *string                            `json:"lastUsed,omitempty"`
+}
+
+type TicketTypeUpdateManyMutationInput struct {
+	CreatorId *string  `json:"creatorID,omitempty"`
+	Cost      *float64 `json:"cost,omitempty"`
+}
+
+type PaymentEntryCreateManyWithoutWithCardInput struct {
+	Create  []PaymentEntryCreateWithoutWithCardInput `json:"create,omitempty"`
+	Connect []PaymentEntryWhereUniqueInput           `json:"connect,omitempty"`
+}
+
+type PersonReviewsUpdateInput struct {
+	Person        *PersonUpdateOneRequiredInput `json:"person,omitempty"`
+	Title         *string                       `json:"title,omitempty"`
+	Description   *string                       `json:"description,omitempty"`
+	AproveNumber  *int32                        `json:"aproveNumber,omitempty"`
+	DeclineNumber *int32                        `json:"declineNumber,omitempty"`
+	Comments      *PersonReviewsUpdateManyInput `json:"comments,omitempty"`
+}
+
+type PaymentEntryCreateWithoutWithCardInput struct {
+	ExternalId      string  `json:"externalID"`
+	ProductId       string  `json:"productID"`
+	Product         string  `json:"product"`
+	GatewayResponse *string `json:"gatewayResponse,omitempty"`
+	Amount          int32   `json:"amount"`
+	DiscountId      *string `json:"discountID,omitempty"`
+	Discount        *int32  `json:"discount,omitempty"`
+}
+
+type AttractionUpdateWithoutOwnerDataInput struct {
+	Overview   *OverviewUpdateOneRequiredInput `json:"overview,omitempty"`
+	MaxUses    *int32                          `json:"maxUses,omitempty"`
+	Address    *string                         `json:"address,omitempty"`
+	Location   *LocationUpdateOneRequiredInput `json:"location,omitempty"`
+	Popularity *float64                        `json:"popularity,omitempty"`
+	LikedBy    *PersonUpdateManyInput          `json:"likedBy,omitempty"`
+	Types      *AttractionUpdatetypesInput     `json:"types,omitempty"`
+	Tags       *AttractionUpdatetagsInput      `json:"tags,omitempty"`
+	Reviews    *PersonReviewsUpdateManyInput   `json:"reviews,omitempty"`
+	Details    *DetailsUpdateOneInput          `json:"details,omitempty"`
+}
+
+type CreditCardUpdateInput struct {
+	Owner      *TravelerUpdateOneRequiredWithoutCardsInput `json:"owner,omitempty"`
+	CardNumber *string                                     `json:"cardNumber,omitempty"`
+	CardToken  *string                                     `json:"cardToken,omitempty"`
+	Type       *CreditCardType                             `json:"type,omitempty"`
+	LastUsed   *string                                     `json:"lastUsed,omitempty"`
+	Uses       *PaymentEntryUpdateManyWithoutWithCardInput `json:"uses,omitempty"`
+}
+
+type OverviewUpdateManyMutationInput struct {
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+}
+
+type TravelerUpdateOneRequiredWithoutCardsInput struct {
+	Create  *TravelerCreateWithoutCardsInput     `json:"create,omitempty"`
+	Update  *TravelerUpdateWithoutCardsDataInput `json:"update,omitempty"`
+	Upsert  *TravelerUpsertWithoutCardsInput     `json:"upsert,omitempty"`
+	Connect *TravelerWhereUniqueInput            `json:"connect,omitempty"`
+}
+
+type PersonUpdateOneRequiredWithoutIdentificationInput struct {
+	Create  *PersonCreateWithoutIdentificationInput     `json:"create,omitempty"`
+	Update  *PersonUpdateWithoutIdentificationDataInput `json:"update,omitempty"`
+	Upsert  *PersonUpsertWithoutIdentificationInput     `json:"upsert,omitempty"`
+	Connect *PersonWhereUniqueInput                     `json:"connect,omitempty"`
+}
+
+type TravelerUpdateWithoutCardsDataInput struct {
+	Person   *PersonUpdateOneRequiredInput `json:"person,omitempty"`
+	Username *string                       `json:"username,omitempty"`
+	Tickets  *TicketUpdateManyInput        `json:"tickets,omitempty"`
+}
+
+type EmailChannelUpdateManyMutationInput struct {
+	DisplayName *string                        `json:"displayName,omitempty"`
+	Valid       *bool                          `json:"valid,omitempty"`
+	Value       *string                        `json:"value,omitempty"`
+	Extras      *EmailChannelUpdateextrasInput `json:"extras,omitempty"`
+}
+
+type TicketUpdateManyInput struct {
+	Create     []TicketCreateInput                      `json:"create,omitempty"`
+	Update     []TicketUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
+	Upsert     []TicketUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
+	Delete     []TicketWhereUniqueInput                 `json:"delete,omitempty"`
+	Connect    []TicketWhereUniqueInput                 `json:"connect,omitempty"`
+	Set        []TicketWhereUniqueInput                 `json:"set,omitempty"`
+	Disconnect []TicketWhereUniqueInput                 `json:"disconnect,omitempty"`
+	DeleteMany []TicketScalarWhereInput                 `json:"deleteMany,omitempty"`
+	UpdateMany []TicketUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
 }
 
 type PaymentEntryScalarWhereInput struct {
@@ -5171,386 +5775,9 @@ type PaymentEntryScalarWhereInput struct {
 	Not                          []PaymentEntryScalarWhereInput `json:"NOT,omitempty"`
 }
 
-type CredentialUpdateManyMutationInput struct {
-	DisplayName    *string         `json:"displayName,omitempty"`
-	IsMain         *bool           `json:"isMain,omitempty"`
-	Type           *CredentialType `json:"type,omitempty"`
-	Validated      *bool           `json:"validated,omitempty"`
-	ValidationId   *string         `json:"validationID,omitempty"`
-	Value          *string         `json:"value,omitempty"`
-	RawPassword    *string         `json:"rawPassword,omitempty"`
-	HashedPassword *string         `json:"hashedPassword,omitempty"`
-}
-
-type TravelerWhereUniqueInput struct {
-	ID       *string `json:"id,omitempty"`
-	Username *string `json:"username,omitempty"`
-}
-
-type CreditCardCreateInput struct {
-	Owner      TravelerCreateOneWithoutCardsInput          `json:"owner"`
-	CardNumber string                                      `json:"cardNumber"`
-	CardToken  string                                      `json:"cardToken"`
-	Type       *CreditCardType                             `json:"type,omitempty"`
-	LastUsed   *string                                     `json:"lastUsed,omitempty"`
-	Uses       *PaymentEntryCreateManyWithoutWithCardInput `json:"uses,omitempty"`
-}
-
-type TicketUpdateManyWithWhereNestedInput struct {
-	Where TicketScalarWhereInput    `json:"where"`
-	Data  TicketUpdateManyDataInput `json:"data"`
-}
-
-type TravelerCreateOneWithoutCardsInput struct {
-	Create  *TravelerCreateWithoutCardsInput `json:"create,omitempty"`
-	Connect *TravelerWhereUniqueInput        `json:"connect,omitempty"`
-}
-
-type PartnerCreateWithoutAttractionsInput struct {
-	Person       PersonCreateOneInput       `json:"person"`
-	BrandName    string                     `json:"brandName"`
-	SocialReason string                     `json:"socialReason"`
-	Ruc          string                     `json:"ruc"`
-	Address      string                     `json:"address"`
-	Location     LocationCreateOneInput     `json:"location"`
-	Features     *FeatureCreateManyInput    `json:"features,omitempty"`
-	OpeningHours OpeningHoursCreateOneInput `json:"openingHours"`
-}
-
-type TravelerCreateWithoutCardsInput struct {
-	Person   PersonCreateOneInput   `json:"person"`
-	Username string                 `json:"username"`
-	Tickets  *TicketCreateManyInput `json:"tickets,omitempty"`
-}
-
-type PhoneCreateInput struct {
-	Type        *CommunicationType `json:"type,omitempty"`
-	CountryCode string             `json:"countryCode"`
-	Number      *string            `json:"number,omitempty"`
-}
-
-type TicketCreateManyInput struct {
-	Create  []TicketCreateInput      `json:"create,omitempty"`
-	Connect []TicketWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type IDentificationDocumentCreateOneWithoutPersonInput struct {
-	Create  *IDentificationDocumentCreateWithoutPersonInput `json:"create,omitempty"`
-	Connect *IDentificationDocumentWhereUniqueInput         `json:"connect,omitempty"`
-}
-
-type TicketCreateInput struct {
-	Type     TicketTypeCreateOneInput   `json:"type"`
-	Owner    PersonCreateOneInput       `json:"owner"`
-	Receive  PaymentEntryCreateOneInput `json:"receive"`
-	ExpireAt string                     `json:"expireAt"`
-	Visited  *AttractionCreateManyInput `json:"visited,omitempty"`
-}
-
-type CredentialCreateWithoutOwnerInput struct {
-	DisplayName    *string         `json:"displayName,omitempty"`
-	IsMain         bool            `json:"isMain"`
-	Type           *CredentialType `json:"type,omitempty"`
-	Validated      *bool           `json:"validated,omitempty"`
-	ValidationId   *string         `json:"validationID,omitempty"`
-	Value          string          `json:"value"`
-	RawPassword    *string         `json:"rawPassword,omitempty"`
-	HashedPassword string          `json:"hashedPassword"`
-}
-
-type TicketTypeCreateOneInput struct {
-	Create  *TicketTypeCreateInput      `json:"create,omitempty"`
-	Connect *TicketTypeWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type TravelerSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                   `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                          `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                         `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                         `json:"updatedFields_contains_some,omitempty"`
-	Node                       *TravelerWhereInput              `json:"node,omitempty"`
-	And                        []TravelerSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []TravelerSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []TravelerSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type TicketTypeCreateInput struct {
-	CreatorId   string                     `json:"creatorID"`
-	Attractions *AttractionCreateManyInput `json:"attractions,omitempty"`
-	Cost        float64                    `json:"cost"`
-}
-
-type PartnerSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                  `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                         `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                        `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                        `json:"updatedFields_contains_some,omitempty"`
-	Node                       *PartnerWhereInput              `json:"node,omitempty"`
-	And                        []PartnerSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []PartnerSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []PartnerSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type AttractionCreateManyInput struct {
-	Create  []AttractionCreateInput      `json:"create,omitempty"`
-	Connect []AttractionWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type CreditCardWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
-}
-
-type PaymentEntryCreateOneInput struct {
-	Create  *PaymentEntryCreateInput      `json:"create,omitempty"`
-	Connect *PaymentEntryWhereUniqueInput `json:"connect,omitempty"`
-}
-
-type PersonWhereInput struct {
-	ID                 *string                           `json:"id,omitempty"`
-	IDNot              *string                           `json:"id_not,omitempty"`
-	IDIn               []string                          `json:"id_in,omitempty"`
-	IDNotIn            []string                          `json:"id_not_in,omitempty"`
-	IDLt               *string                           `json:"id_lt,omitempty"`
-	IDLte              *string                           `json:"id_lte,omitempty"`
-	IDGt               *string                           `json:"id_gt,omitempty"`
-	IDGte              *string                           `json:"id_gte,omitempty"`
-	IDContains         *string                           `json:"id_contains,omitempty"`
-	IDNotContains      *string                           `json:"id_not_contains,omitempty"`
-	IDStartsWith       *string                           `json:"id_starts_with,omitempty"`
-	IDNotStartsWith    *string                           `json:"id_not_starts_with,omitempty"`
-	IDEndsWith         *string                           `json:"id_ends_with,omitempty"`
-	IDNotEndsWith      *string                           `json:"id_not_ends_with,omitempty"`
-	CreatedAt          *string                           `json:"createdAt,omitempty"`
-	CreatedAtNot       *string                           `json:"createdAt_not,omitempty"`
-	CreatedAtIn        []string                          `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn     []string                          `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt        *string                           `json:"createdAt_lt,omitempty"`
-	CreatedAtLte       *string                           `json:"createdAt_lte,omitempty"`
-	CreatedAtGt        *string                           `json:"createdAt_gt,omitempty"`
-	CreatedAtGte       *string                           `json:"createdAt_gte,omitempty"`
-	UpdatedAt          *string                           `json:"updatedAt,omitempty"`
-	UpdatedAtNot       *string                           `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn        []string                          `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn     []string                          `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt        *string                           `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte       *string                           `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt        *string                           `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte       *string                           `json:"updatedAt_gte,omitempty"`
-	MId                *string                           `json:"mID,omitempty"`
-	MIdNot             *string                           `json:"mID_not,omitempty"`
-	MIdIn              []string                          `json:"mID_in,omitempty"`
-	MIdNotIn           []string                          `json:"mID_not_in,omitempty"`
-	MIdLt              *string                           `json:"mID_lt,omitempty"`
-	MIdLte             *string                           `json:"mID_lte,omitempty"`
-	MIdGt              *string                           `json:"mID_gt,omitempty"`
-	MIdGte             *string                           `json:"mID_gte,omitempty"`
-	MIdContains        *string                           `json:"mID_contains,omitempty"`
-	MIdNotContains     *string                           `json:"mID_not_contains,omitempty"`
-	MIdStartsWith      *string                           `json:"mID_starts_with,omitempty"`
-	MIdNotStartsWith   *string                           `json:"mID_not_starts_with,omitempty"`
-	MIdEndsWith        *string                           `json:"mID_ends_with,omitempty"`
-	MIdNotEndsWith     *string                           `json:"mID_not_ends_with,omitempty"`
-	Name               *string                           `json:"name,omitempty"`
-	NameNot            *string                           `json:"name_not,omitempty"`
-	NameIn             []string                          `json:"name_in,omitempty"`
-	NameNotIn          []string                          `json:"name_not_in,omitempty"`
-	NameLt             *string                           `json:"name_lt,omitempty"`
-	NameLte            *string                           `json:"name_lte,omitempty"`
-	NameGt             *string                           `json:"name_gt,omitempty"`
-	NameGte            *string                           `json:"name_gte,omitempty"`
-	NameContains       *string                           `json:"name_contains,omitempty"`
-	NameNotContains    *string                           `json:"name_not_contains,omitempty"`
-	NameStartsWith     *string                           `json:"name_starts_with,omitempty"`
-	NameNotStartsWith  *string                           `json:"name_not_starts_with,omitempty"`
-	NameEndsWith       *string                           `json:"name_ends_with,omitempty"`
-	NameNotEndsWith    *string                           `json:"name_not_ends_with,omitempty"`
-	Photo              *string                           `json:"photo,omitempty"`
-	PhotoNot           *string                           `json:"photo_not,omitempty"`
-	PhotoIn            []string                          `json:"photo_in,omitempty"`
-	PhotoNotIn         []string                          `json:"photo_not_in,omitempty"`
-	PhotoLt            *string                           `json:"photo_lt,omitempty"`
-	PhotoLte           *string                           `json:"photo_lte,omitempty"`
-	PhotoGt            *string                           `json:"photo_gt,omitempty"`
-	PhotoGte           *string                           `json:"photo_gte,omitempty"`
-	PhotoContains      *string                           `json:"photo_contains,omitempty"`
-	PhotoNotContains   *string                           `json:"photo_not_contains,omitempty"`
-	PhotoStartsWith    *string                           `json:"photo_starts_with,omitempty"`
-	PhotoNotStartsWith *string                           `json:"photo_not_starts_with,omitempty"`
-	PhotoEndsWith      *string                           `json:"photo_ends_with,omitempty"`
-	PhotoNotEndsWith   *string                           `json:"photo_not_ends_with,omitempty"`
-	Birthday           *string                           `json:"birthday,omitempty"`
-	BirthdayNot        *string                           `json:"birthday_not,omitempty"`
-	BirthdayIn         []string                          `json:"birthday_in,omitempty"`
-	BirthdayNotIn      []string                          `json:"birthday_not_in,omitempty"`
-	BirthdayLt         *string                           `json:"birthday_lt,omitempty"`
-	BirthdayLte        *string                           `json:"birthday_lte,omitempty"`
-	BirthdayGt         *string                           `json:"birthday_gt,omitempty"`
-	BirthdayGte        *string                           `json:"birthday_gte,omitempty"`
-	From               *string                           `json:"from,omitempty"`
-	FromNot            *string                           `json:"from_not,omitempty"`
-	FromIn             []string                          `json:"from_in,omitempty"`
-	FromNotIn          []string                          `json:"from_not_in,omitempty"`
-	FromLt             *string                           `json:"from_lt,omitempty"`
-	FromLte            *string                           `json:"from_lte,omitempty"`
-	FromGt             *string                           `json:"from_gt,omitempty"`
-	FromGte            *string                           `json:"from_gte,omitempty"`
-	FromContains       *string                           `json:"from_contains,omitempty"`
-	FromNotContains    *string                           `json:"from_not_contains,omitempty"`
-	FromStartsWith     *string                           `json:"from_starts_with,omitempty"`
-	FromNotStartsWith  *string                           `json:"from_not_starts_with,omitempty"`
-	FromEndsWith       *string                           `json:"from_ends_with,omitempty"`
-	FromNotEndsWith    *string                           `json:"from_not_ends_with,omitempty"`
-	ChannelsPhoneEvery *PhoneWhereInput                  `json:"channelsPhone_every,omitempty"`
-	ChannelsPhoneSome  *PhoneWhereInput                  `json:"channelsPhone_some,omitempty"`
-	ChannelsPhoneNone  *PhoneWhereInput                  `json:"channelsPhone_none,omitempty"`
-	ChannelsEmailEvery *EmailWhereInput                  `json:"channelsEmail_every,omitempty"`
-	ChannelsEmailSome  *EmailWhereInput                  `json:"channelsEmail_some,omitempty"`
-	ChannelsEmailNone  *EmailWhereInput                  `json:"channelsEmail_none,omitempty"`
-	IDentification     *IDentificationDocumentWhereInput `json:"identification,omitempty"`
-	CredentialsEvery   *CredentialWhereInput             `json:"credentials_every,omitempty"`
-	CredentialsSome    *CredentialWhereInput             `json:"credentials_some,omitempty"`
-	CredentialsNone    *CredentialWhereInput             `json:"credentials_none,omitempty"`
-	And                []PersonWhereInput                `json:"AND,omitempty"`
-	Or                 []PersonWhereInput                `json:"OR,omitempty"`
-	Not                []PersonWhereInput                `json:"NOT,omitempty"`
-}
-
-type PaymentEntryCreateInput struct {
-	ExternalId      string                              `json:"externalID"`
-	WithCard        CreditCardCreateOneWithoutUsesInput `json:"withCard"`
-	ProductId       string                              `json:"productID"`
-	Product         string                              `json:"product"`
-	GatewayResponse *string                             `json:"gatewayResponse,omitempty"`
-	Amount          int32                               `json:"amount"`
-	DiscountId      *string                             `json:"discountID,omitempty"`
-	Discount        *int32                              `json:"discount,omitempty"`
-}
-
-type CreditCardUpsertWithWhereUniqueWithoutOwnerInput struct {
-	Where  CreditCardWhereUniqueInput            `json:"where"`
-	Update CreditCardUpdateWithoutOwnerDataInput `json:"update"`
-	Create CreditCardCreateWithoutOwnerInput     `json:"create"`
-}
-
-type CreditCardCreateOneWithoutUsesInput struct {
-	Create  *CreditCardCreateWithoutUsesInput `json:"create,omitempty"`
-	Connect *CreditCardWhereUniqueInput       `json:"connect,omitempty"`
-}
-
-type TravelerCreateInput struct {
-	Person   PersonCreateOneInput                   `json:"person"`
-	Username string                                 `json:"username"`
-	Cards    *CreditCardCreateManyWithoutOwnerInput `json:"cards,omitempty"`
-	Tickets  *TicketCreateManyInput                 `json:"tickets,omitempty"`
-}
-
-type CreditCardCreateWithoutUsesInput struct {
-	Owner      TravelerCreateOneWithoutCardsInput `json:"owner"`
-	CardNumber string                             `json:"cardNumber"`
-	CardToken  string                             `json:"cardToken"`
-	Type       *CreditCardType                    `json:"type,omitempty"`
-	LastUsed   *string                            `json:"lastUsed,omitempty"`
-}
-
-type PersonReviewsUpdateInput struct {
-	Person        *PersonUpdateOneRequiredInput `json:"person,omitempty"`
-	Title         *string                       `json:"title,omitempty"`
-	Description   *string                       `json:"description,omitempty"`
-	AproveNumber  *int32                        `json:"aproveNumber,omitempty"`
-	DeclineNumber *int32                        `json:"declineNumber,omitempty"`
-	Comments      *PersonReviewsUpdateManyInput `json:"comments,omitempty"`
-}
-
-type PaymentEntryCreateManyWithoutWithCardInput struct {
-	Create  []PaymentEntryCreateWithoutWithCardInput `json:"create,omitempty"`
-	Connect []PaymentEntryWhereUniqueInput           `json:"connect,omitempty"`
-}
-
-type AttractionUpdateWithoutOwnerDataInput struct {
-	Overview   *OverviewUpdateOneRequiredInput `json:"overview,omitempty"`
-	MaxUses    *int32                          `json:"maxUses,omitempty"`
-	Address    *string                         `json:"address,omitempty"`
-	Location   *LocationUpdateOneRequiredInput `json:"location,omitempty"`
-	Popularity *float64                        `json:"popularity,omitempty"`
-	LikedBy    *PersonUpdateManyInput          `json:"likedBy,omitempty"`
-	Types      *AttractionUpdatetypesInput     `json:"types,omitempty"`
-	Tags       *AttractionUpdatetagsInput      `json:"tags,omitempty"`
-	Reviews    *PersonReviewsUpdateManyInput   `json:"reviews,omitempty"`
-	Details    *DetailsUpdateOneInput          `json:"details,omitempty"`
-}
-
-type PaymentEntryCreateWithoutWithCardInput struct {
-	ExternalId      string  `json:"externalID"`
-	ProductId       string  `json:"productID"`
-	Product         string  `json:"product"`
-	GatewayResponse *string `json:"gatewayResponse,omitempty"`
-	Amount          int32   `json:"amount"`
-	DiscountId      *string `json:"discountID,omitempty"`
-	Discount        *int32  `json:"discount,omitempty"`
-}
-
-type OverviewUpdateManyMutationInput struct {
-	Name        *string `json:"name,omitempty"`
-	Description *string `json:"description,omitempty"`
-}
-
-type CreditCardUpdateInput struct {
-	Owner      *TravelerUpdateOneRequiredWithoutCardsInput `json:"owner,omitempty"`
-	CardNumber *string                                     `json:"cardNumber,omitempty"`
-	CardToken  *string                                     `json:"cardToken,omitempty"`
-	Type       *CreditCardType                             `json:"type,omitempty"`
-	LastUsed   *string                                     `json:"lastUsed,omitempty"`
-	Uses       *PaymentEntryUpdateManyWithoutWithCardInput `json:"uses,omitempty"`
-}
-
-type PersonUpdateOneRequiredWithoutIdentificationInput struct {
-	Create  *PersonCreateWithoutIdentificationInput     `json:"create,omitempty"`
-	Update  *PersonUpdateWithoutIdentificationDataInput `json:"update,omitempty"`
-	Upsert  *PersonUpsertWithoutIdentificationInput     `json:"upsert,omitempty"`
-	Connect *PersonWhereUniqueInput                     `json:"connect,omitempty"`
-}
-
-type TravelerUpdateOneRequiredWithoutCardsInput struct {
-	Create  *TravelerCreateWithoutCardsInput     `json:"create,omitempty"`
-	Update  *TravelerUpdateWithoutCardsDataInput `json:"update,omitempty"`
-	Upsert  *TravelerUpsertWithoutCardsInput     `json:"upsert,omitempty"`
-	Connect *TravelerWhereUniqueInput            `json:"connect,omitempty"`
-}
-
-type DetailsUpdateManyMutationInput struct {
-	ProviderName     *string `json:"providerName,omitempty"`
-	ProviderWeb      *string `json:"providerWeb,omitempty"`
-	ContactPhone     *string `json:"contactPhone,omitempty"`
-	ContactEmail     *string `json:"contactEmail,omitempty"`
-	AddressReference *string `json:"addressReference,omitempty"`
-}
-
-type TravelerUpdateWithoutCardsDataInput struct {
-	Person   *PersonUpdateOneRequiredInput `json:"person,omitempty"`
-	Username *string                       `json:"username,omitempty"`
-	Tickets  *TicketUpdateManyInput        `json:"tickets,omitempty"`
-}
-
-type PaymentEntryUpdateWithoutWithCardDataInput struct {
-	ExternalId      *string `json:"externalID,omitempty"`
-	ProductId       *string `json:"productID,omitempty"`
-	Product         *string `json:"product,omitempty"`
-	GatewayResponse *string `json:"gatewayResponse,omitempty"`
-	Amount          *int32  `json:"amount,omitempty"`
-	DiscountId      *string `json:"discountID,omitempty"`
-	Discount        *int32  `json:"discount,omitempty"`
-}
-
-type TicketUpdateManyInput struct {
-	Create     []TicketCreateInput                      `json:"create,omitempty"`
-	Update     []TicketUpdateWithWhereUniqueNestedInput `json:"update,omitempty"`
-	Upsert     []TicketUpsertWithWhereUniqueNestedInput `json:"upsert,omitempty"`
-	Delete     []TicketWhereUniqueInput                 `json:"delete,omitempty"`
-	Connect    []TicketWhereUniqueInput                 `json:"connect,omitempty"`
-	Set        []TicketWhereUniqueInput                 `json:"set,omitempty"`
-	Disconnect []TicketWhereUniqueInput                 `json:"disconnect,omitempty"`
-	DeleteMany []TicketScalarWhereInput                 `json:"deleteMany,omitempty"`
-	UpdateMany []TicketUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
+type TicketUpdateWithWhereUniqueNestedInput struct {
+	Where TicketWhereUniqueInput `json:"where"`
+	Data  TicketUpdateDataInput  `json:"data"`
 }
 
 type AttractionCreateInput struct {
@@ -5567,17 +5794,6 @@ type AttractionCreateInput struct {
 	Details    *DetailsCreateOneInput                  `json:"details,omitempty"`
 }
 
-type TicketUpdateWithWhereUniqueNestedInput struct {
-	Where TicketWhereUniqueInput `json:"where"`
-	Data  TicketUpdateDataInput  `json:"data"`
-}
-
-type EmailCreateInput struct {
-	Type   *CommunicationType      `json:"type,omitempty"`
-	Value  string                  `json:"value"`
-	Extras *EmailCreateextrasInput `json:"extras,omitempty"`
-}
-
 type TicketUpdateDataInput struct {
 	Type     *TicketTypeUpdateOneRequiredInput   `json:"type,omitempty"`
 	Owner    *PersonUpdateOneRequiredInput       `json:"owner,omitempty"`
@@ -5586,10 +5802,11 @@ type TicketUpdateDataInput struct {
 	Visited  *AttractionUpdateManyInput          `json:"visited,omitempty"`
 }
 
-type LocationCreateInput struct {
-	Longitude   float64 `json:"longitude"`
-	Latitude    float64 `json:"latitude"`
-	Description *string `json:"description,omitempty"`
+type EmailChannelCreateInput struct {
+	DisplayName string                         `json:"displayName"`
+	Valid       *bool                          `json:"valid,omitempty"`
+	Value       string                         `json:"value"`
+	Extras      *EmailChannelCreateextrasInput `json:"extras,omitempty"`
 }
 
 type TicketTypeUpdateOneRequiredInput struct {
@@ -5599,9 +5816,10 @@ type TicketTypeUpdateOneRequiredInput struct {
 	Connect *TicketTypeWhereUniqueInput  `json:"connect,omitempty"`
 }
 
-type CredentialWhereUniqueInput struct {
-	ID    *string `json:"id,omitempty"`
-	Value *string `json:"value,omitempty"`
+type LocationCreateInput struct {
+	Longitude   float64 `json:"longitude"`
+	Latitude    float64 `json:"latitude"`
+	Description *string `json:"description,omitempty"`
 }
 
 type TicketTypeUpdateDataInput struct {
@@ -5610,8 +5828,15 @@ type TicketTypeUpdateDataInput struct {
 	Cost        *float64                   `json:"cost,omitempty"`
 }
 
-type TravelerUpdateManyMutationInput struct {
-	Username *string `json:"username,omitempty"`
+type PersonReviewsSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                        `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                               `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                              `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                              `json:"updatedFields_contains_some,omitempty"`
+	Node                       *PersonReviewsWhereInput              `json:"node,omitempty"`
+	And                        []PersonReviewsSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []PersonReviewsSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []PersonReviewsSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
 type AttractionUpdateManyInput struct {
@@ -5626,8 +5851,65 @@ type AttractionUpdateManyInput struct {
 	UpdateMany []AttractionUpdateManyWithWhereNestedInput   `json:"updateMany,omitempty"`
 }
 
-type IDentificationDocumentWhereUniqueInput struct {
-	ID *string `json:"id,omitempty"`
+type TicketTypeWhereInput struct {
+	ID                     *string                `json:"id,omitempty"`
+	IDNot                  *string                `json:"id_not,omitempty"`
+	IDIn                   []string               `json:"id_in,omitempty"`
+	IDNotIn                []string               `json:"id_not_in,omitempty"`
+	IDLt                   *string                `json:"id_lt,omitempty"`
+	IDLte                  *string                `json:"id_lte,omitempty"`
+	IDGt                   *string                `json:"id_gt,omitempty"`
+	IDGte                  *string                `json:"id_gte,omitempty"`
+	IDContains             *string                `json:"id_contains,omitempty"`
+	IDNotContains          *string                `json:"id_not_contains,omitempty"`
+	IDStartsWith           *string                `json:"id_starts_with,omitempty"`
+	IDNotStartsWith        *string                `json:"id_not_starts_with,omitempty"`
+	IDEndsWith             *string                `json:"id_ends_with,omitempty"`
+	IDNotEndsWith          *string                `json:"id_not_ends_with,omitempty"`
+	CreatedAt              *string                `json:"createdAt,omitempty"`
+	CreatedAtNot           *string                `json:"createdAt_not,omitempty"`
+	CreatedAtIn            []string               `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn         []string               `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt            *string                `json:"createdAt_lt,omitempty"`
+	CreatedAtLte           *string                `json:"createdAt_lte,omitempty"`
+	CreatedAtGt            *string                `json:"createdAt_gt,omitempty"`
+	CreatedAtGte           *string                `json:"createdAt_gte,omitempty"`
+	UpdatedAt              *string                `json:"updatedAt,omitempty"`
+	UpdatedAtNot           *string                `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn            []string               `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn         []string               `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt            *string                `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte           *string                `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt            *string                `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte           *string                `json:"updatedAt_gte,omitempty"`
+	CreatorId              *string                `json:"creatorID,omitempty"`
+	CreatorIdNot           *string                `json:"creatorID_not,omitempty"`
+	CreatorIdIn            []string               `json:"creatorID_in,omitempty"`
+	CreatorIdNotIn         []string               `json:"creatorID_not_in,omitempty"`
+	CreatorIdLt            *string                `json:"creatorID_lt,omitempty"`
+	CreatorIdLte           *string                `json:"creatorID_lte,omitempty"`
+	CreatorIdGt            *string                `json:"creatorID_gt,omitempty"`
+	CreatorIdGte           *string                `json:"creatorID_gte,omitempty"`
+	CreatorIdContains      *string                `json:"creatorID_contains,omitempty"`
+	CreatorIdNotContains   *string                `json:"creatorID_not_contains,omitempty"`
+	CreatorIdStartsWith    *string                `json:"creatorID_starts_with,omitempty"`
+	CreatorIdNotStartsWith *string                `json:"creatorID_not_starts_with,omitempty"`
+	CreatorIdEndsWith      *string                `json:"creatorID_ends_with,omitempty"`
+	CreatorIdNotEndsWith   *string                `json:"creatorID_not_ends_with,omitempty"`
+	AttractionsEvery       *AttractionWhereInput  `json:"attractions_every,omitempty"`
+	AttractionsSome        *AttractionWhereInput  `json:"attractions_some,omitempty"`
+	AttractionsNone        *AttractionWhereInput  `json:"attractions_none,omitempty"`
+	Cost                   *float64               `json:"cost,omitempty"`
+	CostNot                *float64               `json:"cost_not,omitempty"`
+	CostIn                 []float64              `json:"cost_in,omitempty"`
+	CostNotIn              []float64              `json:"cost_not_in,omitempty"`
+	CostLt                 *float64               `json:"cost_lt,omitempty"`
+	CostLte                *float64               `json:"cost_lte,omitempty"`
+	CostGt                 *float64               `json:"cost_gt,omitempty"`
+	CostGte                *float64               `json:"cost_gte,omitempty"`
+	And                    []TicketTypeWhereInput `json:"AND,omitempty"`
+	Or                     []TicketTypeWhereInput `json:"OR,omitempty"`
+	Not                    []TicketTypeWhereInput `json:"NOT,omitempty"`
 }
 
 type AttractionUpdateWithWhereUniqueNestedInput struct {
@@ -5635,17 +5917,8 @@ type AttractionUpdateWithWhereUniqueNestedInput struct {
 	Data  AttractionUpdateDataInput  `json:"data"`
 }
 
-type AttractionCreateWithoutOwnerInput struct {
-	Overview   OverviewCreateOneInput        `json:"overview"`
-	MaxUses    *int32                        `json:"maxUses,omitempty"`
-	Address    string                        `json:"address"`
-	Location   LocationCreateOneInput        `json:"location"`
-	Popularity *float64                      `json:"popularity,omitempty"`
-	LikedBy    *PersonCreateManyInput        `json:"likedBy,omitempty"`
-	Types      *AttractionCreatetypesInput   `json:"types,omitempty"`
-	Tags       *AttractionCreatetagsInput    `json:"tags,omitempty"`
-	Reviews    *PersonReviewsCreateManyInput `json:"reviews,omitempty"`
-	Details    *DetailsCreateOneInput        `json:"details,omitempty"`
+type EmailChannelWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
 }
 
 type AttractionUpdateDataInput struct {
@@ -5662,9 +5935,84 @@ type AttractionUpdateDataInput struct {
 	Details    *DetailsUpdateOneInput                           `json:"details,omitempty"`
 }
 
-type PersonCreateOneWithoutIdentificationInput struct {
-	Create  *PersonCreateWithoutIdentificationInput `json:"create,omitempty"`
-	Connect *PersonWhereUniqueInput                 `json:"connect,omitempty"`
+type PhoneChannelWhereInput struct {
+	ID                       *string                  `json:"id,omitempty"`
+	IDNot                    *string                  `json:"id_not,omitempty"`
+	IDIn                     []string                 `json:"id_in,omitempty"`
+	IDNotIn                  []string                 `json:"id_not_in,omitempty"`
+	IDLt                     *string                  `json:"id_lt,omitempty"`
+	IDLte                    *string                  `json:"id_lte,omitempty"`
+	IDGt                     *string                  `json:"id_gt,omitempty"`
+	IDGte                    *string                  `json:"id_gte,omitempty"`
+	IDContains               *string                  `json:"id_contains,omitempty"`
+	IDNotContains            *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith             *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith          *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith               *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith            *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt                *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot             *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn              []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn           []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt              *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte             *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt              *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte             *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt                *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot             *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn              []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn           []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt              *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte             *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt              *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte             *string                  `json:"updatedAt_gte,omitempty"`
+	DisplayName              *string                  `json:"displayName,omitempty"`
+	DisplayNameNot           *string                  `json:"displayName_not,omitempty"`
+	DisplayNameIn            []string                 `json:"displayName_in,omitempty"`
+	DisplayNameNotIn         []string                 `json:"displayName_not_in,omitempty"`
+	DisplayNameLt            *string                  `json:"displayName_lt,omitempty"`
+	DisplayNameLte           *string                  `json:"displayName_lte,omitempty"`
+	DisplayNameGt            *string                  `json:"displayName_gt,omitempty"`
+	DisplayNameGte           *string                  `json:"displayName_gte,omitempty"`
+	DisplayNameContains      *string                  `json:"displayName_contains,omitempty"`
+	DisplayNameNotContains   *string                  `json:"displayName_not_contains,omitempty"`
+	DisplayNameStartsWith    *string                  `json:"displayName_starts_with,omitempty"`
+	DisplayNameNotStartsWith *string                  `json:"displayName_not_starts_with,omitempty"`
+	DisplayNameEndsWith      *string                  `json:"displayName_ends_with,omitempty"`
+	DisplayNameNotEndsWith   *string                  `json:"displayName_not_ends_with,omitempty"`
+	Valid                    *bool                    `json:"valid,omitempty"`
+	ValidNot                 *bool                    `json:"valid_not,omitempty"`
+	CountryCode              *string                  `json:"countryCode,omitempty"`
+	CountryCodeNot           *string                  `json:"countryCode_not,omitempty"`
+	CountryCodeIn            []string                 `json:"countryCode_in,omitempty"`
+	CountryCodeNotIn         []string                 `json:"countryCode_not_in,omitempty"`
+	CountryCodeLt            *string                  `json:"countryCode_lt,omitempty"`
+	CountryCodeLte           *string                  `json:"countryCode_lte,omitempty"`
+	CountryCodeGt            *string                  `json:"countryCode_gt,omitempty"`
+	CountryCodeGte           *string                  `json:"countryCode_gte,omitempty"`
+	CountryCodeContains      *string                  `json:"countryCode_contains,omitempty"`
+	CountryCodeNotContains   *string                  `json:"countryCode_not_contains,omitempty"`
+	CountryCodeStartsWith    *string                  `json:"countryCode_starts_with,omitempty"`
+	CountryCodeNotStartsWith *string                  `json:"countryCode_not_starts_with,omitempty"`
+	CountryCodeEndsWith      *string                  `json:"countryCode_ends_with,omitempty"`
+	CountryCodeNotEndsWith   *string                  `json:"countryCode_not_ends_with,omitempty"`
+	Number                   *string                  `json:"number,omitempty"`
+	NumberNot                *string                  `json:"number_not,omitempty"`
+	NumberIn                 []string                 `json:"number_in,omitempty"`
+	NumberNotIn              []string                 `json:"number_not_in,omitempty"`
+	NumberLt                 *string                  `json:"number_lt,omitempty"`
+	NumberLte                *string                  `json:"number_lte,omitempty"`
+	NumberGt                 *string                  `json:"number_gt,omitempty"`
+	NumberGte                *string                  `json:"number_gte,omitempty"`
+	NumberContains           *string                  `json:"number_contains,omitempty"`
+	NumberNotContains        *string                  `json:"number_not_contains,omitempty"`
+	NumberStartsWith         *string                  `json:"number_starts_with,omitempty"`
+	NumberNotStartsWith      *string                  `json:"number_not_starts_with,omitempty"`
+	NumberEndsWith           *string                  `json:"number_ends_with,omitempty"`
+	NumberNotEndsWith        *string                  `json:"number_not_ends_with,omitempty"`
+	And                      []PhoneChannelWhereInput `json:"AND,omitempty"`
+	Or                       []PhoneChannelWhereInput `json:"OR,omitempty"`
+	Not                      []PhoneChannelWhereInput `json:"NOT,omitempty"`
 }
 
 type AttractionUpsertWithWhereUniqueNestedInput struct {
@@ -5673,9 +6021,10 @@ type AttractionUpsertWithWhereUniqueNestedInput struct {
 	Create AttractionCreateInput      `json:"create"`
 }
 
-type TravelerUpsertWithoutCardsInput struct {
-	Update TravelerUpdateWithoutCardsDataInput `json:"update"`
-	Create TravelerCreateWithoutCardsInput     `json:"create"`
+type IDentificationDocumentUpdateManyMutationInput struct {
+	Type      *IDentificationType `json:"type,omitempty"`
+	Value     *string             `json:"value,omitempty"`
+	Validated *bool               `json:"validated,omitempty"`
 }
 
 type AttractionScalarWhereInput struct {
@@ -5744,8 +6093,11 @@ type AttractionScalarWhereInput struct {
 	Not                  []AttractionScalarWhereInput `json:"NOT,omitempty"`
 }
 
-type PersonCreatetagsInput struct {
-	Set []string `json:"set,omitempty"`
+type CreditCardUpdateManyMutationInput struct {
+	CardNumber *string         `json:"cardNumber,omitempty"`
+	CardToken  *string         `json:"cardToken,omitempty"`
+	Type       *CreditCardType `json:"type,omitempty"`
+	LastUsed   *string         `json:"lastUsed,omitempty"`
 }
 
 type AttractionUpdateManyWithWhereNestedInput struct {
@@ -5753,61 +6105,17 @@ type AttractionUpdateManyWithWhereNestedInput struct {
 	Data  AttractionUpdateManyDataInput `json:"data"`
 }
 
-type TravelerWhereInput struct {
-	ID                    *string               `json:"id,omitempty"`
-	IDNot                 *string               `json:"id_not,omitempty"`
-	IDIn                  []string              `json:"id_in,omitempty"`
-	IDNotIn               []string              `json:"id_not_in,omitempty"`
-	IDLt                  *string               `json:"id_lt,omitempty"`
-	IDLte                 *string               `json:"id_lte,omitempty"`
-	IDGt                  *string               `json:"id_gt,omitempty"`
-	IDGte                 *string               `json:"id_gte,omitempty"`
-	IDContains            *string               `json:"id_contains,omitempty"`
-	IDNotContains         *string               `json:"id_not_contains,omitempty"`
-	IDStartsWith          *string               `json:"id_starts_with,omitempty"`
-	IDNotStartsWith       *string               `json:"id_not_starts_with,omitempty"`
-	IDEndsWith            *string               `json:"id_ends_with,omitempty"`
-	IDNotEndsWith         *string               `json:"id_not_ends_with,omitempty"`
-	CreatedAt             *string               `json:"createdAt,omitempty"`
-	CreatedAtNot          *string               `json:"createdAt_not,omitempty"`
-	CreatedAtIn           []string              `json:"createdAt_in,omitempty"`
-	CreatedAtNotIn        []string              `json:"createdAt_not_in,omitempty"`
-	CreatedAtLt           *string               `json:"createdAt_lt,omitempty"`
-	CreatedAtLte          *string               `json:"createdAt_lte,omitempty"`
-	CreatedAtGt           *string               `json:"createdAt_gt,omitempty"`
-	CreatedAtGte          *string               `json:"createdAt_gte,omitempty"`
-	UpdatedAt             *string               `json:"updatedAt,omitempty"`
-	UpdatedAtNot          *string               `json:"updatedAt_not,omitempty"`
-	UpdatedAtIn           []string              `json:"updatedAt_in,omitempty"`
-	UpdatedAtNotIn        []string              `json:"updatedAt_not_in,omitempty"`
-	UpdatedAtLt           *string               `json:"updatedAt_lt,omitempty"`
-	UpdatedAtLte          *string               `json:"updatedAt_lte,omitempty"`
-	UpdatedAtGt           *string               `json:"updatedAt_gt,omitempty"`
-	UpdatedAtGte          *string               `json:"updatedAt_gte,omitempty"`
-	Person                *PersonWhereInput     `json:"person,omitempty"`
-	Username              *string               `json:"username,omitempty"`
-	UsernameNot           *string               `json:"username_not,omitempty"`
-	UsernameIn            []string              `json:"username_in,omitempty"`
-	UsernameNotIn         []string              `json:"username_not_in,omitempty"`
-	UsernameLt            *string               `json:"username_lt,omitempty"`
-	UsernameLte           *string               `json:"username_lte,omitempty"`
-	UsernameGt            *string               `json:"username_gt,omitempty"`
-	UsernameGte           *string               `json:"username_gte,omitempty"`
-	UsernameContains      *string               `json:"username_contains,omitempty"`
-	UsernameNotContains   *string               `json:"username_not_contains,omitempty"`
-	UsernameStartsWith    *string               `json:"username_starts_with,omitempty"`
-	UsernameNotStartsWith *string               `json:"username_not_starts_with,omitempty"`
-	UsernameEndsWith      *string               `json:"username_ends_with,omitempty"`
-	UsernameNotEndsWith   *string               `json:"username_not_ends_with,omitempty"`
-	CardsEvery            *CreditCardWhereInput `json:"cards_every,omitempty"`
-	CardsSome             *CreditCardWhereInput `json:"cards_some,omitempty"`
-	CardsNone             *CreditCardWhereInput `json:"cards_none,omitempty"`
-	TicketsEvery          *TicketWhereInput     `json:"tickets_every,omitempty"`
-	TicketsSome           *TicketWhereInput     `json:"tickets_some,omitempty"`
-	TicketsNone           *TicketWhereInput     `json:"tickets_none,omitempty"`
-	And                   []TravelerWhereInput  `json:"AND,omitempty"`
-	Or                    []TravelerWhereInput  `json:"OR,omitempty"`
-	Not                   []TravelerWhereInput  `json:"NOT,omitempty"`
+type PersonCreateInput struct {
+	MId            *string                                           `json:"mID,omitempty"`
+	Name           string                                            `json:"name"`
+	Photo          *string                                           `json:"photo,omitempty"`
+	Birthday       string                                            `json:"birthday"`
+	From           *string                                           `json:"from,omitempty"`
+	ChannelsPhone  *PhoneChannelCreateManyInput                      `json:"channelsPhone,omitempty"`
+	ChannelsEmail  *EmailChannelCreateManyInput                      `json:"channelsEmail,omitempty"`
+	IDentification IDentificationDocumentCreateOneWithoutPersonInput `json:"identification"`
+	Tags           *PersonCreatetagsInput                            `json:"tags,omitempty"`
+	Credentials    *CredentialCreateManyWithoutOwnerInput            `json:"credentials,omitempty"`
 }
 
 type AttractionUpdateManyDataInput struct {
@@ -5818,15 +6126,104 @@ type AttractionUpdateManyDataInput struct {
 	Tags       *AttractionUpdatetagsInput  `json:"tags,omitempty"`
 }
 
-type PaymentEntryUpdateInput struct {
-	ExternalId      *string                                      `json:"externalID,omitempty"`
-	WithCard        *CreditCardUpdateOneRequiredWithoutUsesInput `json:"withCard,omitempty"`
-	ProductId       *string                                      `json:"productID,omitempty"`
-	Product         *string                                      `json:"product,omitempty"`
-	GatewayResponse *string                                      `json:"gatewayResponse,omitempty"`
-	Amount          *int32                                       `json:"amount,omitempty"`
-	DiscountId      *string                                      `json:"discountID,omitempty"`
-	Discount        *int32                                       `json:"discount,omitempty"`
+type OpeningHoursCreateInput struct {
+	From string `json:"from"`
+	To   string `json:"to"`
+}
+
+type TicketTypeUpsertNestedInput struct {
+	Update TicketTypeUpdateDataInput `json:"update"`
+	Create TicketTypeCreateInput     `json:"create"`
+}
+
+type EmailChannelWhereInput struct {
+	ID                       *string                  `json:"id,omitempty"`
+	IDNot                    *string                  `json:"id_not,omitempty"`
+	IDIn                     []string                 `json:"id_in,omitempty"`
+	IDNotIn                  []string                 `json:"id_not_in,omitempty"`
+	IDLt                     *string                  `json:"id_lt,omitempty"`
+	IDLte                    *string                  `json:"id_lte,omitempty"`
+	IDGt                     *string                  `json:"id_gt,omitempty"`
+	IDGte                    *string                  `json:"id_gte,omitempty"`
+	IDContains               *string                  `json:"id_contains,omitempty"`
+	IDNotContains            *string                  `json:"id_not_contains,omitempty"`
+	IDStartsWith             *string                  `json:"id_starts_with,omitempty"`
+	IDNotStartsWith          *string                  `json:"id_not_starts_with,omitempty"`
+	IDEndsWith               *string                  `json:"id_ends_with,omitempty"`
+	IDNotEndsWith            *string                  `json:"id_not_ends_with,omitempty"`
+	CreatedAt                *string                  `json:"createdAt,omitempty"`
+	CreatedAtNot             *string                  `json:"createdAt_not,omitempty"`
+	CreatedAtIn              []string                 `json:"createdAt_in,omitempty"`
+	CreatedAtNotIn           []string                 `json:"createdAt_not_in,omitempty"`
+	CreatedAtLt              *string                  `json:"createdAt_lt,omitempty"`
+	CreatedAtLte             *string                  `json:"createdAt_lte,omitempty"`
+	CreatedAtGt              *string                  `json:"createdAt_gt,omitempty"`
+	CreatedAtGte             *string                  `json:"createdAt_gte,omitempty"`
+	UpdatedAt                *string                  `json:"updatedAt,omitempty"`
+	UpdatedAtNot             *string                  `json:"updatedAt_not,omitempty"`
+	UpdatedAtIn              []string                 `json:"updatedAt_in,omitempty"`
+	UpdatedAtNotIn           []string                 `json:"updatedAt_not_in,omitempty"`
+	UpdatedAtLt              *string                  `json:"updatedAt_lt,omitempty"`
+	UpdatedAtLte             *string                  `json:"updatedAt_lte,omitempty"`
+	UpdatedAtGt              *string                  `json:"updatedAt_gt,omitempty"`
+	UpdatedAtGte             *string                  `json:"updatedAt_gte,omitempty"`
+	DisplayName              *string                  `json:"displayName,omitempty"`
+	DisplayNameNot           *string                  `json:"displayName_not,omitempty"`
+	DisplayNameIn            []string                 `json:"displayName_in,omitempty"`
+	DisplayNameNotIn         []string                 `json:"displayName_not_in,omitempty"`
+	DisplayNameLt            *string                  `json:"displayName_lt,omitempty"`
+	DisplayNameLte           *string                  `json:"displayName_lte,omitempty"`
+	DisplayNameGt            *string                  `json:"displayName_gt,omitempty"`
+	DisplayNameGte           *string                  `json:"displayName_gte,omitempty"`
+	DisplayNameContains      *string                  `json:"displayName_contains,omitempty"`
+	DisplayNameNotContains   *string                  `json:"displayName_not_contains,omitempty"`
+	DisplayNameStartsWith    *string                  `json:"displayName_starts_with,omitempty"`
+	DisplayNameNotStartsWith *string                  `json:"displayName_not_starts_with,omitempty"`
+	DisplayNameEndsWith      *string                  `json:"displayName_ends_with,omitempty"`
+	DisplayNameNotEndsWith   *string                  `json:"displayName_not_ends_with,omitempty"`
+	Valid                    *bool                    `json:"valid,omitempty"`
+	ValidNot                 *bool                    `json:"valid_not,omitempty"`
+	Value                    *string                  `json:"value,omitempty"`
+	ValueNot                 *string                  `json:"value_not,omitempty"`
+	ValueIn                  []string                 `json:"value_in,omitempty"`
+	ValueNotIn               []string                 `json:"value_not_in,omitempty"`
+	ValueLt                  *string                  `json:"value_lt,omitempty"`
+	ValueLte                 *string                  `json:"value_lte,omitempty"`
+	ValueGt                  *string                  `json:"value_gt,omitempty"`
+	ValueGte                 *string                  `json:"value_gte,omitempty"`
+	ValueContains            *string                  `json:"value_contains,omitempty"`
+	ValueNotContains         *string                  `json:"value_not_contains,omitempty"`
+	ValueStartsWith          *string                  `json:"value_starts_with,omitempty"`
+	ValueNotStartsWith       *string                  `json:"value_not_starts_with,omitempty"`
+	ValueEndsWith            *string                  `json:"value_ends_with,omitempty"`
+	ValueNotEndsWith         *string                  `json:"value_not_ends_with,omitempty"`
+	And                      []EmailChannelWhereInput `json:"AND,omitempty"`
+	Or                       []EmailChannelWhereInput `json:"OR,omitempty"`
+	Not                      []EmailChannelWhereInput `json:"NOT,omitempty"`
+}
+
+type PaymentEntryUpdateOneRequiredInput struct {
+	Create  *PaymentEntryCreateInput       `json:"create,omitempty"`
+	Update  *PaymentEntryUpdateDataInput   `json:"update,omitempty"`
+	Upsert  *PaymentEntryUpsertNestedInput `json:"upsert,omitempty"`
+	Connect *PaymentEntryWhereUniqueInput  `json:"connect,omitempty"`
+}
+
+type PartnerWhereUniqueInput struct {
+	ID *string `json:"id,omitempty"`
+}
+
+type CreditCardUpsertWithoutUsesInput struct {
+	Update CreditCardUpdateWithoutUsesDataInput `json:"update"`
+	Create CreditCardCreateWithoutUsesInput     `json:"create"`
+}
+
+type CreditCardUpdateWithoutUsesDataInput struct {
+	Owner      *TravelerUpdateOneRequiredWithoutCardsInput `json:"owner,omitempty"`
+	CardNumber *string                                     `json:"cardNumber,omitempty"`
+	CardToken  *string                                     `json:"cardToken,omitempty"`
+	Type       *CreditCardType                             `json:"type,omitempty"`
+	LastUsed   *string                                     `json:"lastUsed,omitempty"`
 }
 
 type CreditCardUpdateOneRequiredWithoutUsesInput struct {
@@ -5847,62 +6244,37 @@ type PaymentEntryUpdateDataInput struct {
 	Discount        *int32                                       `json:"discount,omitempty"`
 }
 
-type PaymentEntryUpdateOneRequiredInput struct {
-	Create  *PaymentEntryCreateInput       `json:"create,omitempty"`
-	Update  *PaymentEntryUpdateDataInput   `json:"update,omitempty"`
-	Upsert  *PaymentEntryUpsertNestedInput `json:"upsert,omitempty"`
-	Connect *PaymentEntryWhereUniqueInput  `json:"connect,omitempty"`
+type PersonCreateOneWithoutIdentificationInput struct {
+	Create  *PersonCreateWithoutIdentificationInput `json:"create,omitempty"`
+	Connect *PersonWhereUniqueInput                 `json:"connect,omitempty"`
 }
 
-type TicketTypeUpsertNestedInput struct {
-	Update TicketTypeUpdateDataInput `json:"update"`
-	Create TicketTypeCreateInput     `json:"create"`
+type TicketUpdateInput struct {
+	Type     *TicketTypeUpdateOneRequiredInput   `json:"type,omitempty"`
+	Owner    *PersonUpdateOneRequiredInput       `json:"owner,omitempty"`
+	Receive  *PaymentEntryUpdateOneRequiredInput `json:"receive,omitempty"`
+	ExpireAt *string                             `json:"expireAt,omitempty"`
+	Visited  *AttractionUpdateManyInput          `json:"visited,omitempty"`
 }
 
-type IDentificationDocumentUpdateManyMutationInput struct {
-	Type  *IDentificationType `json:"type,omitempty"`
-	Value *string             `json:"value,omitempty"`
+type IDentificationDocumentSubscriptionWhereInput struct {
+	MutationIn                 []MutationType                                 `json:"mutation_in,omitempty"`
+	UpdatedFieldsContains      *string                                        `json:"updatedFields_contains,omitempty"`
+	UpdatedFieldsContainsEvery []string                                       `json:"updatedFields_contains_every,omitempty"`
+	UpdatedFieldsContainsSome  []string                                       `json:"updatedFields_contains_some,omitempty"`
+	Node                       *IDentificationDocumentWhereInput              `json:"node,omitempty"`
+	And                        []IDentificationDocumentSubscriptionWhereInput `json:"AND,omitempty"`
+	Or                         []IDentificationDocumentSubscriptionWhereInput `json:"OR,omitempty"`
+	Not                        []IDentificationDocumentSubscriptionWhereInput `json:"NOT,omitempty"`
 }
 
-type CreditCardUpdateManyWithoutOwnerInput struct {
-	Create     []CreditCardCreateWithoutOwnerInput                `json:"create,omitempty"`
-	Delete     []CreditCardWhereUniqueInput                       `json:"delete,omitempty"`
-	Connect    []CreditCardWhereUniqueInput                       `json:"connect,omitempty"`
-	Set        []CreditCardWhereUniqueInput                       `json:"set,omitempty"`
-	Disconnect []CreditCardWhereUniqueInput                       `json:"disconnect,omitempty"`
-	Update     []CreditCardUpdateWithWhereUniqueWithoutOwnerInput `json:"update,omitempty"`
-	Upsert     []CreditCardUpsertWithWhereUniqueWithoutOwnerInput `json:"upsert,omitempty"`
-	DeleteMany []CreditCardScalarWhereInput                       `json:"deleteMany,omitempty"`
-	UpdateMany []CreditCardUpdateManyWithWhereNestedInput         `json:"updateMany,omitempty"`
+type PersonCreatetagsInput struct {
+	Set []string `json:"set,omitempty"`
 }
 
-type PersonReviewsSubscriptionWhereInput struct {
-	MutationIn                 []MutationType                        `json:"mutation_in,omitempty"`
-	UpdatedFieldsContains      *string                               `json:"updatedFields_contains,omitempty"`
-	UpdatedFieldsContainsEvery []string                              `json:"updatedFields_contains_every,omitempty"`
-	UpdatedFieldsContainsSome  []string                              `json:"updatedFields_contains_some,omitempty"`
-	Node                       *PersonReviewsWhereInput              `json:"node,omitempty"`
-	And                        []PersonReviewsSubscriptionWhereInput `json:"AND,omitempty"`
-	Or                         []PersonReviewsSubscriptionWhereInput `json:"OR,omitempty"`
-	Not                        []PersonReviewsSubscriptionWhereInput `json:"NOT,omitempty"`
-}
-
-type PersonCreateInput struct {
-	MId            *string                                           `json:"mID,omitempty"`
-	Name           string                                            `json:"name"`
-	Photo          *string                                           `json:"photo,omitempty"`
-	Birthday       string                                            `json:"birthday"`
-	From           *string                                           `json:"from,omitempty"`
-	ChannelsPhone  *PhoneCreateManyInput                             `json:"channelsPhone,omitempty"`
-	ChannelsEmail  *EmailCreateManyInput                             `json:"channelsEmail,omitempty"`
-	IDentification IDentificationDocumentCreateOneWithoutPersonInput `json:"identification"`
-	Tags           *PersonCreatetagsInput                            `json:"tags,omitempty"`
-	Credentials    *CredentialCreateManyWithoutOwnerInput            `json:"credentials,omitempty"`
-}
-
-type PaymentEntryUpdateManyWithWhereNestedInput struct {
-	Where PaymentEntryScalarWhereInput    `json:"where"`
-	Data  PaymentEntryUpdateManyDataInput `json:"data"`
+type PaymentEntryUpdateWithWhereUniqueWithoutWithCardInput struct {
+	Where PaymentEntryWhereUniqueInput               `json:"where"`
+	Data  PaymentEntryUpdateWithoutWithCardDataInput `json:"data"`
 }
 
 type TravelerPreviousValuesExec struct {
@@ -5940,160 +6312,6 @@ type TravelerPreviousValues struct {
 	CreatedAt string `json:"createdAt"`
 	UpdatedAt string `json:"updatedAt"`
 	Username  string `json:"username"`
-}
-
-type EmailExec struct {
-	exec *prisma.Exec
-}
-
-func (instance EmailExec) Exec(ctx context.Context) (*Email, error) {
-	var v Email
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance EmailExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type EmailExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance EmailExecArray) Exec(ctx context.Context) ([]Email, error) {
-	var v []Email
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type Email struct {
-	Type   CommunicationType `json:"type"`
-	Value  string            `json:"value"`
-	Extras []string          `json:"extras,omitempty"`
-}
-
-type LocationExec struct {
-	exec *prisma.Exec
-}
-
-func (instance LocationExec) Exec(ctx context.Context) (*Location, error) {
-	var v Location
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance LocationExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type LocationExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance LocationExecArray) Exec(ctx context.Context) ([]Location, error) {
-	var v []Location
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type Location struct {
-	Longitude   float64 `json:"longitude"`
-	Latitude    float64 `json:"latitude"`
-	Description *string `json:"description,omitempty"`
-}
-
-type CreditCardEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CreditCardEdgeExec) Node() *CreditCardExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "CreditCard"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "cardNumber", "cardToken", "type", "lastUsed"})
-
-	return &CreditCardExec{ret}
-}
-
-func (instance CreditCardEdgeExec) Exec(ctx context.Context) (*CreditCardEdge, error) {
-	var v CreditCardEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CreditCardEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CreditCardEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CreditCardEdgeExecArray) Exec(ctx context.Context) ([]CreditCardEdge, error) {
-	var v []CreditCardEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type CreditCardEdge struct {
-	Cursor string `json:"cursor"`
-}
-
-type TicketPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance TicketPreviousValuesExec) Exec(ctx context.Context) (*TicketPreviousValues, error) {
-	var v TicketPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance TicketPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type TicketPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance TicketPreviousValuesExecArray) Exec(ctx context.Context) ([]TicketPreviousValues, error) {
-	var v []TicketPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type TicketPreviousValues struct {
-	ID        string `json:"id"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	ExpireAt  string `json:"expireAt"`
 }
 
 type CreditCardConnectionExec struct {
@@ -6162,6 +6380,124 @@ func (instance CreditCardConnectionExecArray) Exec(ctx context.Context) ([]Credi
 }
 
 type CreditCardConnection struct {
+}
+
+type LocationExec struct {
+	exec *prisma.Exec
+}
+
+func (instance LocationExec) Exec(ctx context.Context) (*Location, error) {
+	var v Location
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance LocationExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type LocationExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance LocationExecArray) Exec(ctx context.Context) ([]Location, error) {
+	var v []Location
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type Location struct {
+	Longitude   float64 `json:"longitude"`
+	Latitude    float64 `json:"latitude"`
+	Description *string `json:"description,omitempty"`
+}
+
+type TicketPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance TicketPreviousValuesExec) Exec(ctx context.Context) (*TicketPreviousValues, error) {
+	var v TicketPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance TicketPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type TicketPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance TicketPreviousValuesExecArray) Exec(ctx context.Context) ([]TicketPreviousValues, error) {
+	var v []TicketPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type TicketPreviousValues struct {
+	ID        string `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	ExpireAt  string `json:"expireAt"`
+}
+
+type CreditCardEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CreditCardEdgeExec) Node() *CreditCardExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "CreditCard"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "cardNumber", "cardToken", "type", "lastUsed"})
+
+	return &CreditCardExec{ret}
+}
+
+func (instance CreditCardEdgeExec) Exec(ctx context.Context) (*CreditCardEdge, error) {
+	var v CreditCardEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CreditCardEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CreditCardEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CreditCardEdgeExecArray) Exec(ctx context.Context) ([]CreditCardEdge, error) {
+	var v []CreditCardEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type CreditCardEdge struct {
+	Cursor string `json:"cursor"`
 }
 
 type PaymentEntryExec struct {
@@ -6263,34 +6599,12 @@ type TravelerEdge struct {
 	Cursor string `json:"cursor"`
 }
 
-type TicketTypeSubscriptionPayloadExec struct {
+type OpeningHoursExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *TicketTypeSubscriptionPayloadExec) Node() *TicketTypeExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "TicketType"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "creatorID", "cost"})
-
-	return &TicketTypeExec{ret}
-}
-
-func (instance *TicketTypeSubscriptionPayloadExec) PreviousValues() *TicketTypePreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "TicketTypePreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "creatorID", "cost"})
-
-	return &TicketTypePreviousValuesExec{ret}
-}
-
-func (instance TicketTypeSubscriptionPayloadExec) Exec(ctx context.Context) (*TicketTypeSubscriptionPayload, error) {
-	var v TicketTypeSubscriptionPayload
+func (instance OpeningHoursExec) Exec(ctx context.Context) (*OpeningHours, error) {
+	var v OpeningHours
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -6301,23 +6615,23 @@ func (instance TicketTypeSubscriptionPayloadExec) Exec(ctx context.Context) (*Ti
 	return &v, nil
 }
 
-func (instance TicketTypeSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance OpeningHoursExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type TicketTypeSubscriptionPayloadExecArray struct {
+type OpeningHoursExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance TicketTypeSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]TicketTypeSubscriptionPayload, error) {
-	var v []TicketTypeSubscriptionPayload
+func (instance OpeningHoursExecArray) Exec(ctx context.Context) ([]OpeningHours, error) {
+	var v []OpeningHours
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type TicketTypeSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
+type OpeningHours struct {
+	From string `json:"from"`
+	To   string `json:"to"`
 }
 
 type TravelerSubscriptionPayloadExec struct {
@@ -7025,11 +7339,11 @@ type AttractionPreviousValues struct {
 	Tags       []string         `json:"tags,omitempty"`
 }
 
-type PhoneConnectionExec struct {
+type PhoneChannelConnectionExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *PhoneConnectionExec) PageInfo() *PageInfoExec {
+func (instance *PhoneChannelConnectionExec) PageInfo() *PageInfoExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
@@ -7040,22 +7354,22 @@ func (instance *PhoneConnectionExec) PageInfo() *PageInfoExec {
 	return &PageInfoExec{ret}
 }
 
-func (instance *PhoneConnectionExec) Edges() *PhoneEdgeExec {
+func (instance *PhoneChannelConnectionExec) Edges() *PhoneChannelEdgeExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "PhoneEdge"},
+		[2]string{"", "PhoneChannelEdge"},
 		"edges",
 		[]string{"cursor"})
 
-	return &PhoneEdgeExec{ret}
+	return &PhoneChannelEdgeExec{ret}
 }
 
-func (instance *PhoneConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
+func (instance *PhoneChannelConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "AggregatePhone"},
+		[2]string{"", "AggregatePhoneChannel"},
 		"aggregate",
 		[]string{"count"})
 
@@ -7064,8 +7378,8 @@ func (instance *PhoneConnectionExec) Aggregate(ctx context.Context) (Aggregate, 
 	return v, err
 }
 
-func (instance PhoneConnectionExec) Exec(ctx context.Context) (*PhoneConnection, error) {
-	var v PhoneConnection
+func (instance PhoneChannelConnectionExec) Exec(ctx context.Context) (*PhoneChannelConnection, error) {
+	var v PhoneChannelConnection
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -7076,40 +7390,29 @@ func (instance PhoneConnectionExec) Exec(ctx context.Context) (*PhoneConnection,
 	return &v, nil
 }
 
-func (instance PhoneConnectionExec) Exists(ctx context.Context) (bool, error) {
+func (instance PhoneChannelConnectionExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PhoneConnectionExecArray struct {
+type PhoneChannelConnectionExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PhoneConnectionExecArray) Exec(ctx context.Context) ([]PhoneConnection, error) {
-	var v []PhoneConnection
+func (instance PhoneChannelConnectionExecArray) Exec(ctx context.Context) ([]PhoneChannelConnection, error) {
+	var v []PhoneChannelConnection
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type PhoneConnection struct {
+type PhoneChannelConnection struct {
 }
 
-type IDentificationDocumentExec struct {
+type EmailChannelExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *IDentificationDocumentExec) Person() *PersonExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Person"},
-		"person",
-		[]string{"id", "createdAt", "updatedAt", "mID", "name", "photo", "birthday", "from", "tags"})
-
-	return &PersonExec{ret}
-}
-
-func (instance IDentificationDocumentExec) Exec(ctx context.Context) (*IDentificationDocument, error) {
-	var v IDentificationDocument
+func (instance EmailChannelExec) Exec(ctx context.Context) (*EmailChannel, error) {
+	var v EmailChannel
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -7120,26 +7423,28 @@ func (instance IDentificationDocumentExec) Exec(ctx context.Context) (*IDentific
 	return &v, nil
 }
 
-func (instance IDentificationDocumentExec) Exists(ctx context.Context) (bool, error) {
+func (instance EmailChannelExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type IDentificationDocumentExecArray struct {
+type EmailChannelExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance IDentificationDocumentExecArray) Exec(ctx context.Context) ([]IDentificationDocument, error) {
-	var v []IDentificationDocument
+func (instance EmailChannelExecArray) Exec(ctx context.Context) ([]EmailChannel, error) {
+	var v []EmailChannel
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type IDentificationDocument struct {
-	ID        string             `json:"id"`
-	CreatedAt string             `json:"createdAt"`
-	UpdatedAt string             `json:"updatedAt"`
-	Type      IDentificationType `json:"type"`
-	Value     string             `json:"value"`
+type EmailChannel struct {
+	ID          string   `json:"id"`
+	CreatedAt   string   `json:"createdAt"`
+	UpdatedAt   string   `json:"updatedAt"`
+	DisplayName string   `json:"displayName"`
+	Valid       bool     `json:"valid"`
+	Value       string   `json:"value"`
+	Extras      []string `json:"extras,omitempty"`
 }
 
 type PersonReviewsEdgeExec struct {
@@ -7356,11 +7661,11 @@ func (instance PersonConnectionExecArray) Exec(ctx context.Context) ([]PersonCon
 type PersonConnection struct {
 }
 
-type TravelerExec struct {
+type IDentificationDocumentExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *TravelerExec) Person() *PersonExec {
+func (instance *IDentificationDocumentExec) Person() *PersonExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
@@ -7371,76 +7676,8 @@ func (instance *TravelerExec) Person() *PersonExec {
 	return &PersonExec{ret}
 }
 
-type CardsParamsExec struct {
-	Where   *CreditCardWhereInput
-	OrderBy *CreditCardOrderByInput
-	Skip    *int32
-	After   *string
-	Before  *string
-	First   *int32
-	Last    *int32
-}
-
-func (instance *TravelerExec) Cards(params *CardsParamsExec) *CreditCardExecArray {
-	var wparams *prisma.WhereParams
-	if params != nil {
-		wparams = &prisma.WhereParams{
-			Where:   params.Where,
-			OrderBy: (*string)(params.OrderBy),
-			Skip:    params.Skip,
-			After:   params.After,
-			Before:  params.Before,
-			First:   params.First,
-			Last:    params.Last,
-		}
-	}
-
-	ret := instance.exec.Client.GetMany(
-		instance.exec,
-		wparams,
-		[3]string{"CreditCardWhereInput", "CreditCardOrderByInput", "CreditCard"},
-		"cards",
-		[]string{"id", "createdAt", "updatedAt", "cardNumber", "cardToken", "type", "lastUsed"})
-
-	return &CreditCardExecArray{ret}
-}
-
-type TicketsParamsExec struct {
-	Where   *TicketWhereInput
-	OrderBy *TicketOrderByInput
-	Skip    *int32
-	After   *string
-	Before  *string
-	First   *int32
-	Last    *int32
-}
-
-func (instance *TravelerExec) Tickets(params *TicketsParamsExec) *TicketExecArray {
-	var wparams *prisma.WhereParams
-	if params != nil {
-		wparams = &prisma.WhereParams{
-			Where:   params.Where,
-			OrderBy: (*string)(params.OrderBy),
-			Skip:    params.Skip,
-			After:   params.After,
-			Before:  params.Before,
-			First:   params.First,
-			Last:    params.Last,
-		}
-	}
-
-	ret := instance.exec.Client.GetMany(
-		instance.exec,
-		wparams,
-		[3]string{"TicketWhereInput", "TicketOrderByInput", "Ticket"},
-		"tickets",
-		[]string{"id", "createdAt", "updatedAt", "expireAt"})
-
-	return &TicketExecArray{ret}
-}
-
-func (instance TravelerExec) Exec(ctx context.Context) (*Traveler, error) {
-	var v Traveler
+func (instance IDentificationDocumentExec) Exec(ctx context.Context) (*IDentificationDocument, error) {
+	var v IDentificationDocument
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -7451,25 +7688,27 @@ func (instance TravelerExec) Exec(ctx context.Context) (*Traveler, error) {
 	return &v, nil
 }
 
-func (instance TravelerExec) Exists(ctx context.Context) (bool, error) {
+func (instance IDentificationDocumentExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type TravelerExecArray struct {
+type IDentificationDocumentExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance TravelerExecArray) Exec(ctx context.Context) ([]Traveler, error) {
-	var v []Traveler
+func (instance IDentificationDocumentExecArray) Exec(ctx context.Context) ([]IDentificationDocument, error) {
+	var v []IDentificationDocument
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type Traveler struct {
-	ID        string `json:"id"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	Username  string `json:"username"`
+type IDentificationDocument struct {
+	ID        string             `json:"id"`
+	CreatedAt string             `json:"createdAt"`
+	UpdatedAt string             `json:"updatedAt"`
+	Type      IDentificationType `json:"type"`
+	Value     string             `json:"value"`
+	Validated *bool              `json:"validated,omitempty"`
 }
 
 type PaymentEntryEdgeExec struct {
@@ -7682,24 +7921,24 @@ func (instance PartnerConnectionExecArray) Exec(ctx context.Context) ([]PartnerC
 type PartnerConnection struct {
 }
 
-type CreditCardExec struct {
+type TravelerExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *CreditCardExec) Owner() *TravelerExec {
+func (instance *TravelerExec) Person() *PersonExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Traveler"},
-		"owner",
-		[]string{"id", "createdAt", "updatedAt", "username"})
+		[2]string{"", "Person"},
+		"person",
+		[]string{"id", "createdAt", "updatedAt", "mID", "name", "photo", "birthday", "from", "tags"})
 
-	return &TravelerExec{ret}
+	return &PersonExec{ret}
 }
 
-type UsesParamsExec struct {
-	Where   *PaymentEntryWhereInput
-	OrderBy *PaymentEntryOrderByInput
+type CardsParamsExec struct {
+	Where   *CreditCardWhereInput
+	OrderBy *CreditCardOrderByInput
 	Skip    *int32
 	After   *string
 	Before  *string
@@ -7707,7 +7946,7 @@ type UsesParamsExec struct {
 	Last    *int32
 }
 
-func (instance *CreditCardExec) Uses(params *UsesParamsExec) *PaymentEntryExecArray {
+func (instance *TravelerExec) Cards(params *CardsParamsExec) *CreditCardExecArray {
 	var wparams *prisma.WhereParams
 	if params != nil {
 		wparams = &prisma.WhereParams{
@@ -7724,15 +7963,49 @@ func (instance *CreditCardExec) Uses(params *UsesParamsExec) *PaymentEntryExecAr
 	ret := instance.exec.Client.GetMany(
 		instance.exec,
 		wparams,
-		[3]string{"PaymentEntryWhereInput", "PaymentEntryOrderByInput", "PaymentEntry"},
-		"uses",
-		[]string{"id", "createdAt", "updatedAt", "externalID", "productID", "product", "gatewayResponse", "amount", "discountID", "discount"})
+		[3]string{"CreditCardWhereInput", "CreditCardOrderByInput", "CreditCard"},
+		"cards",
+		[]string{"id", "createdAt", "updatedAt", "cardNumber", "cardToken", "type", "lastUsed"})
 
-	return &PaymentEntryExecArray{ret}
+	return &CreditCardExecArray{ret}
 }
 
-func (instance CreditCardExec) Exec(ctx context.Context) (*CreditCard, error) {
-	var v CreditCard
+type TicketsParamsExec struct {
+	Where   *TicketWhereInput
+	OrderBy *TicketOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *TravelerExec) Tickets(params *TicketsParamsExec) *TicketExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"TicketWhereInput", "TicketOrderByInput", "Ticket"},
+		"tickets",
+		[]string{"id", "createdAt", "updatedAt", "expireAt"})
+
+	return &TicketExecArray{ret}
+}
+
+func (instance TravelerExec) Exec(ctx context.Context) (*Traveler, error) {
+	var v Traveler
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -7743,28 +8016,25 @@ func (instance CreditCardExec) Exec(ctx context.Context) (*CreditCard, error) {
 	return &v, nil
 }
 
-func (instance CreditCardExec) Exists(ctx context.Context) (bool, error) {
+func (instance TravelerExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type CreditCardExecArray struct {
+type TravelerExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance CreditCardExecArray) Exec(ctx context.Context) ([]CreditCard, error) {
-	var v []CreditCard
+func (instance TravelerExecArray) Exec(ctx context.Context) ([]Traveler, error) {
+	var v []Traveler
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type CreditCard struct {
-	ID         string         `json:"id"`
-	CreatedAt  string         `json:"createdAt"`
-	UpdatedAt  string         `json:"updatedAt"`
-	CardNumber string         `json:"cardNumber"`
-	CardToken  string         `json:"cardToken"`
-	Type       CreditCardType `json:"type"`
-	LastUsed   *string        `json:"lastUsed,omitempty"`
+type Traveler struct {
+	ID        string `json:"id"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	Username  string `json:"username"`
 }
 
 type DetailsSubscriptionPayloadExec struct {
@@ -7930,6 +8200,91 @@ type DetailsPreviousValues struct {
 	AddressReference *string `json:"addressReference,omitempty"`
 }
 
+type CreditCardExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CreditCardExec) Owner() *TravelerExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Traveler"},
+		"owner",
+		[]string{"id", "createdAt", "updatedAt", "username"})
+
+	return &TravelerExec{ret}
+}
+
+type UsesParamsExec struct {
+	Where   *PaymentEntryWhereInput
+	OrderBy *PaymentEntryOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *CreditCardExec) Uses(params *UsesParamsExec) *PaymentEntryExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"PaymentEntryWhereInput", "PaymentEntryOrderByInput", "PaymentEntry"},
+		"uses",
+		[]string{"id", "createdAt", "updatedAt", "externalID", "productID", "product", "gatewayResponse", "amount", "discountID", "discount"})
+
+	return &PaymentEntryExecArray{ret}
+}
+
+func (instance CreditCardExec) Exec(ctx context.Context) (*CreditCard, error) {
+	var v CreditCard
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CreditCardExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CreditCardExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CreditCardExecArray) Exec(ctx context.Context) ([]CreditCard, error) {
+	var v []CreditCard
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type CreditCard struct {
+	ID         string         `json:"id"`
+	CreatedAt  string         `json:"createdAt"`
+	UpdatedAt  string         `json:"updatedAt"`
+	CardNumber string         `json:"cardNumber"`
+	CardToken  string         `json:"cardToken"`
+	Type       CreditCardType `json:"type"`
+	LastUsed   *string        `json:"lastUsed,omitempty"`
+}
+
 type OpeningHoursConnectionExec struct {
 	exec *prisma.Exec
 }
@@ -7998,34 +8353,34 @@ func (instance OpeningHoursConnectionExecArray) Exec(ctx context.Context) ([]Ope
 type OpeningHoursConnection struct {
 }
 
-type EmailSubscriptionPayloadExec struct {
+type EmailChannelSubscriptionPayloadExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *EmailSubscriptionPayloadExec) Node() *EmailExec {
+func (instance *EmailChannelSubscriptionPayloadExec) Node() *EmailChannelExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Email"},
+		[2]string{"", "EmailChannel"},
 		"node",
-		[]string{"type", "value", "extras"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
 
-	return &EmailExec{ret}
+	return &EmailChannelExec{ret}
 }
 
-func (instance *EmailSubscriptionPayloadExec) PreviousValues() *EmailPreviousValuesExec {
+func (instance *EmailChannelSubscriptionPayloadExec) PreviousValues() *EmailChannelPreviousValuesExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "EmailPreviousValues"},
+		[2]string{"", "EmailChannelPreviousValues"},
 		"previousValues",
-		[]string{"type", "value", "extras"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
 
-	return &EmailPreviousValuesExec{ret}
+	return &EmailChannelPreviousValuesExec{ret}
 }
 
-func (instance EmailSubscriptionPayloadExec) Exec(ctx context.Context) (*EmailSubscriptionPayload, error) {
-	var v EmailSubscriptionPayload
+func (instance EmailChannelSubscriptionPayloadExec) Exec(ctx context.Context) (*EmailChannelSubscriptionPayload, error) {
+	var v EmailChannelSubscriptionPayload
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -8036,21 +8391,21 @@ func (instance EmailSubscriptionPayloadExec) Exec(ctx context.Context) (*EmailSu
 	return &v, nil
 }
 
-func (instance EmailSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance EmailChannelSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type EmailSubscriptionPayloadExecArray struct {
+type EmailChannelSubscriptionPayloadExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance EmailSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]EmailSubscriptionPayload, error) {
-	var v []EmailSubscriptionPayload
+func (instance EmailChannelSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]EmailChannelSubscriptionPayload, error) {
+	var v []EmailChannelSubscriptionPayload
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type EmailSubscriptionPayload struct {
+type EmailChannelSubscriptionPayload struct {
 	Mutation      MutationType `json:"mutation"`
 	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
@@ -8100,12 +8455,12 @@ type LocationEdge struct {
 	Cursor string `json:"cursor"`
 }
 
-type EmailPreviousValuesExec struct {
+type EmailChannelPreviousValuesExec struct {
 	exec *prisma.Exec
 }
 
-func (instance EmailPreviousValuesExec) Exec(ctx context.Context) (*EmailPreviousValues, error) {
-	var v EmailPreviousValues
+func (instance EmailChannelPreviousValuesExec) Exec(ctx context.Context) (*EmailChannelPreviousValues, error) {
+	var v EmailChannelPreviousValues
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -8116,24 +8471,28 @@ func (instance EmailPreviousValuesExec) Exec(ctx context.Context) (*EmailPreviou
 	return &v, nil
 }
 
-func (instance EmailPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+func (instance EmailChannelPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type EmailPreviousValuesExecArray struct {
+type EmailChannelPreviousValuesExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance EmailPreviousValuesExecArray) Exec(ctx context.Context) ([]EmailPreviousValues, error) {
-	var v []EmailPreviousValues
+func (instance EmailChannelPreviousValuesExecArray) Exec(ctx context.Context) ([]EmailChannelPreviousValues, error) {
+	var v []EmailChannelPreviousValues
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type EmailPreviousValues struct {
-	Type   CommunicationType `json:"type"`
-	Value  string            `json:"value"`
-	Extras []string          `json:"extras,omitempty"`
+type EmailChannelPreviousValues struct {
+	ID          string   `json:"id"`
+	CreatedAt   string   `json:"createdAt"`
+	UpdatedAt   string   `json:"updatedAt"`
+	DisplayName string   `json:"displayName"`
+	Valid       bool     `json:"valid"`
+	Value       string   `json:"value"`
+	Extras      []string `json:"extras,omitempty"`
 }
 
 type TicketTypePreviousValuesExec struct {
@@ -8174,51 +8533,6 @@ type TicketTypePreviousValues struct {
 	Cost      float64 `json:"cost"`
 }
 
-type CredentialEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *CredentialEdgeExec) Node() *CredentialExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Credential"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "displayName", "isMain", "type", "validated", "validationID", "value", "rawPassword", "hashedPassword"})
-
-	return &CredentialExec{ret}
-}
-
-func (instance CredentialEdgeExec) Exec(ctx context.Context) (*CredentialEdge, error) {
-	var v CredentialEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance CredentialEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type CredentialEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance CredentialEdgeExecArray) Exec(ctx context.Context) ([]CredentialEdge, error) {
-	var v []CredentialEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type CredentialEdge struct {
-	Cursor string `json:"cursor"`
-}
-
 type IDentificationDocumentEdgeExec struct {
 	exec *prisma.Exec
 }
@@ -8229,7 +8543,7 @@ func (instance *IDentificationDocumentEdgeExec) Node() *IDentificationDocumentEx
 		nil,
 		[2]string{"", "IdentificationDocument"},
 		"node",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -8321,12 +8635,34 @@ type FeatureSubscriptionPayload struct {
 	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
 
-type PhoneExec struct {
+type TicketTypeSubscriptionPayloadExec struct {
 	exec *prisma.Exec
 }
 
-func (instance PhoneExec) Exec(ctx context.Context) (*Phone, error) {
-	var v Phone
+func (instance *TicketTypeSubscriptionPayloadExec) Node() *TicketTypeExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "TicketType"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "creatorID", "cost"})
+
+	return &TicketTypeExec{ret}
+}
+
+func (instance *TicketTypeSubscriptionPayloadExec) PreviousValues() *TicketTypePreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "TicketTypePreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "creatorID", "cost"})
+
+	return &TicketTypePreviousValuesExec{ret}
+}
+
+func (instance TicketTypeSubscriptionPayloadExec) Exec(ctx context.Context) (*TicketTypeSubscriptionPayload, error) {
+	var v TicketTypeSubscriptionPayload
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -8337,24 +8673,23 @@ func (instance PhoneExec) Exec(ctx context.Context) (*Phone, error) {
 	return &v, nil
 }
 
-func (instance PhoneExec) Exists(ctx context.Context) (bool, error) {
+func (instance TicketTypeSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PhoneExecArray struct {
+type TicketTypeSubscriptionPayloadExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PhoneExecArray) Exec(ctx context.Context) ([]Phone, error) {
-	var v []Phone
+func (instance TicketTypeSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]TicketTypeSubscriptionPayload, error) {
+	var v []TicketTypeSubscriptionPayload
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type Phone struct {
-	Type        CommunicationType `json:"type"`
-	CountryCode string            `json:"countryCode"`
-	Number      *string           `json:"number,omitempty"`
+type TicketTypeSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
 
 type FeaturePreviousValuesExec struct {
@@ -8437,6 +8772,260 @@ type FeatureEdge struct {
 	Cursor string `json:"cursor"`
 }
 
+type CredentialEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *CredentialEdgeExec) Node() *CredentialExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Credential"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "isMain", "type", "validated", "validationID", "value", "rawPassword", "hashedPassword"})
+
+	return &CredentialExec{ret}
+}
+
+func (instance CredentialEdgeExec) Exec(ctx context.Context) (*CredentialEdge, error) {
+	var v CredentialEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance CredentialEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type CredentialEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance CredentialEdgeExecArray) Exec(ctx context.Context) ([]CredentialEdge, error) {
+	var v []CredentialEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type CredentialEdge struct {
+	Cursor string `json:"cursor"`
+}
+
+type IDentificationDocumentSubscriptionPayloadExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *IDentificationDocumentSubscriptionPayloadExec) Node() *IDentificationDocumentExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "IdentificationDocument"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
+
+	return &IDentificationDocumentExec{ret}
+}
+
+func (instance *IDentificationDocumentSubscriptionPayloadExec) PreviousValues() *IDentificationDocumentPreviousValuesExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "IdentificationDocumentPreviousValues"},
+		"previousValues",
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
+
+	return &IDentificationDocumentPreviousValuesExec{ret}
+}
+
+func (instance IDentificationDocumentSubscriptionPayloadExec) Exec(ctx context.Context) (*IDentificationDocumentSubscriptionPayload, error) {
+	var v IDentificationDocumentSubscriptionPayload
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance IDentificationDocumentSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type IDentificationDocumentSubscriptionPayloadExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance IDentificationDocumentSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]IDentificationDocumentSubscriptionPayload, error) {
+	var v []IDentificationDocumentSubscriptionPayload
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type IDentificationDocumentSubscriptionPayload struct {
+	Mutation      MutationType `json:"mutation"`
+	UpdatedFields []string     `json:"updatedFields,omitempty"`
+}
+
+type EmailChannelConnectionExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *EmailChannelConnectionExec) PageInfo() *PageInfoExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
+
+	return &PageInfoExec{ret}
+}
+
+func (instance *EmailChannelConnectionExec) Edges() *EmailChannelEdgeExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "EmailChannelEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	return &EmailChannelEdgeExec{ret}
+}
+
+func (instance *EmailChannelConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateEmailChannel"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return v, err
+}
+
+func (instance EmailChannelConnectionExec) Exec(ctx context.Context) (*EmailChannelConnection, error) {
+	var v EmailChannelConnection
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance EmailChannelConnectionExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type EmailChannelConnectionExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance EmailChannelConnectionExecArray) Exec(ctx context.Context) ([]EmailChannelConnection, error) {
+	var v []EmailChannelConnection
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type EmailChannelConnection struct {
+}
+
+type IDentificationDocumentPreviousValuesExec struct {
+	exec *prisma.Exec
+}
+
+func (instance IDentificationDocumentPreviousValuesExec) Exec(ctx context.Context) (*IDentificationDocumentPreviousValues, error) {
+	var v IDentificationDocumentPreviousValues
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance IDentificationDocumentPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type IDentificationDocumentPreviousValuesExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance IDentificationDocumentPreviousValuesExecArray) Exec(ctx context.Context) ([]IDentificationDocumentPreviousValues, error) {
+	var v []IDentificationDocumentPreviousValues
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type IDentificationDocumentPreviousValues struct {
+	ID        string             `json:"id"`
+	CreatedAt string             `json:"createdAt"`
+	UpdatedAt string             `json:"updatedAt"`
+	Type      IDentificationType `json:"type"`
+	Value     string             `json:"value"`
+	Validated *bool              `json:"validated,omitempty"`
+}
+
+type DetailsEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *DetailsEdgeExec) Node() *DetailsExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Details"},
+		"node",
+		[]string{"providerName", "providerWeb", "contactPhone", "contactEmail", "addressReference"})
+
+	return &DetailsExec{ret}
+}
+
+func (instance DetailsEdgeExec) Exec(ctx context.Context) (*DetailsEdge, error) {
+	var v DetailsEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance DetailsEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type DetailsEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance DetailsEdgeExecArray) Exec(ctx context.Context) ([]DetailsEdge, error) {
+	var v []DetailsEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type DetailsEdge struct {
+	Cursor string `json:"cursor"`
+}
+
 type CredentialConnectionExec struct {
 	exec *prisma.Exec
 }
@@ -8505,34 +9094,12 @@ func (instance CredentialConnectionExecArray) Exec(ctx context.Context) ([]Crede
 type CredentialConnection struct {
 }
 
-type IDentificationDocumentSubscriptionPayloadExec struct {
+type PhoneChannelExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *IDentificationDocumentSubscriptionPayloadExec) Node() *IDentificationDocumentExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "IdentificationDocument"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
-
-	return &IDentificationDocumentExec{ret}
-}
-
-func (instance *IDentificationDocumentSubscriptionPayloadExec) PreviousValues() *IDentificationDocumentPreviousValuesExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "IdentificationDocumentPreviousValues"},
-		"previousValues",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
-
-	return &IDentificationDocumentPreviousValuesExec{ret}
-}
-
-func (instance IDentificationDocumentSubscriptionPayloadExec) Exec(ctx context.Context) (*IDentificationDocumentSubscriptionPayload, error) {
-	var v IDentificationDocumentSubscriptionPayload
+func (instance PhoneChannelExec) Exec(ctx context.Context) (*PhoneChannel, error) {
+	var v PhoneChannel
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -8543,174 +9110,28 @@ func (instance IDentificationDocumentSubscriptionPayloadExec) Exec(ctx context.C
 	return &v, nil
 }
 
-func (instance IDentificationDocumentSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance PhoneChannelExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type IDentificationDocumentSubscriptionPayloadExecArray struct {
+type PhoneChannelExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance IDentificationDocumentSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]IDentificationDocumentSubscriptionPayload, error) {
-	var v []IDentificationDocumentSubscriptionPayload
+func (instance PhoneChannelExecArray) Exec(ctx context.Context) ([]PhoneChannel, error) {
+	var v []PhoneChannel
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type IDentificationDocumentSubscriptionPayload struct {
-	Mutation      MutationType `json:"mutation"`
-	UpdatedFields []string     `json:"updatedFields,omitempty"`
-}
-
-type EmailConnectionExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *EmailConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *EmailConnectionExec) Edges() *EmailEdgeExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "EmailEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	return &EmailEdgeExec{ret}
-}
-
-func (instance *EmailConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateEmail"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return v, err
-}
-
-func (instance EmailConnectionExec) Exec(ctx context.Context) (*EmailConnection, error) {
-	var v EmailConnection
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance EmailConnectionExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type EmailConnectionExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance EmailConnectionExecArray) Exec(ctx context.Context) ([]EmailConnection, error) {
-	var v []EmailConnection
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type EmailConnection struct {
-}
-
-type IDentificationDocumentPreviousValuesExec struct {
-	exec *prisma.Exec
-}
-
-func (instance IDentificationDocumentPreviousValuesExec) Exec(ctx context.Context) (*IDentificationDocumentPreviousValues, error) {
-	var v IDentificationDocumentPreviousValues
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance IDentificationDocumentPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type IDentificationDocumentPreviousValuesExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance IDentificationDocumentPreviousValuesExecArray) Exec(ctx context.Context) ([]IDentificationDocumentPreviousValues, error) {
-	var v []IDentificationDocumentPreviousValues
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type IDentificationDocumentPreviousValues struct {
-	ID        string             `json:"id"`
-	CreatedAt string             `json:"createdAt"`
-	UpdatedAt string             `json:"updatedAt"`
-	Type      IDentificationType `json:"type"`
-	Value     string             `json:"value"`
-}
-
-type DetailsEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *DetailsEdgeExec) Node() *DetailsExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Details"},
-		"node",
-		[]string{"providerName", "providerWeb", "contactPhone", "contactEmail", "addressReference"})
-
-	return &DetailsExec{ret}
-}
-
-func (instance DetailsEdgeExec) Exec(ctx context.Context) (*DetailsEdge, error) {
-	var v DetailsEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance DetailsEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type DetailsEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance DetailsEdgeExecArray) Exec(ctx context.Context) ([]DetailsEdge, error) {
-	var v []DetailsEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type DetailsEdge struct {
-	Cursor string `json:"cursor"`
+type PhoneChannel struct {
+	ID          string  `json:"id"`
+	CreatedAt   string  `json:"createdAt"`
+	UpdatedAt   string  `json:"updatedAt"`
+	DisplayName string  `json:"displayName"`
+	Valid       bool    `json:"valid"`
+	CountryCode string  `json:"countryCode"`
+	Number      *string `json:"number,omitempty"`
 }
 
 type LocationSubscriptionPayloadExec struct {
@@ -8942,51 +9363,6 @@ func (instance TicketTypeConnectionExecArray) Exec(ctx context.Context) ([]Ticke
 type TicketTypeConnection struct {
 }
 
-type AttractionEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *AttractionEdgeExec) Node() *AttractionExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Attraction"},
-		"node",
-		[]string{"id", "createdAt", "updatedAt", "maxUses", "address", "popularity", "types", "tags"})
-
-	return &AttractionExec{ret}
-}
-
-func (instance AttractionEdgeExec) Exec(ctx context.Context) (*AttractionEdge, error) {
-	var v AttractionEdge
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance AttractionEdgeExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type AttractionEdgeExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance AttractionEdgeExecArray) Exec(ctx context.Context) ([]AttractionEdge, error) {
-	var v []AttractionEdge
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type AttractionEdge struct {
-	Cursor string `json:"cursor"`
-}
-
 type TicketConnectionExec struct {
 	exec *prisma.Exec
 }
@@ -9192,12 +9568,23 @@ type PersonEdge struct {
 	Cursor string `json:"cursor"`
 }
 
-type PageInfoExec struct {
+type AttractionEdgeExec struct {
 	exec *prisma.Exec
 }
 
-func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
-	var v PageInfo
+func (instance *AttractionEdgeExec) Node() *AttractionExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Attraction"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "maxUses", "address", "popularity", "types", "tags"})
+
+	return &AttractionExec{ret}
+}
+
+func (instance AttractionEdgeExec) Exec(ctx context.Context) (*AttractionEdge, error) {
+	var v AttractionEdge
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -9208,25 +9595,22 @@ func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
 	return &v, nil
 }
 
-func (instance PageInfoExec) Exists(ctx context.Context) (bool, error) {
+func (instance AttractionEdgeExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PageInfoExecArray struct {
+type AttractionEdgeExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PageInfoExecArray) Exec(ctx context.Context) ([]PageInfo, error) {
-	var v []PageInfo
+func (instance AttractionEdgeExecArray) Exec(ctx context.Context) ([]AttractionEdge, error) {
+	var v []AttractionEdge
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type PageInfo struct {
-	HasNextPage     bool    `json:"hasNextPage"`
-	HasPreviousPage bool    `json:"hasPreviousPage"`
-	StartCursor     *string `json:"startCursor,omitempty"`
-	EndCursor       *string `json:"endCursor,omitempty"`
+type AttractionEdge struct {
+	Cursor string `json:"cursor"`
 }
 
 type PaymentEntryConnectionExec struct {
@@ -9359,8 +9743,8 @@ type PersonExec struct {
 }
 
 type ChannelsPhoneParamsExec struct {
-	Where   *PhoneWhereInput
-	OrderBy *PhoneOrderByInput
+	Where   *PhoneChannelWhereInput
+	OrderBy *PhoneChannelOrderByInput
 	Skip    *int32
 	After   *string
 	Before  *string
@@ -9368,7 +9752,7 @@ type ChannelsPhoneParamsExec struct {
 	Last    *int32
 }
 
-func (instance *PersonExec) ChannelsPhone(params *ChannelsPhoneParamsExec) *PhoneExecArray {
+func (instance *PersonExec) ChannelsPhone(params *ChannelsPhoneParamsExec) *PhoneChannelExecArray {
 	var wparams *prisma.WhereParams
 	if params != nil {
 		wparams = &prisma.WhereParams{
@@ -9385,16 +9769,16 @@ func (instance *PersonExec) ChannelsPhone(params *ChannelsPhoneParamsExec) *Phon
 	ret := instance.exec.Client.GetMany(
 		instance.exec,
 		wparams,
-		[3]string{"PhoneWhereInput", "PhoneOrderByInput", "Phone"},
+		[3]string{"PhoneChannelWhereInput", "PhoneChannelOrderByInput", "PhoneChannel"},
 		"channelsPhone",
-		[]string{"type", "countryCode", "number"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
 
-	return &PhoneExecArray{ret}
+	return &PhoneChannelExecArray{ret}
 }
 
 type ChannelsEmailParamsExec struct {
-	Where   *EmailWhereInput
-	OrderBy *EmailOrderByInput
+	Where   *EmailChannelWhereInput
+	OrderBy *EmailChannelOrderByInput
 	Skip    *int32
 	After   *string
 	Before  *string
@@ -9402,7 +9786,7 @@ type ChannelsEmailParamsExec struct {
 	Last    *int32
 }
 
-func (instance *PersonExec) ChannelsEmail(params *ChannelsEmailParamsExec) *EmailExecArray {
+func (instance *PersonExec) ChannelsEmail(params *ChannelsEmailParamsExec) *EmailChannelExecArray {
 	var wparams *prisma.WhereParams
 	if params != nil {
 		wparams = &prisma.WhereParams{
@@ -9419,11 +9803,11 @@ func (instance *PersonExec) ChannelsEmail(params *ChannelsEmailParamsExec) *Emai
 	ret := instance.exec.Client.GetMany(
 		instance.exec,
 		wparams,
-		[3]string{"EmailWhereInput", "EmailOrderByInput", "Email"},
+		[3]string{"EmailChannelWhereInput", "EmailChannelOrderByInput", "EmailChannel"},
 		"channelsEmail",
-		[]string{"type", "value", "extras"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
 
-	return &EmailExecArray{ret}
+	return &EmailChannelExecArray{ret}
 }
 
 func (instance *PersonExec) IDentification() *IDentificationDocumentExec {
@@ -9432,7 +9816,7 @@ func (instance *PersonExec) IDentification() *IDentificationDocumentExec {
 		nil,
 		[2]string{"", "IdentificationDocument"},
 		"identification",
-		[]string{"id", "createdAt", "updatedAt", "type", "value"})
+		[]string{"id", "createdAt", "updatedAt", "type", "value", "validated"})
 
 	return &IDentificationDocumentExec{ret}
 }
@@ -9579,47 +9963,12 @@ type Feature struct {
 	Image *string `json:"image,omitempty"`
 }
 
-type AttractionConnectionExec struct {
+type PageInfoExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *AttractionConnectionExec) PageInfo() *PageInfoExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "PageInfo"},
-		"pageInfo",
-		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
-
-	return &PageInfoExec{ret}
-}
-
-func (instance *AttractionConnectionExec) Edges() *AttractionEdgeExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AttractionEdge"},
-		"edges",
-		[]string{"cursor"})
-
-	return &AttractionEdgeExec{ret}
-}
-
-func (instance *AttractionConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "AggregateAttraction"},
-		"aggregate",
-		[]string{"count"})
-
-	var v Aggregate
-	_, err := ret.Exec(ctx, &v)
-	return v, err
-}
-
-func (instance AttractionConnectionExec) Exec(ctx context.Context) (*AttractionConnection, error) {
-	var v AttractionConnection
+func (instance PageInfoExec) Exec(ctx context.Context) (*PageInfo, error) {
+	var v PageInfo
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -9630,21 +9979,25 @@ func (instance AttractionConnectionExec) Exec(ctx context.Context) (*AttractionC
 	return &v, nil
 }
 
-func (instance AttractionConnectionExec) Exists(ctx context.Context) (bool, error) {
+func (instance PageInfoExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type AttractionConnectionExecArray struct {
+type PageInfoExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance AttractionConnectionExecArray) Exec(ctx context.Context) ([]AttractionConnection, error) {
-	var v []AttractionConnection
+func (instance PageInfoExecArray) Exec(ctx context.Context) ([]PageInfo, error) {
+	var v []PageInfo
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type AttractionConnection struct {
+type PageInfo struct {
+	HasNextPage     bool    `json:"hasNextPage"`
+	HasPreviousPage bool    `json:"hasPreviousPage"`
+	StartCursor     *string `json:"startCursor,omitempty"`
+	EndCursor       *string `json:"endCursor,omitempty"`
 }
 
 type PartnerSubscriptionPayloadExec struct {
@@ -9744,61 +10097,47 @@ type PartnerPreviousValues struct {
 	Address      string `json:"address"`
 }
 
-type DetailsExec struct {
+type AttractionConnectionExec struct {
 	exec *prisma.Exec
 }
 
-func (instance DetailsExec) Exec(ctx context.Context) (*Details, error) {
-	var v Details
-	ok, err := instance.exec.Exec(ctx, &v)
-	if err != nil {
-		return nil, err
-	}
-	if !ok {
-		return nil, ErrNoResult
-	}
-	return &v, nil
-}
-
-func (instance DetailsExec) Exists(ctx context.Context) (bool, error) {
-	return instance.exec.Exists(ctx)
-}
-
-type DetailsExecArray struct {
-	exec *prisma.Exec
-}
-
-func (instance DetailsExecArray) Exec(ctx context.Context) ([]Details, error) {
-	var v []Details
-	err := instance.exec.ExecArray(ctx, &v)
-	return v, err
-}
-
-type Details struct {
-	ProviderName     string  `json:"providerName"`
-	ProviderWeb      *string `json:"providerWeb,omitempty"`
-	ContactPhone     *string `json:"contactPhone,omitempty"`
-	ContactEmail     *string `json:"contactEmail,omitempty"`
-	AddressReference *string `json:"addressReference,omitempty"`
-}
-
-type EmailEdgeExec struct {
-	exec *prisma.Exec
-}
-
-func (instance *EmailEdgeExec) Node() *EmailExec {
+func (instance *AttractionConnectionExec) PageInfo() *PageInfoExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Email"},
-		"node",
-		[]string{"type", "value", "extras"})
+		[2]string{"", "PageInfo"},
+		"pageInfo",
+		[]string{"hasNextPage", "hasPreviousPage", "startCursor", "endCursor"})
 
-	return &EmailExec{ret}
+	return &PageInfoExec{ret}
 }
 
-func (instance EmailEdgeExec) Exec(ctx context.Context) (*EmailEdge, error) {
-	var v EmailEdge
+func (instance *AttractionConnectionExec) Edges() *AttractionEdgeExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AttractionEdge"},
+		"edges",
+		[]string{"cursor"})
+
+	return &AttractionEdgeExec{ret}
+}
+
+func (instance *AttractionConnectionExec) Aggregate(ctx context.Context) (Aggregate, error) {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "AggregateAttraction"},
+		"aggregate",
+		[]string{"count"})
+
+	var v Aggregate
+	_, err := ret.Exec(ctx, &v)
+	return v, err
+}
+
+func (instance AttractionConnectionExec) Exec(ctx context.Context) (*AttractionConnection, error) {
+	var v AttractionConnection
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -9809,21 +10148,65 @@ func (instance EmailEdgeExec) Exec(ctx context.Context) (*EmailEdge, error) {
 	return &v, nil
 }
 
-func (instance EmailEdgeExec) Exists(ctx context.Context) (bool, error) {
+func (instance AttractionConnectionExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type EmailEdgeExecArray struct {
+type AttractionConnectionExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance EmailEdgeExecArray) Exec(ctx context.Context) ([]EmailEdge, error) {
-	var v []EmailEdge
+func (instance AttractionConnectionExecArray) Exec(ctx context.Context) ([]AttractionConnection, error) {
+	var v []AttractionConnection
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type EmailEdge struct {
+type AttractionConnection struct {
+}
+
+type EmailChannelEdgeExec struct {
+	exec *prisma.Exec
+}
+
+func (instance *EmailChannelEdgeExec) Node() *EmailChannelExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "EmailChannel"},
+		"node",
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "value", "extras"})
+
+	return &EmailChannelExec{ret}
+}
+
+func (instance EmailChannelEdgeExec) Exec(ctx context.Context) (*EmailChannelEdge, error) {
+	var v EmailChannelEdge
+	ok, err := instance.exec.Exec(ctx, &v)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
+		return nil, ErrNoResult
+	}
+	return &v, nil
+}
+
+func (instance EmailChannelEdgeExec) Exists(ctx context.Context) (bool, error) {
+	return instance.exec.Exists(ctx)
+}
+
+type EmailChannelEdgeExecArray struct {
+	exec *prisma.Exec
+}
+
+func (instance EmailChannelEdgeExecArray) Exec(ctx context.Context) ([]EmailChannelEdge, error) {
+	var v []EmailChannelEdge
+	err := instance.exec.ExecArray(ctx, &v)
+	return v, err
+}
+
+type EmailChannelEdge struct {
 	Cursor string `json:"cursor"`
 }
 
@@ -9995,57 +10378,12 @@ type PaymentEntryPreviousValues struct {
 	Discount        *int32  `json:"discount,omitempty"`
 }
 
-type PersonReviewsExec struct {
+type DetailsExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *PersonReviewsExec) Person() *PersonExec {
-	ret := instance.exec.Client.GetOne(
-		instance.exec,
-		nil,
-		[2]string{"", "Person"},
-		"person",
-		[]string{"id", "createdAt", "updatedAt", "mID", "name", "photo", "birthday", "from", "tags"})
-
-	return &PersonExec{ret}
-}
-
-type CommentsParamsExec struct {
-	Where   *PersonReviewsWhereInput
-	OrderBy *PersonReviewsOrderByInput
-	Skip    *int32
-	After   *string
-	Before  *string
-	First   *int32
-	Last    *int32
-}
-
-func (instance *PersonReviewsExec) Comments(params *CommentsParamsExec) *PersonReviewsExecArray {
-	var wparams *prisma.WhereParams
-	if params != nil {
-		wparams = &prisma.WhereParams{
-			Where:   params.Where,
-			OrderBy: (*string)(params.OrderBy),
-			Skip:    params.Skip,
-			After:   params.After,
-			Before:  params.Before,
-			First:   params.First,
-			Last:    params.Last,
-		}
-	}
-
-	ret := instance.exec.Client.GetMany(
-		instance.exec,
-		wparams,
-		[3]string{"PersonReviewsWhereInput", "PersonReviewsOrderByInput", "PersonReviews"},
-		"comments",
-		[]string{"id", "createdAt", "updatedAt", "title", "description", "aproveNumber", "declineNumber"})
-
-	return &PersonReviewsExecArray{ret}
-}
-
-func (instance PersonReviewsExec) Exec(ctx context.Context) (*PersonReviews, error) {
-	var v PersonReviews
+func (instance DetailsExec) Exec(ctx context.Context) (*Details, error) {
+	var v Details
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -10056,47 +10394,45 @@ func (instance PersonReviewsExec) Exec(ctx context.Context) (*PersonReviews, err
 	return &v, nil
 }
 
-func (instance PersonReviewsExec) Exists(ctx context.Context) (bool, error) {
+func (instance DetailsExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PersonReviewsExecArray struct {
+type DetailsExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PersonReviewsExecArray) Exec(ctx context.Context) ([]PersonReviews, error) {
-	var v []PersonReviews
+func (instance DetailsExecArray) Exec(ctx context.Context) ([]Details, error) {
+	var v []Details
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type PersonReviews struct {
-	ID            string `json:"id"`
-	CreatedAt     string `json:"createdAt"`
-	UpdatedAt     string `json:"updatedAt"`
-	Title         string `json:"title"`
-	Description   string `json:"description"`
-	AproveNumber  *int32 `json:"aproveNumber,omitempty"`
-	DeclineNumber *int32 `json:"declineNumber,omitempty"`
+type Details struct {
+	ProviderName     string  `json:"providerName"`
+	ProviderWeb      *string `json:"providerWeb,omitempty"`
+	ContactPhone     *string `json:"contactPhone,omitempty"`
+	ContactEmail     *string `json:"contactEmail,omitempty"`
+	AddressReference *string `json:"addressReference,omitempty"`
 }
 
-type PhoneEdgeExec struct {
+type PhoneChannelEdgeExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *PhoneEdgeExec) Node() *PhoneExec {
+func (instance *PhoneChannelEdgeExec) Node() *PhoneChannelExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Phone"},
+		[2]string{"", "PhoneChannel"},
 		"node",
-		[]string{"type", "countryCode", "number"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
 
-	return &PhoneExec{ret}
+	return &PhoneChannelExec{ret}
 }
 
-func (instance PhoneEdgeExec) Exec(ctx context.Context) (*PhoneEdge, error) {
-	var v PhoneEdge
+func (instance PhoneChannelEdgeExec) Exec(ctx context.Context) (*PhoneChannelEdge, error) {
+	var v PhoneChannelEdge
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -10107,21 +10443,21 @@ func (instance PhoneEdgeExec) Exec(ctx context.Context) (*PhoneEdge, error) {
 	return &v, nil
 }
 
-func (instance PhoneEdgeExec) Exists(ctx context.Context) (bool, error) {
+func (instance PhoneChannelEdgeExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PhoneEdgeExecArray struct {
+type PhoneChannelEdgeExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PhoneEdgeExecArray) Exec(ctx context.Context) ([]PhoneEdge, error) {
-	var v []PhoneEdge
+func (instance PhoneChannelEdgeExecArray) Exec(ctx context.Context) ([]PhoneChannelEdge, error) {
+	var v []PhoneChannelEdge
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type PhoneEdge struct {
+type PhoneChannelEdge struct {
 	Cursor string `json:"cursor"`
 }
 
@@ -10269,12 +10605,57 @@ type OverviewEdge struct {
 	Cursor string `json:"cursor"`
 }
 
-type OpeningHoursExec struct {
+type PersonReviewsExec struct {
 	exec *prisma.Exec
 }
 
-func (instance OpeningHoursExec) Exec(ctx context.Context) (*OpeningHours, error) {
-	var v OpeningHours
+func (instance *PersonReviewsExec) Person() *PersonExec {
+	ret := instance.exec.Client.GetOne(
+		instance.exec,
+		nil,
+		[2]string{"", "Person"},
+		"person",
+		[]string{"id", "createdAt", "updatedAt", "mID", "name", "photo", "birthday", "from", "tags"})
+
+	return &PersonExec{ret}
+}
+
+type CommentsParamsExec struct {
+	Where   *PersonReviewsWhereInput
+	OrderBy *PersonReviewsOrderByInput
+	Skip    *int32
+	After   *string
+	Before  *string
+	First   *int32
+	Last    *int32
+}
+
+func (instance *PersonReviewsExec) Comments(params *CommentsParamsExec) *PersonReviewsExecArray {
+	var wparams *prisma.WhereParams
+	if params != nil {
+		wparams = &prisma.WhereParams{
+			Where:   params.Where,
+			OrderBy: (*string)(params.OrderBy),
+			Skip:    params.Skip,
+			After:   params.After,
+			Before:  params.Before,
+			First:   params.First,
+			Last:    params.Last,
+		}
+	}
+
+	ret := instance.exec.Client.GetMany(
+		instance.exec,
+		wparams,
+		[3]string{"PersonReviewsWhereInput", "PersonReviewsOrderByInput", "PersonReviews"},
+		"comments",
+		[]string{"id", "createdAt", "updatedAt", "title", "description", "aproveNumber", "declineNumber"})
+
+	return &PersonReviewsExecArray{ret}
+}
+
+func (instance PersonReviewsExec) Exec(ctx context.Context) (*PersonReviews, error) {
+	var v PersonReviews
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -10285,23 +10666,28 @@ func (instance OpeningHoursExec) Exec(ctx context.Context) (*OpeningHours, error
 	return &v, nil
 }
 
-func (instance OpeningHoursExec) Exists(ctx context.Context) (bool, error) {
+func (instance PersonReviewsExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type OpeningHoursExecArray struct {
+type PersonReviewsExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance OpeningHoursExecArray) Exec(ctx context.Context) ([]OpeningHours, error) {
-	var v []OpeningHours
+func (instance PersonReviewsExecArray) Exec(ctx context.Context) ([]PersonReviews, error) {
+	var v []PersonReviews
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type OpeningHours struct {
-	From string `json:"from"`
-	To   string `json:"to"`
+type PersonReviews struct {
+	ID            string `json:"id"`
+	CreatedAt     string `json:"createdAt"`
+	UpdatedAt     string `json:"updatedAt"`
+	Title         string `json:"title"`
+	Description   string `json:"description"`
+	AproveNumber  *int32 `json:"aproveNumber,omitempty"`
+	DeclineNumber *int32 `json:"declineNumber,omitempty"`
 }
 
 type LocationConnectionExec struct {
@@ -10797,12 +11183,12 @@ type Overview struct {
 	Description string `json:"description"`
 }
 
-type PhonePreviousValuesExec struct {
+type PhoneChannelPreviousValuesExec struct {
 	exec *prisma.Exec
 }
 
-func (instance PhonePreviousValuesExec) Exec(ctx context.Context) (*PhonePreviousValues, error) {
-	var v PhonePreviousValues
+func (instance PhoneChannelPreviousValuesExec) Exec(ctx context.Context) (*PhoneChannelPreviousValues, error) {
+	var v PhoneChannelPreviousValues
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -10813,54 +11199,58 @@ func (instance PhonePreviousValuesExec) Exec(ctx context.Context) (*PhonePreviou
 	return &v, nil
 }
 
-func (instance PhonePreviousValuesExec) Exists(ctx context.Context) (bool, error) {
+func (instance PhoneChannelPreviousValuesExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PhonePreviousValuesExecArray struct {
+type PhoneChannelPreviousValuesExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PhonePreviousValuesExecArray) Exec(ctx context.Context) ([]PhonePreviousValues, error) {
-	var v []PhonePreviousValues
+func (instance PhoneChannelPreviousValuesExecArray) Exec(ctx context.Context) ([]PhoneChannelPreviousValues, error) {
+	var v []PhoneChannelPreviousValues
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type PhonePreviousValues struct {
-	Type        CommunicationType `json:"type"`
-	CountryCode string            `json:"countryCode"`
-	Number      *string           `json:"number,omitempty"`
+type PhoneChannelPreviousValues struct {
+	ID          string  `json:"id"`
+	CreatedAt   string  `json:"createdAt"`
+	UpdatedAt   string  `json:"updatedAt"`
+	DisplayName string  `json:"displayName"`
+	Valid       bool    `json:"valid"`
+	CountryCode string  `json:"countryCode"`
+	Number      *string `json:"number,omitempty"`
 }
 
-type PhoneSubscriptionPayloadExec struct {
+type PhoneChannelSubscriptionPayloadExec struct {
 	exec *prisma.Exec
 }
 
-func (instance *PhoneSubscriptionPayloadExec) Node() *PhoneExec {
+func (instance *PhoneChannelSubscriptionPayloadExec) Node() *PhoneChannelExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "Phone"},
+		[2]string{"", "PhoneChannel"},
 		"node",
-		[]string{"type", "countryCode", "number"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
 
-	return &PhoneExec{ret}
+	return &PhoneChannelExec{ret}
 }
 
-func (instance *PhoneSubscriptionPayloadExec) PreviousValues() *PhonePreviousValuesExec {
+func (instance *PhoneChannelSubscriptionPayloadExec) PreviousValues() *PhoneChannelPreviousValuesExec {
 	ret := instance.exec.Client.GetOne(
 		instance.exec,
 		nil,
-		[2]string{"", "PhonePreviousValues"},
+		[2]string{"", "PhoneChannelPreviousValues"},
 		"previousValues",
-		[]string{"type", "countryCode", "number"})
+		[]string{"id", "createdAt", "updatedAt", "displayName", "valid", "countryCode", "number"})
 
-	return &PhonePreviousValuesExec{ret}
+	return &PhoneChannelPreviousValuesExec{ret}
 }
 
-func (instance PhoneSubscriptionPayloadExec) Exec(ctx context.Context) (*PhoneSubscriptionPayload, error) {
-	var v PhoneSubscriptionPayload
+func (instance PhoneChannelSubscriptionPayloadExec) Exec(ctx context.Context) (*PhoneChannelSubscriptionPayload, error) {
+	var v PhoneChannelSubscriptionPayload
 	ok, err := instance.exec.Exec(ctx, &v)
 	if err != nil {
 		return nil, err
@@ -10871,21 +11261,21 @@ func (instance PhoneSubscriptionPayloadExec) Exec(ctx context.Context) (*PhoneSu
 	return &v, nil
 }
 
-func (instance PhoneSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
+func (instance PhoneChannelSubscriptionPayloadExec) Exists(ctx context.Context) (bool, error) {
 	return instance.exec.Exists(ctx)
 }
 
-type PhoneSubscriptionPayloadExecArray struct {
+type PhoneChannelSubscriptionPayloadExecArray struct {
 	exec *prisma.Exec
 }
 
-func (instance PhoneSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]PhoneSubscriptionPayload, error) {
-	var v []PhoneSubscriptionPayload
+func (instance PhoneChannelSubscriptionPayloadExecArray) Exec(ctx context.Context) ([]PhoneChannelSubscriptionPayload, error) {
+	var v []PhoneChannelSubscriptionPayload
 	err := instance.exec.ExecArray(ctx, &v)
 	return v, err
 }
 
-type PhoneSubscriptionPayload struct {
+type PhoneChannelSubscriptionPayload struct {
 	Mutation      MutationType `json:"mutation"`
 	UpdatedFields []string     `json:"updatedFields,omitempty"`
 }
