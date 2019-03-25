@@ -7,6 +7,8 @@ variable "lima_base_script" {
   default = "https://raw.githubusercontent.com/limacitypass/util/master/lima-base.sh"
 }
 
+variable "limadb_secret" {}
+
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
@@ -63,8 +65,8 @@ resource "aws_instance" "prisma-db" {
   }
   
   provisioner "file" {
-    source      = "prisma/docker-compose.yml"
-    destination = "/home/ubuntu/prisma/prisma.yml"
+    content = "${replace(file("prisma/docker-compose.yml"), "<SECRET>", var.limadb_secret)}"
+    destination = "/home/ubuntu/prisma/docker-compose.yml"
 
     connection {
       type     = "ssh"
@@ -72,6 +74,19 @@ resource "aws_instance" "prisma-db" {
       # private_key = "${aws_key_pair.generated_key.public_key}"
       private_key = "${file("limakey.pem")}"
     }
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     = "ubuntu"
+      private_key = "${file("limakey.pem")}"
+    }
+
+    inline = [
+      "cd ~/prisma",
+      "sudo docker-compose up -d"
+    ]
   }
   
   tags {

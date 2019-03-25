@@ -10,4 +10,4 @@ datamodel:
   - location.prisma
 generate:
   - generator: go-client
-    output: ./lima-client
+    output: ./client

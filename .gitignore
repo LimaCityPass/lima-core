@@ -13,6 +13,7 @@
 
 terralima/.terraform
 terralima/terraform.*
-terralima/*pem
-limakey.pem
+terralima/*.pem
+terralima/limadb.txt
+
 limadb/.env
