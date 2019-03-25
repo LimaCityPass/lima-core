@@ -1,6 +1,6 @@
 # endpoint: https://us1.prisma.sh/bregy-malpartida-2d1dcf/limadb/dev
 endpoint: http://db.limacitypass.com:4466/limadb/dev
-
+secret: ${env:PRISMA_MANAGEMENT_API_SECRET}
 datamodel:
   - person.prisma
   - traveler.prisma
