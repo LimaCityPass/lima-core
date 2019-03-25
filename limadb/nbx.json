@@ -1,0 +1,8 @@
+{
+  "resources": [
+    {
+      "id": "db",
+      "image": "nanobox/postgresql"
+    }
+  ]
+}

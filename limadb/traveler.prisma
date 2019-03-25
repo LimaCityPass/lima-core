@@ -43,5 +43,5 @@ type Traveler {
   username: String! @unique
 
   cards: [CreditCard!]! @relation(name:"CreditCards")
-  
+  tickets: [Ticket!]!
 }

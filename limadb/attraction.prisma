@@ -1,11 +1,36 @@
 enum AttractionType {
   ADVENTURE
   HISTORY
+  RESTAURANT
+  HOTEL
+  NATURE
+  DISCOUNT
 }
 
-type Location {
-  longitude: Float!
-  latitude: Float!
+type Overview {
+  name: String!
+  description: String!
+}
+
+type Details {
+  providerName: String!
+  providerWeb: String
+  contactPhone: String
+  contactEmail: String
+  addressReference: String
+}
+
+type PersonReviews {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  person: Person!
+  title: String!
+  description: String! @default(value:"")
+  aproveNumber: Int @default(value:1)
+  declineNumber: Int @default(value:0)
+  comments: [PersonReviews!]!
 }
 
 type Attraction {
@@ -14,12 +39,19 @@ type Attraction {
   updatedAt: DateTime!
 
   owner: Partner!
-  name: String!
-  description: String!
+  overview: Overview!
+
+  maxUses: Int! @default(value:1)
+  
   address: String!
   location: Location!
-  popularity: Int
+  popularity: Float! @default(value:0)
   likedBy: [Person!]!
   types: [AttractionType!]!
   tags: [String!]!
+  
+  reviews: [PersonReviews!]!
+  
+  details: Details
+
 }

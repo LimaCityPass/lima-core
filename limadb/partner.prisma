@@ -1,8 +1,27 @@
+type Feature {
+  name: String
+  image: String
+}
+
+type OpeningHours {
+  from: DateTime!
+  to: DateTime!
+}
+
 type Partner {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
 
   person: Person! @unique
-  attraction: Attraction!
+
+  attractions: [Attraction!]!
+  brandName: String!
+  socialReason: String!
+  ruc: String!
+  address: String!
+  location: Location!
+  features: [Feature!]!
+  openingHours: OpeningHours!
+
 }
