@@ -20,5 +20,4 @@ type Ticket {
   
   expireAt: DateTime!
   visited: [Attraction!]!
-
 }

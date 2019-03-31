@@ -1,1 +1,0 @@
-ssh -i "limakey.pem" ubuntu@52.70.12.93

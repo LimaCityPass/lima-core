@@ -1,0 +1,7 @@
+type Route {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  creatorID: ID!
+}
